@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.jci.com:g4-metasys-server/api.git"
+    "url": "https://github.com/johnsoncontrols/metasys-server-api-docs"
   },
   "devDependencies": {
     "@apib/2me": "^1.0.3",
