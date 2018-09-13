@@ -1,0 +1,67 @@
+## AlarmEntityDigital
++ Include AlarmEntity
++ triggerValue (DigitalValueAlarm)- The digital value of the attribute of the object on which the alarm was triggered
+
+## AlarmEntityAnalog
++ Include AlarmEntity
++ triggerValue (AnalogValueAlarm)- The analog value of the attribute of the object on which the alarm was triggered
+
+## AlarmEntity
++ Include BaseObject
++ message (string) - The alarm message
++ isAckRequired (boolean) - Indicates whether an acknowledgment is required on the alarm
++ type:`/enumSets/{id}/members/{memberId}` (string) - A link to the enum member for the type of alarm
++ priority (number) - The priority of the alarm
++ creationTime:`2000-01-01T12:00:00Z` (string) - The ISO-8601 encoded timestamp for when the alarm was detected
++ isAcknowledged (boolean) - Indicates whether the alarm has been acknowledged
++ isDiscarded (boolean) - Indicates whether the alarm has been discarded
++ category:`/enumSets/{id}/members/{memberId}` (string) - A link to the authorization category of the object when the alarm was generated
++ object:`/objects/{id}` (string) - A link to the object from which this alarm was generated
++ annotations:`/alarms/{id}/annotations` (string) - A link to the annotations available on the alarm
++ self:`/alarms/{id}` (string) - A link to this collection of alarms
+
+## AlarmEntityCollection
++ Include PagedItemCollection
++ items (array) - The collection of alarms
+    - (AlarmEntityAnalog)
+    - (AlarmEntityDigital)
+
+## AnalogValueAlarm
++ value:`68.9` (number) - The value of the attribute of the object on which the alarm was triggered
++ units:`/enumSets/{id}/members/{memberId}` (string) - A link to the units of the object on which the alarm was triggered
+
+## DigitalValueAlarm
++ value:`1` (number) - The value of the attribute of the object on which the alarm was triggered
++ valueEnumMember:`/enumSets/{id}/members/{memberId}` (string) - A link to the enum member for the alarm trigger value
+
+## NetworkDeviceAlarmsRelationshipLinks
++ self:`/networkDevices/{id}/alarms` (string) - A link to this collection of network device alarms
++ networkDevice:`/networkDevices/{id}` (string) - A link to the network device from which this alarm was generated
+
+## NetworkDeviceAlarmRelationshipLinks
++ self:`/networkDevices/{id}/alarms/{alarmId}` (string) - A link to this network device alarm
++ networkDevice:`/networkDevices/{id}` (string) - A link to the network device from which this alarm was generated
+
+## NetworkDeviceAlarmEntity
++ Include AlarmEntity
++ Include NetworkDeviceAlarmRelationshipLinks
+
+## NetworkDeviceAlarmsEntity
++ Include AlarmEntityCollection
++ Include NetworkDeviceAlarmsRelationshipLinks
+
+## ObjectAlarmsRelationshipLinks
++ self:`/objects/{id}/alarms` (string) - A link to this collection of object alarms
++ object:`/objects/{id}` (string) - A link to the object from which which this alarm was generated
+
+## ObjectAlarmRelationshipLinks
++ self:`/objects/{id}/alarms/{alarmId}` (string) - A link to this object alarm
++ object:`/objects/{id}` (string) - A link to the object from which this alarm was generated
+
+## ObjectAlarmEntity
++ Include AlarmEntity
++ Include ObjectAlarmRelationshipLinks
+
+## ObjectAlarmsEntity
++ Include AlarmEntityCollection
++ Include ObjectAlarmsRelationshipLinks

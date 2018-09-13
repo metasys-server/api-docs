@@ -1,0 +1,200 @@
+var _ = require('lodash'),
+    Url = require('postman-collection').Url;
+
+var testRequests = [];
+
+// Used to catch and show fatal errors in the test runner 
+try {
+    const isSuccess = responseCode.code === {{response.statusCode}};
+    const runSadTests = isSuccess && pm.environment.get('include_sad_tests') === 'true';
+    const jsonData = pm.response.json();
+
+    /**
+     * Test correct status code is returned
+     */
+    tests['Status code is correct'] = isSuccess;
+
+    /**
+     * Test correct headers are returned
+     */
+    {{#response.headers}}
+    pm.test('{{key}} header value is correct', function () {
+        pm.expect(postman.getResponseHeader('{{key}}')).to.contain('{{value}}');
+    });
+
+    {{/response.headers}}
+    /**
+     * Test that the returned self link matches the link sent
+     */
+    pm.test('Self link is correct', function () {
+        const self = Url.parse(jsonData.self);
+        const current = pm.request.url.toJSON();
+
+        const pathDiffs = _.difference(self.path, current.path);
+        const queryDiffs = _.differenceWith(self.query, current.query, _.isEqual);
+
+        const pathDiffsDupe = pathDiffs.slice(0);
+
+        // Check if any of the differences are caused by the parent id being returned or version number in the url
+        for (let diff of pathDiffsDupe) {
+            if (jsonData.id === diff || pm.request.headers.get('Accept').indexOf(diff) !== -1) {
+                pathDiffs.splice(pathDiffs.indexOf(diff), 1);
+            }
+        }
+
+        pm.expect(pathDiffs.length).to.equal(0, `Differences found in the path: { ${pathDiffs.join(', ')} }`);
+        pm.expect(queryDiffs.length).to.equal(0, `Differences found in the query: { ${queryDiffs.join(', ')} }`);
+    });
+
+    const schema = {{{response.jsonSchema}}};
+
+    /**
+     * Verify the response structure matches the expected JSON schema
+     */
+    const result = tv4.validateMultiple(jsonData, schema);
+    const errors = result.errors.map(e => `Item { ${e.dataPath} } does not match schema, message: ${e.message}`);
+
+    tests[`Response matches JSON schema. Messages: ${errors.join(', ')}`] = result.valid;
+
+    /**
+     * Replaces {id} and {?queryParams} with a GUID and query matching regex respectively
+     */
+    function bodyMatchReplacer(k, v) {
+        return v.replace ? v.replace(/\//g, '\\/').replace(/{\w+}/g, '[-\\w]+').replace(/{\?queryParams}/g, '\??[&=\\w]*') : v;
+    }
+
+    const rawSampleBody = {{{response.body}}};
+    const sampleBody = JSON.parse(JSON.stringify(rawSampleBody), bodyMatchReplacer);
+    const bodyChecks = _.pickBy(flatten(sampleBody), (v, k) => v.indexOf && (v.indexOf('[-\\w]+') !== -1 || v.indexOf('\\??[&=\\w]*') !== -1));
+
+    /**
+     * Verify the response against the sample body
+     */
+    _.forOwn(bodyChecks, (v, k) => {
+        const actual = _.get(jsonData, k) || '';
+
+        tests[`Response body { ${k} } matches sample of ${_.get(rawSampleBody, k)}, actual: ${actual}`] = !!actual.match(new RegExp(v));
+    });
+
+    {{#if isPageable}}
+    /**
+     * Set the id environment variable to the first returned element
+     */
+    if (!pm.environment.get('{{pathName}}id')) {
+        if (jsonData.items.length > 0 && jsonData.items[0].id) {
+            const id = jsonData.items[0].id;
+            pm.environment.set('{{pathName}}id', id);
+            tests['Set {{pathName}}id to ' + id] = true;
+        } else {
+            tests['Failed to set {{pathName}}id, could not find a matching item in the result set'] = false;
+        }
+    }
+
+    /**
+     * Verify that items are actually returned
+     */
+    tests['Items should be returned'] = jsonData.items.length > 0;
+
+    if (runSadTests) {
+        const invalidPageError = '"The specified pageSize is outside the valid range (1 - 1000)"';
+
+        /**
+         * Test a negative page returns the correct message
+         */
+        testRequest([{
+            key: 'page',
+            value: '-2'
+        }], (err, res) => {
+            pm.test('Negative page number should return the correct error response', () => {
+                pm.expect(err).to.equal(null);
+                pm.expect(res).to.have.status(400);
+                pm.expect(res).to.have.body('"The specified page must be greater than 0"');
+            });
+        });
+
+        /**
+         * Test a negative page size returns the correct message
+         */
+        testRequest([{
+            key: 'pageSize',
+            value: '-4'
+        }], (err, res) => {
+            pm.test('Negative page size should return the correct error response', () => {
+                pm.expect(err).to.equal(null);
+                pm.expect(res).to.have.status(400);
+                pm.expect(res).to.have.body(invalidPageError);
+            });
+        });
+
+        /**
+         * Test a too large page size returns the correct message
+         */
+        testRequest([{
+            key: 'pageSize',
+            value: '10005'
+        }], (err, res) => {
+            pm.test('Large page size should return the correct error response', () => {
+                pm.expect(err).to.equal(null);
+                pm.expect(res).to.have.status(400);
+                pm.expect(res).to.have.body(invalidPageError);
+            });
+        });
+
+        {{#if sortParams}}
+        /**
+         * Test that specifying an invalid sort param returns a collection of the available sort params
+         */
+        testRequest([{
+            key: 'sort',
+            value: 'invalidOne'
+        }], (err, res) => {
+            pm.test('Invalid sort parameter should return the correct error response', () => {
+                pm.expect(err).to.equal(null);
+                pm.expect(res).to.have.status(400);
+
+                const sortRegex = new RegExp(/^.*Valid attributes: (.*)$/gm);
+                const actual = sortRegex.exec(res.json())[1].replace(/ /g, '').split(',');
+                const difference = _.difference(actual, [
+                    {{#sortParams}}'{{this}}'{{#unless @last}}, {{/unless}}{{/sortParams}}
+                ]);
+
+                pm.expect(difference.length).to.equal(0, 'Extraneous sort attributes found:    (' + difference.join(', ') + ')   ');
+            });
+        });
+        {{/if}}
+    }
+    {{/if}}
+
+    runNextTest();
+} catch (error) {
+    /**
+     * Catch all errors otherwise Postman runner will halt execution
+     */
+    tests['Fatal error running tests: ' + error] = false;
+}
+
+/**
+ * Test helpers
+ */
+
+function runNextTest() { if (testRequests.length > 0) testRequests.pop()(() => runNextTest()); }
+
+function testRequest(newParams, assertCallback) {
+    testRequests.push((callback) => {
+        const newUrl = _.cloneDeep(pm.request.url);
+        newUrl.query.assimilate(newParams);
+
+        const newRequest = {
+            url: newUrl.toString(),
+            method: pm.request.method,
+            header: pm.request.headers.toString()
+        };
+
+        pm.sendRequest(newRequest, (err, res) => {
+            assertCallback(err, res);
+            callback();
+        });
+    });
+}
+
+function flatten(obj, prefix, current) {prefix = prefix || []; current = current || {}; if (typeof (obj) === 'object' && obj !== null) Object.keys(obj).forEach(key => flatten(obj[key], prefix.concat(key), current)); else current[prefix.join('.')] = obj; return current;}

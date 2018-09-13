@@ -1,0 +1,44 @@
+## EquipmentLinkCollection
++ Include PagedItemCollection
++ items:`[/equipment/{id}]` (array[string], fixed-type) - The collection of equipment links
+
+## EquipmentEntity
++ Include EquipmentData
++ Include EquipmentRelationshipLinks
+
+## EquipmentEntityCollection
++ Include PagedItemCollection
++ items (array[EquipmentEntity], fixed-type) - The collection of equipment instances
+
+## EquipmentData
++ Include BaseObject
++ name (string) - The full name of the equipment instance
++ type:`AHU` (string) - The name of the equipment definition for this equipment instance
+
+## EquipmentRelationshipLinks
++ self:`/equipment/{id}` (string) - A link to this equipment instance
++ spaces:`/equipment/{id}/spaces` (string) - A link to the spaces served by this equipment instance
++ equipment:`/equipment/{id}/equipment` (string) - A link to the equipment served by this equipment instance
++ upstreamEquipment:`/equipment/{id}/upstreamEquipment` (string) - A link to the equipment that serves this equipment instance
++ networkDevices:`/equipment/{id}/networkDevices` (string) - A link to the network devices that host this equipment instance
++ points:`/equipment/{id}/points` (string) - A link to the point mappings defined by this equipment instance
+
+## EquipmentPointMappingEntity
++ Include EquipmentPointMappingData
++ Include EquipmentPointMappingRelationshipLinks
+
+## EquipmentPointMappingCollection
++ Include PagedItemCollection
++ items (array[EquipmentPointMappingEntity], fixed-type) - The collection of equipment point mappings
+
+## EquipmentPointMappingData
++ equipmentName (string) - The name of the mapped equipment
++ shortName:`ZN-T` (string) - The short name for the equipment point
++ label:`Zone Temperature` (string) - The label for the equipment point
++ category (string) - The category for the equipment point
++ isDisplayData (boolean) - Whether the equipment point is marked as display data
+
+## EquipmentPointMappingRelationshipLinks
++ equipment:`/equipment/{id}` (string) - A link to the mapped equipment
++ object:`/objects/{id}` (string) - A link to the mapped object
++ attribute:`/enumSets/509/members/{memberId}` (string) - A link to the mapped attribute

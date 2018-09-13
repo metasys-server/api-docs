@@ -1,0 +1,49 @@
+{{> _templates/header}}
+
+
+{{!-- The groups array is only there for dynamically rendering the partial preview otherwise we explicitly specify the grouping order --}}
+{{#unless groups}}
+{{> groups/auth/auth}}
+
+
+{{> groups/alarms/alarms}}
+
+
+{{> groups/annotations/annotations}}
+
+
+{{> groups/audits/audits}}
+
+
+{{> groups/enums/enums}}
+
+
+{{> groups/equipment/equipment}}
+
+
+{{> groups/network_devices/network_devices}}
+
+
+{{> groups/objects/objects}}
+
+
+{{> groups/samples/samples}}
+
+
+{{> groups/spaces/spaces}}
+{{/unless}}
+{{#groups}}
+{{> (lookup ../groups @key)}}
+
+
+{{/groups}}
+
+
+# Data Structures
+
+{{!-- The data structures can be in any order so we just plop them all in --}}
+{{#structs}}
+{{> (lookup ../structs @key)}}
+
+
+{{/structs}}

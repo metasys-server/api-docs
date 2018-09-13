@@ -1,0 +1,156 @@
+Group Network Devices
+=====================
+
+This section contains information about network device-related resources as used within the Metasys API
+
+### Get Network Devices [GET /networkDevices{?type,page,pageSize,sort}]
+Retrieves a collection of network devices.
+
++ Parameters
+    + type (number, optional) - Type of network device to return
+        + See /networkDevices/availableTypes for possible values
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `categoryId`, `firmwareVersion`, `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes 
+        + Include NetworkDeviceEntityCollection
+        + self:`/networkDevices{?queryParams}` (string) - A link to this network device collection
+
+### Get Network Device Types [GET /networkDevices/availableTypes]
+Retrieves the collection of all network device types.
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include ItemCollection
+        + items (array[ObjectTypeEnum], fixed-type)
+        + self:`/networkDevices/availableTypes` - A link to this network device type collection
+
+### Get A Single Network Device [GET /networkDevices/{id}]
+Retrieves the specified network device.
+
++ Parameters
+    + id (string) - The identifier of the network device
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes(NetworkDeviceEntity)
+
+### Get Network Devices Hosting An Equipment Instance [GET /equipment/{id}/networkDevices{?page,pageSize,sort}]
+Retrieves the collection of network devices that host the specified equipment instance, along with the parents of those network devices. A network device is considered to host an equipment if the equipment defines points that map to an attribute of any object contained on the network device.
+
++ Parameters
+    + id (string) - The identifier of the equipment instance
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `categoryId`, `firmwareVersion`, `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes 
+        + Include NetworkDeviceEntityCollection
+        + self:`/equipment/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
+
+### Get Network Device Children [GET /networkDevices/{id}/networkDevices{?page,pageSize,sort}]
+Retrieves the collection of network devices that are children of the specified network device.
+
++ Parameters
+    + id (string) - The identifier of the network device
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `categoryId`, `firmwareVersion`, `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes 
+        + Include NetworkDeviceEntityCollection
+        + self:`/networkDevices/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
+
+### Get Network Devices Serving A Space [GET /spaces/{id}/networkDevices{?page,pageSize,sort}]
+Retrieves the collection of network devices that are serving the specified space.
+A space is considered to be served by a network device is considered to host an equipment if any equipment instance serving the space defines points that map to an attribute of any object contained on the network device.
+
++ Parameters
+    + id (string) - The identifier of the space
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `categoryId`, `firmwareVersion`, `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include NetworkDeviceEntityCollection
+        + self:`/spaces/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection

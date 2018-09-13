@@ -1,0 +1,137 @@
+Group Spaces
+============
+
+This section contains information about space-related resources as used within the Metasys API.
+
+### Get Spaces [GET /spaces{?type,page,pageSize,sort}]
+Retrieves a collection of spaces.
+
++ Parameters
+    + type (number, optional) - Type of space to return
+        + See /enumSets/1766/members for possible values
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include SpaceEntityCollection
+        + self:`/spaces{?queryParams}` (string) - A link to this space collection
+
+### Get A Single Space [GET /spaces/{id}]
+Retrieves the specified space.
+
++ Parameters
+    + id (string) - The identifier of the space
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes (SpaceEntity)
+
+### Get Spaces Served By An Equipment Instance [GET /equipment/{id}/spaces{?page,pageSize,sort}]
+Retrieves the collection of spaces served by the specified equipment instance.
+
++ Parameters
+    + id (string) - The identifier of the equipment instance
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include SpaceEntityCollection
+        + self:`/equipment/{id}/spaces{?queryParams}` (string) - A link to this space collection
+
+### Get Spaces Served by a Network Device [GET /networkDevices/{id}/spaces{?page,pageSize,sort}]
+Retrieves the collection of spaces served by the specified network device.
+A space is considered to be served by a network device if any equipment instance serving the space defines points that map to an attribute of any object contained on the network device.
+
++ Parameters
+    + id (string) - The identifier of the network device
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include SpaceEntityCollection
+        + self:`/networkDevices/{id}/spaces{?queryParams}` (string) - A link to this space collection
+
+### Get Space Children [GET /spaces/{id}/spaces{?page,pageSize,sort}]
+Retrieves the collection of spaces that are located within the specified space.
+
++ Parameters
+    + id (string) - The identifier of the space
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include SpaceEntityCollection
+        + self:`/spaces/{id}/spaces{?queryParams}` (string) - A link to this space collection.

@@ -1,0 +1,31 @@
+{
+  "name": "@api/metasys",
+  "version": "1.0.0",
+  "description": "Metasys API",
+  "author": "Johnson Controls International, Plc.",
+  "license": "BSD",
+  "scripts": {
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "build:postman": "apib2postman build/index.apib -o build/postman_collection.json -e build/postman_environment.json -t _templates/tests/postman-tests.hbs",
+    "publish": "gulp publish",
+    "preview": "gulp preview",
+    "preview:group": "gulp preview:group",
+    "preview:watch": "gulp watch:preview",
+    "preview:group:watch": "gulp watch:preview:group"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.jci.com:g4-metasys-server/api.git"
+  },
+  "devDependencies": {
+    "@apib/2me": "^1.0.3",
+    "@apib/2postman": "^1.1.0",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-hb": "^7.0.1",
+    "through2": "^2.0.3",
+    "yargs": "^12.0.1"
+  }
+}

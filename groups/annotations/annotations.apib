@@ -1,0 +1,62 @@
+Group Annotations
+================
+
+This section contains information about annotations as used within the Metasys API
+
+### Get Alarm Annotations [GET /alarms/{id}/annotations/{?startTime,endTime,page,pageSize,sort}]
+Retrieves the collection of annotations available for the specified alarm.
+
++ Parameters
+    + id (string) - The identifier of the alarm
+    + startTime (string, optional) - The ISO-8601 encoded dateTime representing the earliest annotation to return
+    + endTime (string, optional) - The ISO-8601 encoded dateTime representing the latest annotation to return
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-10,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `creationTime`
+        + Default: `creationTime`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include AlarmAnnotationEntityCollection
+        + self:`/alarms/{id}/annotations{?queryParams}` (string) - A link to this alarm annotation collection
+
+### Get Audit Annotations [GET /audits/{id}/annotations{?page,pageSize,sort}]
+Retrieves a collection of audit annotations.
+
++ Parameters
+    + id:`00000000-0000-0000-0000-000000000000` (string) - The identifier of the audit to retrieve annotations for
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-10,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `creationTime`
+        + Default: `-creationTime`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include AuditAnnotationEntityCollection
+        + self:`/audits/{id}/annotations{?queryParams}` (string) - A link to this audit annotation data set

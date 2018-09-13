@@ -1,0 +1,189 @@
+Group Equipment
+===============
+This section contains information about equipment-related resources as used within the Metasys API.
+
+### Get Equipment Instances [GET /equipment{?page,pageSize,sort}]
+Retrieves a collection of equipment instances.
+
++ Parameters
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `type`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include EquipmentEntityCollection
+        + self:`/equipment{?queryParams}` (string) - A link to this equipment collection
+
+### Get A Single Equipment Instance [GET /equipment/{id}]
+Retrieves the specified equipment instance.
+
++ Parameters
+    + id (string) - The identifier of the equipment instance
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes (EquipmentEntity)
+
+### Get Equipment Served By An Equipment Instance [GET /equipment/{id}/equipment{?page,pageSize,sort}]
+Retrieves the equipment served by the specified equipment instance.
+
++ Parameters
+    + id (string) - The identifier of the equipment instance
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `type`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include EquipmentEntityCollection
+        + self:`/equipment/{id}/equipment{?queryParams}` (string) - A link to this equipment collection
+
+### Get Points Defined by An Equipment Instance [GET /equipment/{id}/points{?page,pageSize,sort}]
+Retrieves the collection of points that are defined by the specified equipment instance. Each point contains a mapping to an attribute on an object.
+
++ Parameters
+    + id (string) - The identifier of the equipment instance
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `category`,`equipmentName`, `isDisplayData`, `shortName`
+        + Default: `shortName`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes 
+        + Include EquipmentPointMappingCollection
+        + self:`/equipment/{id}/points{?queryParams}` (string) - A link to this equipment point mapping collection
+
+### Get Equipment that Serve An Equipment Instance [GET /equipment/{id}/upstreamEquipment{?page,pageSize,sort}]
+Retrieves the collection of equipment that serve the specified equipment instance.
+
++ Parameters
+    + id (string) - The identifier of the equipment instance
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `type`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include EquipmentEntityCollection
+        + self:`/equipment/{id}/upstreamEquipment{?queryParams}` (string) - A link to this equipment collection
+
+### Get Equipment Hosted By A Network Device [GET /networkDevices/{id}/equipment{?page,pageSize,sort}]
+Retrieves the collection of equipment instances that are hosted by the specified network device or its children. A network device is considered to host an equipment if the equipment defines points that map to an attribute of any object contained on the network device.
+
++ Parameters
+    + id (string) - The identifier of the network device
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `type`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include EquipmentEntityCollection
+        + self:` /networkDevices/{id}/equipment{?queryParams}` (string) - A link to this equipment collection
+
+### Get Equipment Serving A Space [GET /spaces/{id}/equipment{?page,pageSize,sort}]
+Retrieves the collection of equipment that serve the specified space.
+
++ Parameters
+    + id (string) - The identifier of the space
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `type`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include EquipmentEntityCollection
+        + self:`/spaces/{id}/equipment{?queryParams}` (string) - A link to this equipment collection

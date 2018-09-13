@@ -1,0 +1,138 @@
+Group Objects
+============
+
+This section contains information about object-related resources as used within the Metasys API.
+
+### Get Objects [GET /objects{?type,page,pageSize,sort}]
+Retrieves a collection of objects. Note that this endpoint requires the `type` parameter to be supplied; returning a list of all objects in the system is not currently supported.
+
++ Parameters
+    + type (number) - Type of object to return
+        + See /enumSets/508/members for possible values
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include ObjectEntityCollection
+        + self:`/objects{?queryParams}` (string) - A link to this object collection
+
+### Get A Single Object [GET /objects/{id}]
+Retrieves the specified object.
+
++ Parameters
+    + id (string) - The identifier of the object
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+
+    + Headers
+
+            Allow: GET
+
+    + Attributes(ObjectEntity)
+
+### Get Network Device Children Objects [GET /networkDevices/{id}/objects{?page,pageSize,sort}]
+Retrieves the collection of objects that are children of the specified network device.
+
++ Parameters
+    + id (string) - The identifier of the network device
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes 
+        + Include ObjectEntityCollection
+        + self:`/networkDevices/{id}/objects{?queryParams}` (string) - A link to this object collection
+
+### Get Object Children [GET /objects/{id}/objects{?page,pageSize,sort}]
+Retrieves the children (recursively) of the specified object.
+
++ Parameters
+    + id (string) - The identifier of the object
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `itemReference`, `name`, `typeId`
+        + Default: `name`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include ObjectEntityCollection
+        + self:`/objects/{id}/objects{?queryParams}` (string) - A link to this object collection
+
+### Get Equipment Points Mapped To An Object [GET /objects/{id}/points{?page,pageSize,sort}]
+Retrieves all equipment points mapped to attributes of this object.
+
++ Parameters
+    + id (string) - The identifier of the object
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+    + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
+        + Accepted Values: `category`,`equipmentName`, `isDisplayData`, `shortName`
+        + Default: `shortName`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include EquipmentPointMappingCollection
+        + self:`/objects/{id}/points{?queryParams}` (string) - A link to this equipment point collection

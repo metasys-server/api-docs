@@ -1,0 +1,27 @@
+## ItemCollection
++ total:`1` (number) - The total number of items in the collection
++ items (object) - The collection of items
+
+## PagedItemCollection
++ total:`1` (number) - The total number of items in the collection
++ items (object) - The collection of items
++ next:`[link to next page]` (string, nullable) - A link to the next page of results
++ previous:`[link to previous page]` (string, nullable) - A link to the previous page of results
+
+## BaseObject (object)
++ id:`00000000-0000-0000-0000-000000000000` (string) - The identifier of the object
++ itemReference:`site:device/itemReference` (string) - The fully qualified reference of the object
++ name (string) - The name of the object
+
+## Data
++ value:`0`,`False`,`19` (string) - The past or present value of the audit
++ type:`/enumSets/501/members/1` (string) - The type of data value should be parsed into.  See /enumSets/501/members for possible values
++ unit:`/enumSets/507/members/1` (string) - The unit of measurement this data uses. See /enumSets/507/members for possible values
++ precision:`/enumSets/0/members/1` (string) - The precision, number of decimal places, this data uses. See /enumSets/0/members for possible values
+
+## LegacyMetasys
++ fullyQualifiedItemReference (string) - The fully qualified item reference of the object that created this audit
++ itemName (string) - The short name of the object that created this audit
++ classLevel (string) - Indicates the class level in which this audit belongs. See /enumSets/568/members for possible values
++ originApplication (string) - Indicates the application that performed action that generated this audit. See /enumSets/578/members for possible values
++ description (string) - Provides the description of the action that generated this audit. See /enumSets/580/members for possible values

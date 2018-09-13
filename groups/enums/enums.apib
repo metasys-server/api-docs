@@ -1,0 +1,92 @@
+Group Enumerations
+==================
+
+This section contains information about enumeration-related resources as used within the Metasys API.
+
+### Get Enum Sets [GET /enumSets{?page,pageSize}]
+Retrieves a collection of all enumeration sets in the system.
+
++ Parameters
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include EnumSetCollection
+        + self:`/enumSets{?queryParams}` (string) - A link to this enum set collection
+
+### Get A Single Enum Set [GET /enumSets/{id}]
+Retrieves the specified enumeration set.
+
++ Parameters
+    + id (number) - The identifier for the enum set
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes(EnumSet)
+
+### Get Enum Members [GET /enumSets/{id}/members{?page,pageSize}]
+Retrieves the collection of member values belonging to the specified enumeration set.
+
++ Parameters
+    + id (number) - The identifier for the enum set
+    + page (number, optional) - The page number of items to return
+        + Default: `1`
+    + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
+        + Default: `100`
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes
+        + Include EnumMemberCollection
+        + self:`/enumSets/{id}/members{?queryParams}` (string) - A link to this enum member collection
+
+### Get A Single Enum Member [GET /enumSets/{id}/members/{memberId}]
+Retrieves the specified enumeration member value.
+
++ Parameters
+    + id (number) - The identifier for the enum set
+    + memberId (number) - The identifier for the enum member
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+
+            Allow: GET
+
+    + Attributes(EnumMember)
