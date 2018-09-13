@@ -2,4 +2,4 @@ language: node_js
 script:
 - npm run build
 - npm run build:postman
-- npm run publish
+- 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then npm run publish; fi'
