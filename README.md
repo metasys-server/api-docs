@@ -3,7 +3,7 @@
 <!-- cSpell:ignore apiaryio -->
 # Metasys API
 
-The source code for the Metasys Server API documentation hosted by GitHub Pages: https://github.jci.com/pages/g4-metasys-server/api
+The source code for the [Metasys Server API](https://johnsoncontrols.github.io/metasys-server-api-docs)
 
 ## Quickstart
 
