@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/johnsoncontrols/metasys-server-api-docs.svg?branch=master)](https://travis-ci.org/johnsoncontrols/metasys-server-api-docs)
+[![CircleCI](https://circleci.com/gh/johnsoncontrols/metasys-server-api-docs.svg?style=svg)](https://circleci.com/gh/johnsoncontrols/metasys-server-api-docs)
 
 <!-- cSpell:ignore apiaryio -->
 # Metasys API
@@ -96,6 +96,6 @@ Each group of actions is housed in a separate file to keep their concerns solely
 
 ### Pull Requests
 
-When a pull request is submitted, TeamCity will automagically generate a full documentation preview which can be shown to reviewers before merging in the changes.
+When a pull request is submitted, CircleCI will automagically generate a full documentation preview which can be shown to reviewers before merging in the changes.
 
-The preview can be accessed via the "API Preview" tab when viewing the build in TeamCity.
+The preview can be accessed via the "Artifacts" tab when viewing the build in CircleCI and clicking on the index.html file.
