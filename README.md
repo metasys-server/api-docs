@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/johnsoncontrols/metasys-server-api-docs.svg?branch=master)](https://travis-ci.org/johnsoncontrols/metasys-server-api-docs)
+
 <!-- cSpell:ignore apiaryio -->
 # Metasys API
 
