@@ -1,5 +1,10 @@
 language: node_js
 script:
 - npm run build
+- node build.js
 - npm run build:postman
 - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then npm run publish; fi'
+
+cache:
+  directories:
+    - "node_modules"

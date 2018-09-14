@@ -22,9 +22,12 @@
     "@apib/2me": "^1.0.3",
     "@apib/2postman": "^1.1.0",
     "del": "^3.0.0",
+    "fury": "^3.0.0-beta.7",
+    "fury-adapter-apib-parser": "^0.11.0",
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-hb": "^7.0.1",
+    "src-location": "^1.1.0",
     "through2": "^2.0.3",
     "yargs": "^12.0.1"
   }
