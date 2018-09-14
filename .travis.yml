@@ -1,9 +1,9 @@
 language: node_js
 script:
 - npm run build
-- node build.js
+- 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then node build.js && npm run publish; fi'
+- 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then node build.js; fi'
 - npm run build:postman
-- 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then npm run publish; fi'
 
 cache:
   directories:
