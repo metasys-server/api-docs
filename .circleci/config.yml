@@ -29,6 +29,8 @@ jobs:
           name: Build
           command: |
             npm run build
+            if [ -n "$CIRCLE_PULL_REQUEST" ]; then node build.js; fi
+            if [ -z "$CIRCLE_PULL_REQUEST" ]; then node build.js && npm run publish; fi
             node build.js
             npm run build:postman
             npm run preview
