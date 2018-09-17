@@ -14,12 +14,19 @@ Used to login and retrieve an access token.
 
 + Request (application/vnd.metasys.v1+json)
 
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+
+
     + Attributes
+
         + Include LoginRequest
 
 + Response 200 (application/vnd.metasys.v1+json)
 
     + Attributes
+    
         + Include LoginResponse
 
 ### Refresh Token [GET /refreshToken]
