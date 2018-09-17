@@ -75,7 +75,7 @@ The section specified is one of the directories within the groups directory. The
 npm run preview:group -- --group=<section>
 ```
 
-_The extra -- is intentional, that is just how NPM handles parameters_
+**Note:** The extra -- is intentional, that is just how NPM handles parameters
 
 ### Auto Build
 
