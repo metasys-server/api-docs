@@ -1,12 +1,12 @@
 # Metasys API
 
-[![CircleCI](https://circleci.com/gh/johnsoncontrols/metasys-server-api-docs.svg?style=svg)](https://circleci.com/gh/johnsoncontrols/metasys-server-api-docs)
+[![CircleCI](https://circleci.com/gh/metasys-server/api-docs.svg?style=svg)](https://circleci.com/gh/metasys-server/api-docs)
 
 <!-- cSpell:ignore apiaryio -->
 
 **Note** This is prerelease documentation and is subject to change.
 
-The source code for the [Metasys Server API](https://johnsoncontrols.github.io/metasys-server-api-docs)
+The source code for the [Metasys Server API](https://metasys-server.github.io/api-docs)
 
 ## Quickstart
 
