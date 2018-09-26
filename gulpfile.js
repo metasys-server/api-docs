@@ -81,7 +81,7 @@ function apiTemplate(revision, groups, structs) {
   return hb()
     .partials(BLUEPRINT_FILES)
     .data({
-      revision: revision ? revision : new Date().toISOString(),
+      revision: revision ? revision : new Date().toUTCString(),
       groups: groups ? groups.map(x => path.relative('./', x.path).replace(/\\/g, '/').replace('.apib', '')) : null,
       structs: structs ? structs.map(x => path.relative('./', x.path).replace(/\\/g, '/').replace('.apib', '')) : null
     });
