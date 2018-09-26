@@ -26,10 +26,13 @@ Documentation: {{revision}}
 <!--
 This document describes version 1 of the API (not to be confused with document version in [Document Information](#document-information) section above). -->
 
-While this is currently the only version available, as new versions are added the API consumer will need to specify which version of the API they intend to use.  
-The primary means of doing this is to add the version before the first entity in the URL using the format "v[#]" (e.g. the `v1` in `http://localhost/api/v1/spaces`).  
-If using the URL is undesirable, an alternate approach is to use the `accept` header in the HTTP request, and modify the version portion based on which version is intended (e.g. the `v1` in `application/vnd.metasysapi.v1+json`).  
-The version (if used) in the URL will always override the version (if used) in the header. If no version is specified, the lowest supported version (version 1) will be used. If an invalid version is specified, a 404 (not found) error status will be returned.  
+While this is currently the only version available, as new versions are added the API consumer will need to specify which version of the API they intend to use.
+The primary means of doing this is to add the version before the first entity in the URL using the format "v[#]" (e.g. the `v1` in `http://localhost/api/v1/spaces`).
+
+If using the URL is undesirable, an alternate approach is to use the `Accept` header in the HTTP request, and modify the version portion based on which version is intended (e.g. the `v1` in `application/vnd.metasysapi.v1+json`).
+
+The version (if used) in the URL will always override the version (if used) in the header. If no version is specified, the lowest supported version (version 1) will be used. If an invalid version is specified, a 404 (not found) error status will be returned.
+
 The `Content-Type` header of the response will always contain (in part) the version of the API that was used to serve the request, so the consumer can use this to identify which version of the API was utilized.
 
 ## Pagination
