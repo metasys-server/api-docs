@@ -42,8 +42,9 @@ If using the URL is undesirable, an alternate approach is to use the `Accept` he
 Because the version specification is optional and can be provided in multiple ways, the following rules are used when determining or providing version information:
 
 * If no version is specified, the lowest supported version (version 1) will be used.
-* If both a version is specified in both the URL and the `Accept` header for a request, the version specified in the URL will always override a version specified in the header. 
-* If an invalid version is specified, a 404 (not found) error status will be returned.  
+* If a version is specified in both the URL and the `Accept` header for a request, the version specified in the URL will always override a version specified in the header. 
+* If the version encountered in the URL is invalid and a valid version is provided in the `Accept` header, the valid version in the header will be used.
+* If an invalid version is specified in either the URL, the `Accept` header, or both, a 404 (not found) error status will be returned.
 * The `Content-Type` header of the response will always contain (in part) the version of the API that was used to serve the request. This allows the consumer to identify which version of the API was utilized.
   
 ## Pagination
