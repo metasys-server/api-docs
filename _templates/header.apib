@@ -27,15 +27,28 @@ This documentation was last updated on {{revision}}.
 <!--
 This document describes version 1 of the API (not to be confused with document version in [Document Information](#document-information) section above). -->
 
-While this is currently the only version available, as new versions are added the API consumer will need to specify which version of the API they intend to use.
-The primary means of doing this is to add the version before the first entity in the URL using the format "v[#]" (e.g. the `v1` in `http://localhost/api/v1/spaces`).
+While this is currently the only version available, as new versions are added the API consumer will need to specify which version of the API they intend to use. The primary means of doing this is to add the version before the first entity in the URL using the format "v[#]":
 
-If using the URL is undesirable, an alternate approach is to use the `Accept` header in the HTTP request, and modify the version portion based on which version is intended (e.g. the `v1` in `application/vnd.metasysapi.v1+json`).
+* `http://localhost/api/v1/spaces` for version 1
+* `http://localhost/api/v2/spaces` for version 2
 
-The version (if used) in the URL will always override the version (if used) in the header. If no version is specified, the lowest supported version (version 1) will be used. If an invalid version is specified, a 404 (not found) error status will be returned.
+If using the URL is undesirable, an alternate approach is to use the `Accept` header in the HTTP request, and modify the version portion based on which version is intended, again using the "v[#]" format:
 
-The `Content-Type` header of the response will always contain (in part) the version of the API that was used to serve the request, so the consumer can use this to identify which version of the API was utilized.
+* `Accept: application/vnd.metasysapi.v1+json` for version 1
+* `Accept: application/vnd.metasysapi.v2+json` for version 2
 
+#### Version Specification Rules
+
+Because the version specification is optional and can be provided in multiple ways, the following rules are used when determining or providing version information:
+
+* If no version is specified, the lowest supported version (v1) will be used.
+* If the version is specified in both the URL and the `Accept` header, the version specified in the URL will be used and the a version specified in the header will be ignored. 
+* If the version specified is invalid (i.e. does not represent a known version of the API), a 404 (not found) error status will be returned.
+
+#### Version Response Behavior
+
+The `Content-Type` header of the response will always contain (in part) the version of the API that was used to serve the request. This allows the consumer to identify which version of the API was utilized.
+  
 ## Pagination
 
 On endpoints where `page` and `pageSize` is allowed, the default `page` number will be 1 and is 1-based for all endpoints while the default `pageSize` will vary between endpoints.  The `page` parameter indicates the `page` number of items to return from the endpoint.  The `pageSize` parameter indicates the maximum number of items in the response from the endpoint.
