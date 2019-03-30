@@ -181,3 +181,21 @@ Several error status codes are possible
 
 + Response 504
 
+### Lookup Object Id [GET /objectIdentifiers{?fqr}]
+Retrieves an Object Id for an Object given its Fully Qualified Reference.
+This information is often referred to as the Item Reference in Metasys user interfaces.
+Note: You must URL encode the Fully Qualified Reference in the query string.
+
++ Parameters
+    + fqr: siteName:naeName/Folder1.AV1 (string) - The Fully Qualified Reference of an object.
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (text/plain)
+    + Body
+
+            "00000000-0000-0000-0000-000000000000"
