@@ -1,0 +1,21 @@
+Group Users
+============
+
+This section contains information about user-related resources as used within the Metasys API.
+
+### User Counts Report [GET /users/reports/counts]
+Retrieves user counts report information.
+
++ Parameters
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v1+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+            Allow: GET
+    + Attributes
+        + Include UserStatisticsCollection

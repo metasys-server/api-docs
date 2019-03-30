@@ -3,7 +3,7 @@ Group Network Devices
 
 This section contains information about network device-related resources as used within the Metasys API
 
-### Get Network Devices [GET /networkDevices{?type,page,pageSize,sort}]
+### Get Network Devices [GET /networkDevices{?type,page,pageSize,sort,classification}]
 Retrieves a collection of network devices.
 
 + Parameters
@@ -16,17 +16,16 @@ Retrieves a collection of network devices.
     + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
         + Accepted Values: `categoryId`, `firmwareVersion`, `itemReference`, `name`, `typeId`
         + Default: `name`
+    + classification (string, option) - The classification to filter devices on.
 
 + Request
     + Headers
-
-            Accept: application/vnd.metasysapi.v1+json
-            Authorization: Bearer [token]
+        Accept: application/vnd.metasysapi.v1+json
+        Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
     + Headers
-
-            Allow: GET
+        Allow: GET
 
     + Attributes 
         + Include NetworkDeviceEntityCollection

@@ -1,0 +1,33 @@
+Group Health
+============
+
+This section contains information about health-related resources as used within the Metasys API.
+
+### Get Accounts Health [GET /health/reports/accounts]
+Retrieves a report of accounts health.
+
++ Request
+    + Headers
+        Accept: application/vnd.metasysapi.v1+json
+        Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+        Allow: GET
+
+    + Attributes 
+        + Include UserStatisticsAndSeveritysCollection
+
+### Get Device Health [GET /health/reports/devices]
+Retrieves a report of devices health.
+
++ Request
+    + Headers
+        Accept: application/vnd.metasysapi.v1+json
+        Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v1+json)
+    + Headers
+        Allow: GET
+    + Attributes 
+        + Include EngineList

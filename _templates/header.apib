@@ -5,10 +5,6 @@ HOST: https://localhost/api/
 Metasys API
 ===========
 
-> **NOTE** This is prerelease documentation and subject to change. The APIs on Metasys Server may change with each release. Be sure to consult the appropriate version
-of the documentation for the release of Metasys Server that you have.
-
-
 The Metasys API is the exposed interface for accessing system data. This document defines the contracts included in that interface.
 
 <!--
@@ -17,38 +13,21 @@ The Metasys API is the exposed interface for accessing system data. This documen
 
 ## API Version
 
-Version: 1  
-Prefix: /api/v1
-
-This documentation was last updated on {{revision}}.
+Version: 1.5  
+Prefix: /api/v1.5  
+Documentation: {{revision}}
 
 ### API Version Notes
 
 <!--
 This document describes version 1 of the API (not to be confused with document version in [Document Information](#document-information) section above). -->
 
-While this is currently the only version available, as new versions are added the API consumer will need to specify which version of the API they intend to use. The primary means of doing this is to add the version before the first entity in the URL using the format "v[#]":
+While this is currently the only version available, as new versions are added the API consumer will need to specify which version of the API they intend to use.  
+The primary means of doing this is to add the version before the first entity in the URL using the format "v[#]" (e.g. the `v1` in `http://localhost/api/v1/spaces`).  
+If using the URL is undesirable, an alternate approach is to use the `accept` header in the HTTP request, and modify the version portion based on which version is intended (e.g. the `v1` in `application/vnd.metasysapi.v1+json`).  
+The version (if used) in the URL will always override the version (if used) in the header. If no version is specified, the lowest supported version (version 1) will be used. If an invalid version is specified, a 404 (not found) error status will be returned.  
+The `Content-Type` header of the response will always contain (in part) the version of the API that was used to serve the request, so the consumer can use this to identify which version of the API was utilized.
 
-* `http://localhost/api/v1/spaces` for version 1
-* `http://localhost/api/v2/spaces` for version 2
-
-If using the URL is undesirable, an alternate approach is to use the `Accept` header in the HTTP request, and modify the version portion based on which version is intended, again using the "v[#]" format:
-
-* `Accept: application/vnd.metasysapi.v1+json` for version 1
-* `Accept: application/vnd.metasysapi.v2+json` for version 2
-
-#### Version Specification Rules
-
-Because the version specification is optional and can be provided in multiple ways, the following rules are used when determining or providing version information:
-
-* If no version is specified, the lowest supported version (v1) will be used.
-* If the version is specified in both the URL and the `Accept` header, the version specified in the URL will be used and the a version specified in the header will be ignored. 
-* If the version specified is invalid (i.e. does not represent a known version of the API), a 404 (not found) error status will be returned.
-
-#### Version Response Behavior
-
-The `Content-Type` header of the response will always contain (in part) the version of the API that was used to serve the request. This allows the consumer to identify which version of the API was utilized.
-  
 ## Pagination
 
 On endpoints where `page` and `pageSize` is allowed, the default `page` number will be 1 and is 1-based for all endpoints while the default `pageSize` will vary between endpoints.  The `page` parameter indicates the `page` number of items to return from the endpoint.  The `pageSize` parameter indicates the maximum number of items in the response from the endpoint.
@@ -67,20 +46,28 @@ For example, if object `/objects/a` has children `/objects/b` and `/objects/c`, 
 
 Additionally, each payload will contain a `self` property, which contains a link representing the endpoint used to obtain the data contained in the current payload.
 
+## DateTimes
+
+Unless otherwise specified, all date times in the document are ISO-8601 encoded.
+
 ## Validation
 
-There are some general rules that apply across all endpoints. If certain provided inputs are invalid or preconditions are not met, the API will respond with an appropriate error to indicate what went wrong.
+There are some general rules that apply across all endpoints. If certain provided inputs are invalid or preconditions are not met, the API wll respond with an appropriate error to indicate what went wrong.
 
-|Condition                      |Error             |Details                                                                                                    |
-|-------------------------------|------------------|-----------------------------------------------------------------------------------------------------------|
-|User not authenticated         |401 (Unauthorized)|The auth token supplied with the request is missing, invalid, or expired                                   |
-|Record not authorized          |403 (Forbidden)   |The user is not authorized to view data matching the provided identifier                                   |
-|Identifier not found           |404 (Not Found)   |An identifier is provided that does not match any known data                                               |
-|Missing required parameter     |400 (Bad Request) |A parameter marked required in this document is not included in the request                                |
-|Parameter incorrect type       |400 (Bad Request) |A parameter is included with a value of the wrong type (e.g. number is expected and string is provided)    |
-|Parameter out of range         |400 (Bad Request) |A numeric parameter is included but the value is outside the allowed range                                 |
-|Parameter not in set           |400 (Bad Request) |A string parameter has a set of predefined valid values, and the value provided is not included in that set|
-|Parameter not in correct format|400 (Bad Request) |A string parameter with expected format is provided in the wrong format                                    |
+|Condition                      |Error                       |Details                                                                                                    |
+|-------------------------------|----------------------------|-----------------------------------------------------------------------------------------------------------|
+|Missing required parameter     |400 (Bad Request)           |A parameter marked required in this document is not included in the request                                |
+|Parameter incorrect type       |400 (Bad Request)           |A parameter is included with a value of the wrong type (e.g. number is expected and string is provided)    |
+|Parameter out of range         |400 (Bad Request)           |A numeric parameter is included but the value is outside the allowed range                                 |
+|Parameter not in set           |400 (Bad Request)           |A string parameter has a set of predefined valid values, and the value provided is not included in that set|
+|Parameter not in correct format|400 (Bad Request)           |A string parameter with expected format is provided in the wrong format                                    |
+|User not authenticated         |401 (Unauthorized)          |The auth token supplied with the request is missing, invalid, or expired                                   |
+|Record not authorized          |403 (Forbidden)             |The user is not authorized to view data matching the provided identifier                                   |
+|Identifier not found           |404 (Not Found)             |An identifier is provided that does not match any known data                                               |
+|The Resource already exists    |409 (Conflict)              |The Resource already exists                                                                                |
+|Internal Server Error          |500 (Internal Server Error) |An unexpected error occurs                                                                                 |
+|The device is not supported    |501 (Not Implemented)       |The server does not support the functionality required to fulfill the request                              |
+|The device is offline          |503 (Service Unavailable)   |The device is currently offline and unable to serve the request                                            |
 
 ## Redirects
 
