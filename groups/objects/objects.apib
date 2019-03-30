@@ -52,6 +52,26 @@ Retrieves the specified object.
 
     + Attributes(ObjectEntity)
 
+### Lookup Object Id [GET /objectIdentifiers{?fqr}]
+Retrieves an Object Id for an Object given its Fully Qualified Reference.
+This information is often referred to as the Item Reference in Metasys user interfaces.
+Note: You must URL encode the Fully Qualified Reference in the query string.
+
++ Parameters
+    + fqr: siteName:naeName/Folder1.AV1 (string) - The Fully Qualified Reference of an object.
+
++ Request
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (text/plain)
+    + Body
+
+            "00000000-0000-0000-0000-000000000000"
+
+
 ### Get Network Device Children Objects [GET /networkDevices/{id}/objects{?page,pageSize,sort}]
 Retrieves the collection of objects that are children of the specified network device.
 
@@ -137,6 +157,601 @@ Retrieves all equipment points mapped to attributes of this object.
         + Include EquipmentPointMappingCollection
         + self:`/objects/{id}/points{?queryParams}` (string) - A link to this equipment point collection
 
+### Get Commands For An Object [GET /objects/{id}/commands]
+Retrieves schema information for commands to send to an object.
+
+A 504 status code is returned if the server cannot connect to the device to
+get a list of commands for an object.
+
+
++ Parameters
+    + id (string) - The identifier of the object
+
++ Request AV Example
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+    + Body
+
+            [
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "adjust",
+                    "description": "Adjust",
+                    "type": "array",
+                    "items": [
+                    {
+                        "type": "number",
+                        "description": "Value",
+                        "minimum": 0,
+                        "maximum": 100
+                    }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "operatorOverride",
+                    "description": "Operator Override",
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "number",
+                            "description": "Value",
+                            "minimum": 0,
+                            "maximum": 100
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseOperatorOverride",
+                    "description": "Release Operator Override",
+                    "type": "array",
+                    "items": [],
+                    "minItems": 0,
+                    "maxItems": 0
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "release",
+                    "description": "Release",
+                    "type": "array",
+                    "items": [
+                    {
+                        "oneOf": [
+                            {
+                                "const": "presentValue",
+                                "description": "Present Value"
+                            }
+                        ]
+                    },
+                    {
+                        "oneOf": [
+                            {
+                                "const": "priorityNone",
+                                "description": "0 (No Priority)"
+                            },
+                            {
+                                "const": "priorityManualEmergency",
+                                "description": "1 (Manual Life Safety)"
+                            },
+                            {
+                                "const": "priorityFireApplications",
+                                "description": "2 (Auto Life Safety)"
+                            },
+                            {
+                                "const": "priority3",
+                                "description": "3 (Application)"
+                            },
+                            {
+                                "const": "priority4",
+                                "description": "4 (Application)"
+                            },
+                            {
+                                "const": "priorityCriticalEquipment",
+                                "description": "5 (Critical Equipment)"
+                            },
+                            {
+                                "const": "priorityMinimumOnOff",
+                                "description": "6 (Minimum On Off)"
+                            },
+                            {
+                                "const": "priorityHeavyEquipDelay",
+                                "description": "7 (Heavy Equip Delay)"
+                            },
+                            {
+                                "const": "priorityOperatorOverride",
+                                "description": "8 (Operator Override)"
+                            },
+                            {
+                                "const": "priority9",
+                                "description": "9 (Application)"
+                            },
+                            {
+                                "const": "priority10",
+                                "description": "10 (Application)"
+                            },
+                            {
+                                "const": "priorityDemandLimiting",
+                                "description": "11 (Demand Limiting)"
+                            },
+                            {
+                                "const": "priority12",
+                                "description": "12 (Application)"
+                            },
+                            {
+                                "const": "priorityLoadRolling",
+                                "description": "13 (Load Rolling)"
+                            },
+                            {
+                                "const": "priority14",
+                                "description": "14 (Application)"
+                            },
+                            {
+                                "const": "prioritySchedulingOst",
+                                "description": "15 (Scheduling)"
+                            },
+                            {
+                                "const": "priorityDefault",
+                                "description": "16 (Default)"
+                            }
+                        ]
+                    }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseAll",
+                    "description": "Release All",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "presentValue",
+                                    "description": "Present Value"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                }
+            ]
+
++ Request BV Example
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+    + Body
+
+            [
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "adjust",
+                    "description": "Set State",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "state0Command",
+                                    "description": "Inactive"
+                                },
+                                {
+                                    "const": "state1Commmand",
+                                    "description": "Active"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "operatorOverride",
+                    "description": "Operator Override",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "bacbinInactive",
+                                    "description": "Inactive"
+                                },
+                                {
+                                    "const": "bacbinActive",
+                                    "description": "Active"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseOperatorOverride",
+                    "description": "Release Operator Override",
+                    "type": "array",
+                    "items": [],
+                    "minItems": 0,
+                    "maxItems": 0
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "release",
+                    "description": "Release",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "presentValue",
+                                    "description": "Present Value"
+                                }
+                            ]
+                        },
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "priorityNone",
+                                    "description": "0 (No Priority)"
+                                },
+                                {
+                                    "const": "priorityManualEmergency",
+                                    "description": "1 (Manual Life Safety)"
+                                },
+                                {
+                                    "const": "priorityFireApplications",
+                                    "description": "2 (Auto Life Safety)"
+                                },
+                                {
+                                    "const": "priority3",
+                                    "description": "3 (Application)"
+                                },
+                                {
+                                    "const": "priority4",
+                                    "description": "4 (Application)"
+                                },
+                                {
+                                    "const": "priorityCriticalEquipment",
+                                    "description": "5 (Critical Equipment)"
+                                },
+                                {
+                                    "const": "priorityMinimumOnOff",
+                                    "description": "6 (Minimum On Off)"
+                                },
+                                {
+                                    "const": "priorityHeavyEquipDelay",
+                                    "description": "7 (Heavy Equip Delay)"
+                                },
+                                {
+                                    "const": "priorityOperatorOverride",
+                                    "description": "8 (Operator Override)"
+                                },
+                                {
+                                    "const": "priority9",
+                                    "description": "9 (Application)"
+                                },
+                                {
+                                    "const": "priority10",
+                                    "description": "10 (Application)"
+                                },
+                                {
+                                    "const": "priorityDemandLimiting",
+                                    "description": "11 (Demand Limiting)"
+                                },
+                                {
+                                    "const": "priority12",
+                                    "description": "12 (Application)"
+                                },
+                                {
+                                    "const": "priorityLoadRolling",
+                                    "description": "13 (Load Rolling)"
+                                },
+                                {
+                                    "const": "priority14",
+                                    "description": "14 (Application)"
+                                },
+                                {
+                                    "const": "prioritySchedulingOst",
+                                    "description": "15 (Scheduling)"
+                                },
+                                {
+                                    "const": "priorityDefault",
+                                    "description": "16 (Default)"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseAll",
+                    "description": "Release All",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "presentValue",
+                                    "description": "Present Value"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                }
+            ]
+
++ Request MV Example
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+    + Body
+
+            [
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "adjust",
+                    "description": "Set State",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                            {
+                                "const": "multistate0Command",
+                                "description": "State 0"
+                            },
+                            {
+                                "const": "multistate1Command",
+                                "description": "State 1"
+                            },
+                            {
+                                "const": "multistate2Command",
+                                "description": "State 2"
+                            },
+                            {
+                                "const": "multistate3Command",
+                                "description": "State 3"
+                            }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "operatorOverride",
+                    "description": "Operator Override",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                            {
+                                "const": "state0",
+                                "description": "State 0"
+                            },
+                            {
+                                "const": "state1",
+                                "description": "State 1"
+                            },
+                            {
+                                "const": "state2",
+                                "description": "State 2"
+                            },
+                            {
+                                "const": "state3",
+                                "description": "State 3"
+                            }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "temporaryOperatorOverride",
+                    "description": "Temporary Override",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                            {
+                                "const": "state0",
+                                "description": "State 0"
+                            },
+                            {
+                                "const": "state1",
+                                "description": "State 1"
+                            },
+                            {
+                                "const": "state2",
+                                "description": "State 2"
+                            },
+                            {
+                                "const": "state3",
+                                "description": "State 3"
+                            }
+                            ]
+                        },
+                        {
+                            "type": "number",
+                            "description": "Hours",
+                            "Minimum": 0,
+                            "Maximum": 100
+                        },
+                        {
+                            "type": "number",
+                            "description": "Minutes",
+                            "Minimum": 0,
+                            "Maximum": 59
+                        }
+                    ],
+                    "minItems": 3,
+                    "maxItems": 3
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseOperatorOverride",
+                    "description": "Release Operator Override",
+                    "type": "array",
+                    "items": [],
+                    "minItems": 0,
+                    "maxItems": 0
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "release",
+                    "description": "Release",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                            {
+                                "const": "presentValue",
+                                "description": "Present Value"
+                            }
+                            ]
+                        },
+                        {
+                            "oneOf": [
+                            {
+                                "const": "priorityNone",
+                                "description": "0 (No Priority)"
+                            },
+                            {
+                                "const": "priorityManualEmergency",
+                                "description": "1 (Manual Life Safety)"
+                            },
+                            {
+                                "const": "priorityFireApplications",
+                                "description": "2 (Auto Life Safety)"
+                            },
+                            {
+                                "const": "priority3",
+                                "description": "3 (Application)"
+                            },
+                            {
+                                "const": "priority4",
+                                "description": "4 (Application)"
+                            },
+                            {
+                                "const": "priorityCriticalEquipment",
+                                "description": "5 (Critical Equipment)"
+                            },
+                            {
+                                "const": "priorityMinimumOnOff",
+                                "description": "6 (Minimum On Off)"
+                            },
+                            {
+                                "const": "priorityHeavyEquipDelay",
+                                "description": "7 (Heavy Equip Delay)"
+                            },
+                            {
+                                "const": "priorityOperatorOverride",
+                                "description": "8 (Operator Override)"
+                            },
+                            {
+                                "const": "priority9",
+                                "description": "9 (Application)"
+                            },
+                            {
+                                "const": "priority10",
+                                "description": "10 (Application)"
+                            },
+                            {
+                                "const": "priorityDemandLimiting",
+                                "description": "11 (Demand Limiting)"
+                            },
+                            {
+                                "const": "priority12",
+                                "description": "12 (Application)"
+                            },
+                            {
+                                "const": "priorityLoadRolling",
+                                "description": "13 (Load Rolling)"
+                            },
+                            {
+                                "const": "priority14",
+                                "description": "14 (Application)"
+                            },
+                            {
+                                "const": "prioritySchedulingOst",
+                                "description": "15 (Scheduling)"
+                            },
+                            {
+                                "const": "priorityDefault",
+                                "description": "16 (Default)"
+                            }
+                            ]
+                        }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseAll",
+                    "description": "Release All",
+                    "type": "array",
+                    "items": [
+                    {
+                        "oneOf": [
+                            {
+                                "const": "presentValue",
+                                "description": "Present Value"
+                            }
+                        ]
+                    }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "enableAlarms",
+                    "description": "Enable Alarms",
+                    "type": "array",
+                    "items": [],
+                    "minItems": 0,
+                    "maxItems": 0
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "disableAlarms",
+                    "description": "Disable Alarms",
+                    "type": "array",
+                    "items": [],
+                    "minItems": 0,
+                    "maxItems": 0
+                }
+            ]
+
++ Response 504
+
 ### Send a Command to an Object [PUT /objects/{id}/commands/{commandId}]
 
 This action allows you to send a command to the specified object. To discover what commands an object supports,
@@ -181,21 +796,3 @@ Several error status codes are possible
 
 + Response 504
 
-### Lookup Object Id [GET /objectIdentifiers{?fqr}]
-Retrieves an Object Id for an Object given its Fully Qualified Reference.
-This information is often referred to as the Item Reference in Metasys user interfaces.
-Note: You must URL encode the Fully Qualified Reference in the query string.
-
-+ Parameters
-    + fqr: siteName:naeName/Folder1.AV1 (string) - The Fully Qualified Reference of an object.
-
-+ Request
-    + Headers
-
-            Accept: application/vnd.metasysapi.v2+json
-            Authorization: Bearer [token]
-
-+ Response 200 (text/plain)
-    + Body
-
-            "00000000-0000-0000-0000-000000000000"
