@@ -3,8 +3,6 @@ Group Enumerations
 
 This section contains information about enumeration-related resources as used within the Metasys API.
 
-Note: The `/enumSets` endpoints are being deprecated in Metasys 10.1. Going forward, please see the `Schemas` resource endpoints for access to `Enumerations`.
-
 ### Get Enum Sets [GET /enumSets{?page,pageSize}]
 Retrieves a collection of all enumeration sets in the system.
 
@@ -17,17 +15,15 @@ Retrieves a collection of all enumeration sets in the system.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EnumSetCollection
-        + self:`/enumSets{?queryParams}` (string) - A link to this enum set collection
+        + self:`https://{hostname}/api/v2/enumSets{?queryParams}` (string) - A link to this enum set collection
 
 ### Get A Single Enum Set [GET /enumSets/{id}]
 Retrieves the specified enumeration set.
@@ -38,13 +34,11 @@ Retrieves the specified enumeration set.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(EnumSet)
 
@@ -61,17 +55,15 @@ Retrieves the collection of member values belonging to the specified enumeration
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EnumMemberCollection
-        + self:`/enumSets/{id}/members{?queryParams}` (string) - A link to this enum member collection
+        + self:`https://{hostname}/api/v2/enumSets/{id}/members{?queryParams}` (string) - A link to this enum member collection
 
 ### Get A Single Enum Member [GET /enumSets/{id}/members/{memberId}]
 Retrieves the specified enumeration member value.
@@ -83,12 +75,10 @@ Retrieves the specified enumeration member value.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(EnumMember)

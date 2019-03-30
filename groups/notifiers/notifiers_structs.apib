@@ -53,8 +53,8 @@
 ## NotifierEntity
 + type: `email` (NotifierType) - The type of the notifier
 + label:`Email` (string) - The localized label of the notifier
-+ configurationUrl:`/notifiers/email/configuration` (string) - A link to the notifier's configuration 
-+ destinationUrl:`/notifiers/email/destinations` (string) - A link to the notifier's destinations
++ configurationUrl:`https://{hostname}/api/v2/notifiers/email/configuration` (string) - A link to the notifier's configuration 
++ destinationUrl:`https://{hostname}/api/v2/notifiers/email/destinations` (string) - A link to the notifier's destinations
 + readOnly:`true` (boolean) - Indicates whether the user just has read only permission on the notifier
 
 ## EmailNotifierConfigurationEntity
@@ -304,7 +304,7 @@
 
 ## DestinationSaveSuccessful 
 + destinationId:`f391d369-7eaa-5deb-8d1d-fb6697d679fc` (string) - The unique identification of created destination
-+ url:`/notifiers/email/destinations` (string) - URL to get all the destinations
++ url:`https://{hostname}/api/v2/notifiers/email/destinations` (string) - URL to get all the destinations
 
 ## AddNotifierDestinationEventFilterForServer
 + property: (NotifierFilterPropertyNameForServer) - The name of the property on an activity (alarm or audit) to filter on

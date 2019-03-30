@@ -1,6 +1,6 @@
 ## EquipmentLinkCollection
 + Include PagedItemCollection
-+ items:`[/equipment/{id}]` (array[string], fixed-type) - The collection of equipment links
++ items:`[https://{hostname}/api/v2/equipment/{id}]` (array[string], fixed-type) - The collection of equipment links
 
 ## EquipmentEntity
 + Include EquipmentData
@@ -16,12 +16,12 @@
 + type:`AHU` (string) - The name of the equipment definition for this equipment instance
 
 ## EquipmentRelationshipLinks
-+ self:`/equipment/{id}` (string) - A link to this equipment instance
-+ spaces:`/equipment/{id}/spaces` (string) - A link to the spaces served by this equipment instance
-+ equipment:`/equipment/{id}/equipment` (string) - A link to the equipment served by this equipment instance
-+ upstreamEquipment:`/equipment/{id}/upstreamEquipment` (string) - A link to the equipment that serves this equipment instance
-+ networkDevices:`/equipment/{id}/networkDevices` (string) - A link to the network devices that host this equipment instance
-+ points:`/equipment/{id}/points` (string) - A link to the point mappings defined by this equipment instance
++ self:`https://{hostname}/api/v2/equipment/{id}` (string) - A link to this equipment instance
++ spacesUrl:`https://{hostname}/api/v2/equipment/{id}/spaces` (string) - A link to the spaces served by this equipment instance
++ equipmentUrl:`https://{hostname}/api/v2/equipment/{id}/equipment` (string) - A link to the equipment served by this equipment instance
++ upstreamEquipmentUrl:`https://{hostname}/api/v2/equipment/{id}/upstreamEquipment` (string) - A link to the equipment that serves this equipment instance
++ networkDevicesUrl:`https://{hostname}/api/v2/equipment/{id}/networkDevices` (string) - A link to the network devices that host this equipment instance
++ pointsUrl:`https://{hostname}/api/v2/equipment/{id}/points` (string) - A link to the point mappings defined by this equipment instance
 
 ## EquipmentPointMappingEntity
 + Include EquipmentPointMappingData
@@ -39,6 +39,6 @@
 + isDisplayData (boolean) - Whether the equipment point is marked as display data
 
 ## EquipmentPointMappingRelationshipLinks
-+ equipment:`/equipment/{id}` (string) - A link to the mapped equipment
-+ object:`/objects/{id}` (string) - A link to the mapped object
-+ attribute:`/enumSets/509/members/{memberId}` (string) - A link to the mapped attribute
++ equipmentUrl:`https://{hostname}/api/v2/equipment/{id}` (string) - A link to the mapped equipment
++ objectUrl:`https://{hostname}/api/v2/objects/{id}` (string) - A link to the mapped object
++ attributeUrl:`https://{hostname}/api/v2/enumSets/509/members/{memberId}` (string) - A link to the mapped attribute

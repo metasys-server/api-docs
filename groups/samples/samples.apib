@@ -12,22 +12,20 @@ Retrieves a collection of attributes under the specified network device for whic
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include NetworkDeviceAttributeWithSamplesCollection
-        + self:`/networkDevices/{id}/attributes` - A link to this collection
+        + self:`https://{hostname}/api/v2/networkDevices/{id}/attributes` - A link to this collection
 
 ### Get Samples For A Network Device Attribute [GET /networkDevices/{id}/attributes/{attributeId}/samples{?startTime,endTime,page,pageSize,sort}]
 Retrieves a collection of samples for the specified network device attribute during a particular date and time range.
 
-Note that the parent endpoint `/networkDevices/{id}/attributes/{attributeId}` is not currently implemented.
+Note that the parent endpoint `https://{hostname}/api/v2/networkDevices/{id}/attributes/{attributeId}` is not currently implemented.
 
 + Parameters
     + id (string) - The identifier of the network device
@@ -46,13 +44,11 @@ Note that the parent endpoint `/networkDevices/{id}/attributes/{attributeId}` is
 + Request Analog Samples
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(NetworkDeviceValueSamplesEntity)
       - items (array)
@@ -61,13 +57,11 @@ Note that the parent endpoint `/networkDevices/{id}/attributes/{attributeId}` is
 + Request Digital Samples
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (NetworkDeviceValueSamplesEntity)
       - items (array)
@@ -82,22 +76,20 @@ Retrieves a collection of attributes under the specified object for which sample
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include ObjectAttributeWithSamplesCollection
-        + self:`/objects/{id}/attributes` - A link to this collection
+        + self:`https://{hostname}/api/v2/objects/{id}/attributes` - A link to this collection
 
 ### Get Samples For An Object Attribute [GET /objects/{id}/attributes/{attributeId}/samples{?startTime,endTime,page,pageSize,sort}]
 Retrieves a collection of samples for the specified object attribute during a particular date and time range.
 
-Note that the parent endpoint `/objects/{id}/attributes/{attributeId}` is not currently implemented.
+Note that the parent endpoint `https://{hostname}/api/v2/objects/{id}/attributes/{attributeId}` is not currently implemented.
 
 + Parameters
     + id (string) - The identifier of the object
@@ -116,13 +108,11 @@ Note that the parent endpoint `/objects/{id}/attributes/{attributeId}` is not cu
 + Request Analog Samples
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (ObjectValueSamplesEntity)
       - items (array)
@@ -131,13 +121,11 @@ Note that the parent endpoint `/objects/{id}/attributes/{attributeId}` is not cu
 + Request Digital Samples
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (ObjectValueSamplesEntity)
       - items (array)

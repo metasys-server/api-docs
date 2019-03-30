@@ -26,11 +26,9 @@ Retrieves a collection of spaces.
 + Response 200 (application/vnd.metasysapi.v1+json)
     + Headers
 
-            Allow: GET
-
     + Attributes
         + Include SpaceEntityCollection
-        + self:`/spaces{?queryParams}` (string) - A link to this space collection
+        + self:`https://{hostname}/api/v2/spaces{?queryParams}` (string) - A link to this space collection
 
 ### Get A Single Space [GET /spaces/{id}]
 Retrieves the specified space.
@@ -46,8 +44,6 @@ Retrieves the specified space.
 
 + Response 200 (application/vnd.metasysapi.v1+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (SpaceEntity)
 
@@ -73,11 +69,9 @@ Retrieves the collection of spaces served by the specified equipment instance.
 + Response 200 (application/vnd.metasysapi.v1+json)
     + Headers
 
-            Allow: GET
-
     + Attributes
         + Include SpaceEntityCollection
-        + self:`/equipment/{id}/spaces{?queryParams}` (string) - A link to this space collection
+        + self:`https://{hostname}/api/v2/equipment/{id}/spaces{?queryParams}` (string) - A link to this space collection
 
 ### Get Spaces Served by a Network Device [GET /networkDevices/{id}/spaces{?page,pageSize,sort}]
 Retrieves the collection of spaces served by the specified network device.
@@ -102,11 +96,9 @@ A space is considered to be served by a network device if any equipment instance
 + Response 200 (application/vnd.metasysapi.v1+json)
     + Headers
 
-            Allow: GET
-
     + Attributes
         + Include SpaceEntityCollection
-        + self:`/networkDevices/{id}/spaces{?queryParams}` (string) - A link to this space collection
+        + self:`https://{hostname}/api/v2/networkDevices/{id}/spaces{?queryParams}` (string) - A link to this space collection
 
 ### Get Space Children [GET /spaces/{id}/spaces{?page,pageSize,sort}]
 Retrieves the collection of spaces that are located within the specified space.
@@ -130,8 +122,6 @@ Retrieves the collection of spaces that are located within the specified space.
 + Response 200 (application/vnd.metasysapi.v1+json)
     + Headers
 
-            Allow: GET
-
     + Attributes
         + Include SpaceEntityCollection
-        + self:`/spaces/{id}/spaces{?queryParams}` (string) - A link to this space collection.
+        + self:`https://{hostname}/api/v2/spaces/{id}/spaces{?queryParams}` (string) - A link to this space collection.

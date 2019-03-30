@@ -9,13 +9,11 @@ Retrieves list of all supported notifiers for server
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (array[NotifierEntity])
 
@@ -25,29 +23,29 @@ Retrieves list of all supported notifiers for server
                 {
                     "type":"email",
                     "label":"Email",
-                    "configurationUrl": "/notifiers/email/configuration",
-                    "destinationUrl": "/notifiers/email/destinations",
+                    "configurationUrl": "https://{hostname}/api/v2/notifiers/email/configuration",
+                    "destinationUrl": "https://{hostname}/api/v2/notifiers/email/destinations",
                     "readOnly": true
                 },
                 {
                     "type":"printer",
                     "label":"Printer",
-                    "configurationUrl": "/notifiers/printer/configuration",
-                    "destinationUrl": "/notifiers/printer/destinations",
+                    "configurationUrl": "https://{hostname}/api/v2/notifiers/printer/configuration",
+                    "destinationUrl": "https://{hostname}/api/v2/notifiers/printer/destinations",
                     "readOnly": true
                 },
                 {
                     "type":"snmp",
                     "label":"SNMP",
-                    "configurationUrl": "/notifiers/snmp/configuration",
-                    "destinationUrl": "/notifiers/snmp/destinations",
+                    "configurationUrl": "https://{hostname}/api/v2/notifiers/snmp/configuration",
+                    "destinationUrl": "https://{hostname}/api/v2/notifiers/snmp/destinations",
                     "readOnly": false
                 },
                 {
                     "type":"syslog",
                     "label":"Syslog",
-                    "configurationUrl": "/notifiers/syslog/configuration",
-                    "destinationUrl": "/notifiers/syslog/destinations",
+                    "configurationUrl": "https://{hostname}/api/v2/notifiers/syslog/configuration",
+                    "destinationUrl": "https://{hostname}/api/v2/notifiers/syslog/destinations",
                     "readOnly": true
                 }
             ]
@@ -61,13 +59,11 @@ Retrieves a collection of all supported notifiers for the specified network devi
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (array[NotifierEntity])
 
@@ -77,29 +73,29 @@ Retrieves a collection of all supported notifiers for the specified network devi
                 {
                     "type":"email",
                     "label":"Email",
-                    "configurationUrl": "/notifiers/email/configuration",
-                    "destinationUrl": "/notifiers/email/destinations",
+                    "configurationUrl": "https://{hostname}/api/v2/notifiers/email/configuration",
+                    "destinationUrl": "https://{hostname}/api/v2/notifiers/email/destinations",
                     "readOnly": true
                 },
                 {
                     "type":"printer",
                     "label":"Printer",
-                    "configurationUrl": "/notifiers/printer/configuration",
-                    "destinationUrl": "/notifiers/printer/destinations",
+                    "configurationUrl": "https://{hostname}/api/v2/notifiers/printer/configuration",
+                    "destinationUrl": "https://{hostname}/api/v2/notifiers/printer/destinations",
                     "readOnly": true
                 },
                 {
                     "type":"snmp",
                     "label":"SNMP",
-                    "configurationUrl": "/notifiers/snmp/configuration",
-                    "destinationUrl": "/notifiers/snmp/destinations",
+                    "configurationUrl": "https://{hostname}/api/v2/notifiers/snmp/configuration",
+                    "destinationUrl": "https://{hostname}/api/v2/notifiers/snmp/destinations",
                     "readOnly": true
                 },
                 {
                     "type":"syslog",
                     "label":"Syslog",
-                    "configurationUrl": "/notifiers/syslog/configuration",
-                    "destinationUrl": "/notifiers/syslog/destinations",
+                    "configurationUrl": "https://{hostname}/api/v2/notifiers/syslog/configuration",
+                    "destinationUrl": "https://{hostname}/api/v2/notifiers/syslog/destinations",
                     "readOnly": true
                 }
             ]
@@ -113,13 +109,11 @@ Retrieves email notifier configuration for the server
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(EmailNotifierConfigurationEntity)
 
@@ -129,13 +123,11 @@ Retrieves constraints for the email notifier configuration of the server
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(EmailNotifierConfigurationConstraint)
 
@@ -170,7 +162,7 @@ Update email notifier configuration for server.
 
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 204
@@ -206,7 +198,7 @@ Partially update email notifier configuration for server. User can edit  the `ss
 
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 204
@@ -223,13 +215,11 @@ Retrieves email notifier configuration for network device
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(EmailNotifierConfigurationEntity)
 
@@ -239,13 +229,11 @@ Retrieves constraints for the email notifier configuration of the network device
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(EmailNotifierConfigurationConstraint)
 
@@ -280,7 +268,7 @@ Update email notifier configuration for network device.
             
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 204
@@ -316,7 +304,7 @@ Partially update email notifier configuration for network device. User can edit 
 
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 204
@@ -330,14 +318,11 @@ Retrieve email notifier destinations for server
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
-
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(EmailNotifierDestinationContainerForServer)
 
@@ -452,13 +437,11 @@ Retrieve email notifier destinations for server
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(EmailNotifierDestinationForServer)
     
@@ -1059,13 +1042,11 @@ Add new email notifier destination for server
             
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 201 (application/vnd.metasysapi.v1+json)
++ Response 201 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: POST
 
     + Attributes (DestinationSaveSuccessful)
 
@@ -1135,13 +1116,11 @@ Update email notifier single destination for server
             
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: PUT
 
     + Attributes (DestinationSaveSuccessful)
 
@@ -1155,8 +1134,7 @@ Delete email notifier single destination for server
 
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 204 (application/vnd.metasysapi.v1+json)
-
++ Response 204 (application/vnd.metasysapi.v2+json)

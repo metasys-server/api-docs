@@ -21,17 +21,15 @@ Retrieves the collection of annotations available for the specified alarm.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include AlarmAnnotationEntityCollection
-        + self:`/alarms/{id}/annotations{?queryParams}` (string) - A link to this alarm annotation collection
+        + self:`https://{hostname}/api/v2/alarms/{id}/annotations{?queryParams}` (string) - A link to this alarm annotation collection
 
 ### Get Audit Annotations [GET /audits/{id}/annotations{?page,pageSize,sort}]
 Retrieves a collection of audit annotations.
@@ -49,14 +47,12 @@ Retrieves a collection of audit annotations.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include AuditAnnotationEntityCollection
-        + self:`/audits/{id}/annotations{?queryParams}` (string) - A link to this audit annotation data set
+        + self:`https://{hostname}/api/v2/audits/{id}/annotations{?queryParams}` (string) - A link to this audit annotation data set

@@ -11,8 +11,8 @@
 + description:`Object Type` (string) - The description of the enum set
 
 ## EnumSetRelationships
-+ self:`enumSets/{id}` (string) - A link to the enum set
-+ members:`enumSets/{id}/members` (string) - A link to the enum set members
++ self:`https://{hostname}/api/v2/enumSets/{id}` (string) - A link to the enum set
++ membersUrl:`https://{hostname}/api/v2/enumSets/{id}/members` (string) - A link to the enum set members
 
 ## EnumMember
 + Include EnumMemberData
@@ -27,54 +27,54 @@
 + description:`JCI AV` (string) - The description of the enum member
 
 ## EnumMemberRelationships
-+ self:`/enumSets/{id}/members/{memberId}` (string) - A link to the enum set members
-+ set:`/enumSets/{id}` (string) - A link to the enum set
++ self:`https://{hostname}/api/v2/enumSets/{id}/members/{memberId}` (string) - A link to the enum set members
++ setUrl:`https://{hostname}/api/v2/enumSets/{id}` (string) - A link to the enum set
 
 ## AttributeEnum
 + Include EnumMember
 + id:`85` (number) - Identifier for the attribute
 + description:`Present Value` (string) - The description of the attribute
-+ self:`/enumSets/509/members/85` (string)
-+ set:`/enumSets/509` (string, fixed) - A link to the attribute enum set
++ self:`https://{hostname}/api/v2/enumSets/509/members/85` (string)
++ setUrl:`https://{hostname}/api/v2/enumSets/509` (string, fixed) - A link to the attribute enum set
 
 ## ObjectTypeEnum
 + Include EnumMember
 + id:`165` (number) - Identifier for the object type
 + description:`JCI AV` (string) - The description of the object type
-+ self:`/enumSets/508/members/165` (string) - A link to the object type enum member
-+ set:`/enumSets/508` (string, fixed) - A link to the object type enum set
++ self:`https://{hostname}/api/v2/enumSets/508/members/165` (string) - A link to the object type enum member
++ setUrl:`https://{hostname}/api/v2/enumSets/508` (string, fixed) - A link to the object type enum set
 
 ## ObjectCategoryEnum
 + Include EnumMember
 + id:`5` (number) - Identifier for the object category
 + description:`General` (string) - The description of the object category
-+ self:`/enumSets/33/members/5` (string) - A link to the object category enum member
-+ set:`/enumSets/33` (string, fixed) - Link to the object category enum set
++ self:`https://{hostname}/api/v2/enumSets/33/members/5` (string) - A link to the object category enum member
++ setUrl:`https://{hostname}/api/v2/enumSets/33` (string, fixed) - Link to the object category enum set
 
 ## SpaceTypeEnum
 + Include EnumMember
 + id:`1` (number) - Identifier for the space type
 + description:`Building` (string) - The description of the space type
-+ self:`/enumSets/1766/members/1` (string) - A link to the space type enum member
-+ set:`/enumSets/1766` (string, fixed) - Link to the space type enum set
++ self:`https://{hostname}/api/v2/enumSets/1766/members/1` (string) - A link to the space type enum member
++ setUrl:`https://{hostname}/api/v2/enumSets/1766` (string, fixed) - Link to the space type enum set
 
 ## TimeZoneEnum
 + Include EnumMember
 + id:`53` (number) - Identifier for the time zone
 + description:`(UTC-06:00) Central Time (US & Canada)` (string) - The description of the time zone, consistent with SMP display
-+ self:`/enumSets/576/members/53`(string)  - A link to the time zone enum member
-+ set:`/enumSets/576` (string, fixed) - Link to the time zone enum set
++ self:`https://{hostname}/api/v2/enumSets/576/members/53`(string)  - A link to the time zone enum member
++ setUrl:`https://{hostname}/api/v2/enumSets/576` (string, fixed) - Link to the time zone enum set
 
 ## UnitsEnum
 + Include EnumMember
 + id:`64` (number) - The identifier for the unit
 + description:`deg F` (string) - The description of the unit
-+ self:`/enumSets/507/members/64` (string)  - A link to the units enum member
-+ set:`/enumSets/507` (string, fixed) - A link to the units enum set
++ self:`https://{hostname}/api/v2/enumSets/507/members/64` (string)  - A link to the units enum member
++ setUrl:`https://{hostname}/api/v2/enumSets/507` (string, fixed) - A link to the units enum set
 
 ## ObjectStatusEnum
 + Include EnumMember
 + id:`38` (number) - The identifier for the status
 + description:`Alarm` (string) - The description of the status
-+ self:`/enumSets/505/members/38` (string) - A link to the object status enum member
-+ set:`/enumSets/505` (string, fixed) - A link to the object status enum set
++ self:`https://{hostname}/api/v2/enumSets/505/members/38` (string) - A link to the object status enum member
++ setUrl:`https://{hostname}/api/v2/enumSets/505` (string, fixed) - A link to the object status enum set

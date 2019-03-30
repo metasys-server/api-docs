@@ -20,16 +20,15 @@ Retrieves a collection of network devices.
 
 + Request
     + Headers
-        Accept: application/vnd.metasysapi.v1+json
+        Accept: application/vnd.metasysapi.v2+json
         Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-        Allow: GET
 
     + Attributes 
         + Include NetworkDeviceEntityCollection
-        + self:`/networkDevices{?queryParams}` (string) - A link to this network device collection
+        + self:`https://{hostname}/api/v2/networkDevices{?queryParams}` (string) - A link to this network device collection
 
 ### Get Network Device Types [GET /networkDevices/availableTypes]
 Retrieves the collection of all network device types.
@@ -37,18 +36,16 @@ Retrieves the collection of all network device types.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include ItemCollection
         + items (array[ObjectTypeEnum], fixed-type)
-        + self:`/networkDevices/availableTypes` - A link to this network device type collection
+        + self:`https://{hostname}/api/v2/networkDevices/availableTypes` - A link to this network device type collection
 
 ### Get A Single Network Device [GET /networkDevices/{id}]
 Retrieves the specified network device.
@@ -59,13 +56,11 @@ Retrieves the specified network device.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(NetworkDeviceEntity)
 
@@ -85,17 +80,15 @@ Retrieves the collection of network devices that host the specified equipment in
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes 
         + Include NetworkDeviceEntityCollection
-        + self:`/equipment/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
+        + self:`https://{hostname}/api/v2/equipment/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
 
 ### Get Network Device Children [GET /networkDevices/{id}/networkDevices{?page,pageSize,sort}]
 Retrieves the collection of network devices that are children of the specified network device.
@@ -113,17 +106,15 @@ Retrieves the collection of network devices that are children of the specified n
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes 
         + Include NetworkDeviceEntityCollection
-        + self:`/networkDevices/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
+        + self:`https://{hostname}/api/v2/networkDevices/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
 
 ### Get Network Devices Serving A Space [GET /spaces/{id}/networkDevices{?page,pageSize,sort}]
 Retrieves the collection of network devices that are serving the specified space.
@@ -142,14 +133,12 @@ A space is considered to be served by a network device is considered to host an 
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include NetworkDeviceEntityCollection
-        + self:`/spaces/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
+        + self:`https://{hostname}/api/v2/spaces/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection

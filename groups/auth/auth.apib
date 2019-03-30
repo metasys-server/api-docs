@@ -5,8 +5,8 @@ All of the endpoints in the Metasys Server API require authentication. This is
 accomplished by passing an access token in an Authorization header. To
  get an access token use the `/login` api. Access tokens eventually expire. Prior to
  expiration you can request a new access token by calling the `/refreshToken` api.
-  
-The expiration time of the access token is based on the Metasys user profile.  
+
+The expiration time of the access token is based on the Metasys user profile.
 
 ### Login [POST /login]
 
@@ -16,17 +16,17 @@ Used to login and retrieve an access token.
 
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
 
 
     + Attributes
 
         + Include LoginRequest
 
-+ Response 200 (application/vnd.metasys.v1+json)
++ Response 200 (application/vnd.metasys.v2+json)
 
     + Attributes
-    
+
         + Include LoginResponse
 
 ### Refresh Token [GET /refreshToken]
@@ -36,11 +36,11 @@ Used to request a new access token prior to expiration.
 + Request
 
     + Headers
-    
-            Accept: application/vnd.metasysapi.v1+json
+
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasys.v1+json)
++ Response 200 (application/vnd.metasys.v2+json)
 
     + Attributes
         + Include LoginResponse
