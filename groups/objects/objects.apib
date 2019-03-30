@@ -76,7 +76,7 @@ Retrieves the collection of objects that are children of the specified network d
 
             Allow: GET
 
-    + Attributes 
+    + Attributes
         + Include ObjectEntityCollection
         + self:`/networkDevices/{id}/objects{?queryParams}` (string) - A link to this object collection
 
@@ -136,3 +136,48 @@ Retrieves all equipment points mapped to attributes of this object.
     + Attributes
         + Include EquipmentPointMappingCollection
         + self:`/objects/{id}/points{?queryParams}` (string) - A link to this equipment point collection
+
+### Send a Command to an Object [PUT /objects/{id}/commands/{commandId}]
+
+This action allows you to send a command to the specified object. To discover what commands an object supports,
+see the get commands endpoint.
+
+Several examples of different commands are shown below.
+
+Several error status codes are possible
+
+| Status Code | Reason
+| ----------: | ----------------
+| 400         | The point being commanded is under local control or the request is malformed.
+| 504         | The command is sent to an offline device or the server cannot connect to the device.
+
++ Parameters
+    + id (string) - The identifier of the object.
+    + commandId (string) - The Id of the command to send. Command Ids are discovered via the get commands endpoint.
+
++ Request
+    + Headers
+
+            Authorization: Bearer [token]
+            Accept: application/vnd.metasysapi.v2+json
+
+    + Body
+
+            + parameters (array) - The list of parameters for the command. Parameters and their data types are determined by the command being sent.
+
++ Request Adjust an AV (application/json)
+
+        [15]
+
++ Request Release a BV (application/json)
+
+        []
+
++ Request Temporary Operator Override a MV (application/json)
+
+        ["state0", 15, 30]
+
++ Response 400
+
++ Response 504
+
