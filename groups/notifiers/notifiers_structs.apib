@@ -53,7 +53,7 @@
 ## NotifierEntity
 + type: `email` (NotifierType) - The type of the notifier
 + label:`Email` (string) - The localized label of the notifier
-+ configurationUrl:`https://{hostname}/api/v2/notifiers/email/configuration` (string) - A link to the notifier's configuration 
++ configurationUrl:`https://{hostname}/api/v2/notifiers/email/configuration` (string) - A link to the notifier's configuration
 + destinationUrl:`https://{hostname}/api/v2/notifiers/email/destinations` (string) - A link to the notifier's destinations
 + readOnly:`true` (boolean) - Indicates whether the user just has read only permission on the notifier
 
@@ -71,18 +71,18 @@
 + smtpPort:`25` (number) - The SMTP server port number. This is only used in case the authentication type is smtp or popBeforeSmtp
 + popConfigurationDetails (popConfiguration) - The POP Configuration
 + smtpConfigurationDetails (smtpConfiguration) - The SMTP Configuration
-+ emailDiagnostics (string) - The email diagnostics information 
++ emailDiagnostics (string) - The email diagnostics information
 
 ## popConfiguration
 + hostname: `pop.jci.com` (string, optional) - The POP server host-name
 + username: `sample@jci.com` (string, optional) - The POP server user name
 
-## smtpConfiguration 
+## smtpConfiguration
 + username: `sample@jci.com` (string, optional) - The SMTP server user name
 
 ## UpdateEmailNotifierConfiguration
 + sslEmailEnabled (boolean, optional) - Indicates whether SSL is enabled on Email. This is only used if the device's version is above 4.0
-+ sslEmailIgnoreErrors: (boolean, optional) - Indicates whether ignoring SSL errors is enabled.This is only used if the device's version is above 4.0
++ sslEmailIgnoreErrors (boolean, optional) - Indicates whether ignoring SSL errors is enabled.This is only used if the device's version is above 4.0
 + authenticationType: `popBeforeSmtp` (EmailAuthenticationType) - The authentication mechanism to use
 + fromEmailAddress: `metasys@jci.com` (string) - The sender's email address
 + smtpHostname: `smtp.jci.com` (string) - The SMTP server host name
@@ -231,7 +231,7 @@
 ## popConfigurationDetailConstraint
 + hostname (NotifierStringConstraint) - The POP host-name constraints
 + password (NotifierStringConstraint) - The POP password constraints
-+ username (NotifierStringConstraint) - The POP user name constraints 
++ username (NotifierStringConstraint) - The POP user name constraints
 
 ## smtpConfigurationDetailConstraint
 + password (NotifierStringConstraint) - The SMTP password constraints
@@ -252,7 +252,7 @@
 + smtpConfigurationDetails (smtpConfigurationDetailConstraint) - The SMTP Configuration constraints
 
 ## BaseNotifierDestinationContainer
-+ type: (NotifierType) - The type of the notifier
++ type (NotifierType) - The type of the notifier
 + label:`Email` (string) - The localized label of the notifier
 
 ## EmailNotifierDestinationContainerForServer
@@ -263,7 +263,7 @@
 + id:`6a00fbfa-fa27-5308-a927-b7405490259b` (string) - The unique identifier of the destination
 + label:`Destination 1` (string) - The localized label of the notifier destination
 + toEmailAddresses:["destination1@jci.com"] (array[string]) - The email address of one or more recipients
-+ priority: (NotifierDestinationPriority) - The priority of the outbound email message
++ priority (NotifierDestinationPriority) - The priority of the outbound email message
 + subject (string) - The user-defined text that appears in the subject field of the email message
 + retries (number) - The number or attempts made to send a message if there is a failure before the system discards it
 + enabled (boolean) - Indicates whether or not the destination is enabled
@@ -275,7 +275,7 @@
 ## NewEmailNotifierDestinationForServer
 + label:`Destination 1` (string) - The localized label of the notifier destination
 + toEmailAddresses:["destination1@jci.com"] (array[string]) - The email address of one or more recipients
-+ priority: (NotifierDestinationPriority) - The priority of the outbound email message
++ priority (NotifierDestinationPriority) - The priority of the outbound email message
 + subject (string) - The user-defined text that appears in the subject field of the email message
 + retries (number) - The number or attempts made to send a message if there is a failure before the system discards it
 + enabled (boolean) - Indicates whether or not the destination is enabled
@@ -284,7 +284,7 @@
 + escalationConfiguration (EscalationConfiguration) - The escalation settings for destination
 
 # EscalationConfiguration
-+ emailRecipients: ["manager@jci.com"] (array[string]) - The email address of one or more recipients for alarm escalation 
++ emailRecipients: ["manager@jci.com"] (array[string]) - The email address of one or more recipients for alarm escalation
 + delayInterval (EscalationDelay) - Total delay in an escalation of an alarm
 
 ## EscalationDelay
@@ -302,28 +302,28 @@
 + acknowledgeRequired (boolean) -Indicates whether destination delivery format contains a acknowledge required value
 + previousStatus (boolean) - Indicates whether destination delivery format contains a previous status value
 
-## DestinationSaveSuccessful 
+## DestinationSaveSuccessful
 + destinationId:`f391d369-7eaa-5deb-8d1d-fb6697d679fc` (string) - The unique identification of created destination
 + url:`https://{hostname}/api/v2/notifiers/email/destinations` (string) - URL to get all the destinations
 
 ## AddNotifierDestinationEventFilterForServer
-+ property: (NotifierFilterPropertyNameForServer) - The name of the property on an activity (alarm or audit) to filter on
-+ operator: (NotifierFilterOperatorType) - The operation to use for filtering
++ property (NotifierFilterPropertyNameForServer) - The name of the property on an activity (alarm or audit) to filter on
++ operator (NotifierFilterOperatorType) - The operation to use for filtering
 + values (array[string]) - The list of values
 
 ## AddNotifierDestinationEventFilter
-+ property: (NotifierFilterPropertyName) - The name of the property on an activity (alarm or audit) to filter on
-+ operator: (NotifierFilterOperatorType) - The operation to use for filtering
++ property (NotifierFilterPropertyName) - The name of the property on an activity (alarm or audit) to filter on
++ operator (NotifierFilterOperatorType) - The operation to use for filtering
 + values (array[string]) - The list of values
 
 ## NotifierDestinationEventFilterForServer
-+ property: (NotifierFilterPropertyNameForServer) - The name of the property on an activity (alarm or audit) to filter on
-+ operator: (NotifierFilterOperatorType) - The operation to use for filtering
++ property (NotifierFilterPropertyNameForServer) - The name of the property on an activity (alarm or audit) to filter on
++ operator (NotifierFilterOperatorType) - The operation to use for filtering
 + values (array[FilterValue]) - The list of values
 
 ## NotifierDestinationEventFilter
-+ property: (NotifierFilterPropertyName) - The name of the property on an activity (alarm or audit) to filter on
-+ operator: (NotifierFilterOperatorType) - The operation to use for filtering
++ property (NotifierFilterPropertyName) - The name of the property on an activity (alarm or audit) to filter on
++ operator (NotifierFilterOperatorType) - The operation to use for filtering
 + values (array[FilterValue]) - The list of values
 
 ## FilterValue
@@ -334,7 +334,7 @@
 
 ## EscalationConfigurationConstraints
 + Include NotifierPropertyCommonConstraint
-+ emailRecipients (NotifierStringArrayConstraint) - The constraints for the email address of one or more recipients for alarm escalation 
++ emailRecipients (NotifierStringArrayConstraint) - The constraints for the email address of one or more recipients for alarm escalation
 + delayInterval (EscalationDelayConstraints) - The constraints for the total delay in an escalation of an alarm
 
 ## EscalationDelayConstraints

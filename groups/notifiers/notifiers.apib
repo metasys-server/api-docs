@@ -18,7 +18,7 @@ Retrieves list of all supported notifiers for server
     + Attributes (array[NotifierEntity])
 
     + Body
-    
+
             [
                 {
                     "type":"email",
@@ -55,7 +55,7 @@ Retrieves a collection of all supported notifiers for the specified network devi
 
 + Parameters
     + id (string) - The unique identifier of the network device
-    
+
 + Request
     + Headers
 
@@ -101,7 +101,7 @@ Retrieves a collection of all supported notifiers for the specified network devi
             ]
 
 ## Email Notifier Configuration for Server [/notifiers/email/configuration]
-This section contains information about a notifier's configuration as used within the Metasys API 
+This section contains information about a notifier's configuration as used within the Metasys API
 
 ### Retrieve email configuration for server [GET]
 Retrieves email notifier configuration for the server
@@ -137,9 +137,9 @@ Update email notifier configuration for server.
 + Request
 
     + Attributes(UpdateEmailNotifierConfiguration)
-     
+
     + Body
-    
+
             {
             "sslEmailEnabled":false,
             "sslEmailIgnoreErrors":false,
@@ -148,13 +148,13 @@ Update email notifier configuration for server.
             "smtpHostname": "smtp.jci.com",
             "smtpPort": 587,
             "popConfiguration":
-                { 
+                {
                     "hostname": "pop.jci.com",
                     "password": "password",
                     "username": "sample@jci.com"
                 },
             "smtpConfiguration":
-                { 
+                {
                     "password": "password",
                     "username": "sample@jci.com"
                 }
@@ -243,9 +243,9 @@ Update email notifier configuration for network device.
 + Request
 
     + Attributes(UpdateEmailNotifierConfiguration)
-    
+
     + Body
-    
+
             {
             "sslEmailEnabled":false,
             "sslEmailIgnoreErrors":false,
@@ -254,18 +254,18 @@ Update email notifier configuration for network device.
             "smtpHostname": "smtp.jci.com",
             "smtpPort": 587,
             "popConfiguration":
-                { 
+                {
                     "hostname": "pop.jci.com",
                     "password": "password",
                     "username": "sample@jci.com"
                 },
             "smtpConfiguration":
-                { 
+                {
                     "password": "password",
                     "username": "sample@jci.com"
                 }
             }
-            
+
     + Headers
 
             Accept: application/vnd.metasysapi.v2+json
@@ -327,11 +327,11 @@ Retrieve email notifier destinations for server
     + Attributes(EmailNotifierDestinationContainerForServer)
 
     + Body
-    
+
             {
             "type": "email",
             "label": "Email",
-            "destinations": 
+            "destinations":
                 [
                     {
                         "id": "f391d369-7eaa-5deb-8d1d-fb6697d679fc",
@@ -342,12 +342,12 @@ Retrieve email notifier destinations for server
                         "retries": 3,
                         "enabled": true,
                         "readOnly": false,
-                        "eventFilter": 
+                        "eventFilter":
                             [
                                 {
                                     "name": "Current Status",
                                     "operator": "==",
-                                    "values": 
+                                    "values":
                                         [
                                             {
                                                 "value": "Normal"
@@ -357,7 +357,7 @@ Retrieve email notifier destinations for server
                                 {
                                     "name": "Priority",
                                     "operator": "!=",
-                                    "values": 
+                                    "values":
                                         [
                                             {
                                                 "value": "120"
@@ -367,7 +367,7 @@ Retrieve email notifier destinations for server
                                 {
                                     "name": "Spaces",
                                     "operator": "==",
-                                    "values": 
+                                    "values":
                                         [
                                             {
                                                 "name": "AHU_Floor",
@@ -386,7 +386,7 @@ Retrieve email notifier destinations for server
                                 {
                                     "name": "Equipment",
                                     "operator": "==",
-                                    "values": 
+                                    "values":
                                         [
                                             {
                                                 "name": "999 AHU_Generic2",
@@ -403,7 +403,7 @@ Retrieve email notifier destinations for server
                                         ]
                                 }
                             ],
-                        "format": 
+                        "format":
                             {
                                 "priority": true,
                                 "message": true,
@@ -418,7 +418,7 @@ Retrieve email notifier destinations for server
                         "escalationConfiguration":
                             {
                                 "emailRecipients": [ "manager@jci.com" ],
-                                "delayInterval": 
+                                "delayInterval":
                                     {
                                         "hours": 5,
                                         "minutes": 30
@@ -444,9 +444,9 @@ Retrieve email notifier destinations for server
     + Headers
 
     + Attributes(EmailNotifierDestinationForServer)
-    
+
     + Body
-    
+
             {
             "id": "f391d369-7eaa-5deb-8d1d-fb6697d679fc",
             "label": "Destination 1",
@@ -456,12 +456,12 @@ Retrieve email notifier destinations for server
             "retries": 3,
             "enabled": true,
             "readOnly": false,
-            "eventFilter": 
+            "eventFilter":
                 [
                     {
                         "name": "Current Status",
                         "operator": "==",
-                        "values": 
+                        "values":
                             [
                                 {
                                     "value": "Normal"
@@ -471,7 +471,7 @@ Retrieve email notifier destinations for server
                     {
                         "name": "Priority",
                         "operator": "!=",
-                        "values": 
+                        "values":
                             [
                                 {
                                     "value": "120"
@@ -481,7 +481,7 @@ Retrieve email notifier destinations for server
                     {
                         "name": "Spaces",
                         "operator": "==",
-                        "values": 
+                        "values":
                             [
                                 {
                                     "name": "AHU_Floor",
@@ -500,7 +500,7 @@ Retrieve email notifier destinations for server
                     {
                        "name": "Equipment",
                        "operator": "==",
-                       "values": 
+                       "values":
                            [
                                {
                                    "name": "999 AHU_Generic2",
@@ -515,9 +515,9 @@ Retrieve email notifier destinations for server
                                    "value": "equipment.FUI01.Field Bus MSTP1.ahu"
                                }
                            ]
-                    }                    
+                    }
                 ],
-            "format": 
+            "format":
                 {
                     "priority": true,
                     "message": true,
@@ -532,7 +532,7 @@ Retrieve email notifier destinations for server
             "escalationConfiguration":
                 {
                     "emailRecipients": [ "manager@jci.com" ],
-                    "delayInterval": 
+                    "delayInterval":
                         {
                             "hours": 5,
                             "minutes": 30
@@ -557,8 +557,9 @@ Retrieves constraints for the email notifier destination of the server.
     + Attributes(EmailNotifierDestinationConstraintForServer)
 
     + Body
+
             {
-            "label": 
+            "label":
                 {
                     "label": "Label",
                     "type": "string",
@@ -567,26 +568,26 @@ Retrieves constraints for the email notifier destination of the server.
                     "maxLength": 80,
                     "defaultValue": ""
                 },
-            "toEmailAddresses": 
+            "toEmailAddresses":
                 {
                     "label": "Email Address",
                     "type": "array",
                     "required": true,
                     "readOnly": false,
-                    "of": 
+                    "of":
                         {
                             "type": "email",
                             "maxLength": 256
                         },
                     "defaultValue": ""
                 },
-            "priority": 
+            "priority":
                 {
                     "label": "Priority",
                     "type": "enum",
                     "required": true,
                     "readOnly": false,
-                    "set": 
+                    "set":
                         {
                             "high": "High",
                             "normal": "Normal",
@@ -594,7 +595,7 @@ Retrieves constraints for the email notifier destination of the server.
                         },
                     "defaultValue": "normal"
                 },
-            "subject": 
+            "subject":
                 {
                     "label": "Subject",
                     "type": "string",
@@ -603,7 +604,7 @@ Retrieves constraints for the email notifier destination of the server.
                     "maxLength": 256,
                     "defaultValue": ""
                 },
-            "retries": 
+            "retries":
                 {
                     "label": "Retries",
                     "type": "number",
@@ -614,93 +615,93 @@ Retrieves constraints for the email notifier destination of the server.
                     "maximum": 10,
                     "defaultValue": 3
                 },
-            "enabled": 
+            "enabled":
                 {
                     "label": "Enabled",
                     "type": "boolean",
                     "required": true,
                     "readOnly": false,
-                    "set": 
+                    "set":
                         {
-                            "false": "False", 
-                            "true": "True" 
+                            "false": "False",
+                            "true": "True"
                         },
                     "defaultValue": "true"
                 },
-            "format": 
+            "format":
                 {
                     "label": "Format",
                     "type": "bits",
                     "required": false,
                     "readOnly": false,
-                    "priority": 
+                    "priority":
                         {
                             "label": "Priority",
                             "defaultValue": true
                         },
-                    "message": 
+                    "message":
                         {
                             "label": "Message",
                             "defaultValue": true
                         },
-                    "value": 
+                    "value":
                         {
                             "label": "Value",
                             "defaultValue": true
                         },
-                    "siteName": 
+                    "siteName":
                         {
                             "label": "Site Name",
                             "defaultValue": false
                         },
-                    "itemDescription": 
+                    "itemDescription":
                         {
                             "label": "Item Description",
                             "defaultValue": true
                         },
-                    "itemFullyQualifiedReference": 
+                    "itemFullyQualifiedReference":
                         {
                             "label": "Item Fully Qualified Reference",
                             "defaultValue": true
                         },
-                    "authorizationCategory": 
+                    "authorizationCategory":
                         {
                             "label": "Authorization Category",
                             "defaultValue": true
                         },
-                    "acknowledgeRequired": 
+                    "acknowledgeRequired":
                         {
                             "label": "Acknowledge Required",
                             "defaultValue": false
                         },
-                    "previousStatus": 
+                    "previousStatus":
                         {
                             "label": "Previous Status",
                             "defaultValue": false
                         }
                 },
-            "eventFilters": 
+            "eventFilters":
                 {
                     "label": "Event Filters",
                     "type": "array",
                     "required": false,
                     "readOnly": false,
-                    "of": 
+                    "of":
                         {
                             "type": "filter",
-                            "set": 
+                            "set":
                                 {
-                                    "currentStatus": 
+                                    "currentStatus":
                                         {
                                             "required": true,
                                             "label": "Current Status",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To"
                                                 },
                                             "type": "enum",
-                                            "values": 
+                                            "values":
                                                 {
                                                     "normal": "Normal",
                                                     "fault": "Fault",
@@ -724,13 +725,13 @@ Retrieves constraints for the email notifier destination of the server.
                                                     "unoccupied": "Unoccupied"
                                                 }
                                         },
-                                    "priority": 
+                                    "priority":
                                         {
                                             "minimum": 0,
                                             "maximum": 255,
                                             "required": true,
                                             "label": "Priority",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To",
@@ -742,17 +743,17 @@ Retrieves constraints for the email notifier destination of the server.
                                             "type": "number",
                                             "values": {}
                                         },
-                                    "authorizationCategory": 
+                                    "authorizationCategory":
                                         {
                                             "required": true,
                                             "label": "Authorization Category",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To"
                                                 },
                                             "type": "enum",
-                                            "values": 
+                                            "values":
                                                 {
                                                     "hvac": "HVAC",
                                                     "fire": "Fire",
@@ -769,33 +770,33 @@ Retrieves constraints for the email notifier destination of the server.
                                                     "system": "System"
                                             }
                                         },
-                                    "acknowledgeRequired": 
+                                    "acknowledgeRequired":
                                         {
                                             "required": true,
                                             "label": "Acknowledge Required",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To"
                                                 },
                                             "type": "boolean",
-                                            "values": 
+                                            "values":
                                                 {
                                                     "false": "False",
                                                     "true": "True"
                                                 }
                                         },
-                                    "previousStatus": 
+                                    "previousStatus":
                                         {
                                             "required": true,
                                             "label": "Previous Status",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To"
                                                 },
                                             "type": "enum",
-                                            "values": 
+                                            "values":
                                                 {
                                                     "normal": "Normal",
                                                     "fault": "Fault",
@@ -819,11 +820,11 @@ Retrieves constraints for the email notifier destination of the server.
                                                     "unoccupied": "Unoccupied"
                                                 }
                                         },
-                                    "startDayOfWeek": 
+                                    "startDayOfWeek":
                                         {
                                             "required": true,
                                             "label": "Start Day Of Week",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To",
@@ -833,7 +834,7 @@ Retrieves constraints for the email notifier destination of the server.
                                                     ">=": "Greater Than Equals To"
                                                 },
                                             "type": "enum",
-                                            "values": 
+                                            "values":
                                                 {
                                                     "monday": "Monday",
                                                     "tuesday": "Tuesday",
@@ -844,11 +845,11 @@ Retrieves constraints for the email notifier destination of the server.
                                                     "sunday": "Sunday"
                                                 }
                                         },
-                                    "startTime": 
+                                    "startTime":
                                         {
                                             "required": true,
                                             "label": "Start Time",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To",
@@ -860,11 +861,11 @@ Retrieves constraints for the email notifier destination of the server.
                                             "type": "time",
                                             "values": {}
                                         },
-                                    "endDayOfWeek": 
+                                    "endDayOfWeek":
                                         {
                                             "required": true,
                                             "label": "End Day Of Week",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To",
@@ -874,7 +875,7 @@ Retrieves constraints for the email notifier destination of the server.
                                                     ">=": "Greater Than Equals To"
                                                 },
                                             "type": "enum",
-                                            "values": 
+                                            "values":
                                                 {
                                                     "monday": "Monday",
                                                     "tuesday": "Tuesday",
@@ -885,11 +886,11 @@ Retrieves constraints for the email notifier destination of the server.
                                                     "sunday": "Sunday"
                                                 }
                                         },
-                                    "endTime": 
+                                    "endTime":
                                         {
                                             "required": true,
                                             "label": "End Time",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To",
@@ -901,11 +902,11 @@ Retrieves constraints for the email notifier destination of the server.
                                             "type": "time",
                                             "values": {}
                                         },
-                                    "spaces": 
+                                    "spaces":
                                         {
                                             "required": true,
                                             "label": "Spaces",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To"
@@ -913,11 +914,11 @@ Retrieves constraints for the email notifier destination of the server.
                                             "type": "space",
                                             "values": {}
                                         },
-                                    "equipment": 
+                                    "equipment":
                                         {
                                             "required": true,
                                             "label": "Equipment",
-                                            "operators": 
+                                            "operators":
                                                 {
                                                     "==": "Equals To",
                                                     "!=": "Not Equals To"
@@ -929,17 +930,17 @@ Retrieves constraints for the email notifier destination of the server.
                         },
                     "defaultValue": null
                 },
-            "escalationConfiguration": 
+            "escalationConfiguration":
                 {
                     "label": "Escalation Configuration",
                     "required": false,
                     "readOnly": false,
-                    "delayInterval": 
+                    "delayInterval":
                         {
                             "label": "Escalation Delay",
                             "required": false,
                             "readOnly": false,
-                            "hours": 
+                            "hours":
                                 {
                                     "label": "Hour",
                                     "type": "number",
@@ -950,7 +951,7 @@ Retrieves constraints for the email notifier destination of the server.
                                     "maximum": 8759,
                                     "defaultValue": 0
                                 },
-                            "minutes": 
+                            "minutes":
                                 {
                                     "label": "Minute",
                                     "type": "number",
@@ -962,13 +963,13 @@ Retrieves constraints for the email notifier destination of the server.
                                     "defaultValue": 0
                                 }
                         },
-                    "emailRecipients": 
+                    "emailRecipients":
                         {
                             "label": "Escalation Email Recipients",
                             "type": "array",
                             "required": false,
                             "readOnly": false,
-                            "of": 
+                            "of":
                                 {
                                     "type": "email",
                                     "maxLength": 256
@@ -984,8 +985,9 @@ Add new email notifier destination for server
 + Request
 
     + Attributes(NewEmailNotifierDestinationForServer)
-    
+
     + Body
+
             {
             "label": "Destination 1",
             "toEmailAddresses": [ "operator@jci.com" ],
@@ -993,7 +995,7 @@ Add new email notifier destination for server
             "subject": "Floor One",
             "retries": 3,
             "enabled": true,
-            "eventFilter": 
+            "eventFilter":
                 [
                     {
                         "name": "Current Status",
@@ -1016,7 +1018,7 @@ Add new email notifier destination for server
                        "values": [ "equipment.GGT-NAE03.Field Bus MSTP1.999 AHU_Generic2", "equipment.FUI01.Field Bus MSTP1.ahu" ]
                     }
                 ],
-            "format": 
+            "format":
                 {
                     "priority": true,
                     "message": true,
@@ -1031,7 +1033,7 @@ Add new email notifier destination for server
             "escalationConfiguration":
                 {
                     "emailRecipients": [ "manager@jci.com" ],
-                    "delayInterval": 
+                    "delayInterval":
                         {
                             "hours": 5,
                             "minutes": 30
@@ -1039,7 +1041,7 @@ Add new email notifier destination for server
                 }
             }
 
-            
+
     + Headers
 
             Accept: application/vnd.metasysapi.v2+json
@@ -1059,8 +1061,9 @@ Update email notifier single destination for server
 + Request
 
     + Attributes(NewEmailNotifierDestinationForServer)
-    
+
     + Body
+
             {
             "label": "Destination 1",
             "toEmailAddresses": [ "operator@jci.com" ],
@@ -1068,7 +1071,7 @@ Update email notifier single destination for server
             "subject": "Floor One",
             "retries": 3,
             "enabled": true,
-            "eventFilter": 
+            "eventFilter":
                 [
                     {
                         "name": "Current Status",
@@ -1091,7 +1094,7 @@ Update email notifier single destination for server
                        "values": [ "equipment.GGT-NAE03.Field Bus MSTP1.999 AHU_Generic2", "equipment.FUI01.Field Bus MSTP1.ahu" ]
                     }
                 ],
-            "format": 
+            "format":
                 {
                     "priority": true,
                     "message": true,
@@ -1106,14 +1109,14 @@ Update email notifier single destination for server
             "escalationConfiguration":
                 {
                     "emailRecipients": [ "manager@jci.com" ],
-                    "delayInterval": 
+                    "delayInterval":
                         {
                             "hours": 5,
                             "minutes": 30
                         }
                 }
             }
-            
+
     + Headers
 
             Accept: application/vnd.metasysapi.v2+json

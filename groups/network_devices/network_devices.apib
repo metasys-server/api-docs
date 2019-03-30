@@ -16,17 +16,18 @@ Retrieves a collection of network devices.
     + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
         + Accepted Values: `categoryId`, `firmwareVersion`, `itemReference`, `name`, `typeId`
         + Default: `name`
-    + classification (string, option) - The classification to filter devices on.
+    + classification (string, optional) - The classification to filter devices on.
 
 + Request
     + Headers
-        Accept: application/vnd.metasysapi.v2+json
-        Authorization: Bearer [token]
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
 
-    + Attributes 
+    + Attributes
         + Include NetworkDeviceEntityCollection
         + self:`https://{hostname}/api/v2/networkDevices{?queryParams}` (string) - A link to this network device collection
 
@@ -86,7 +87,7 @@ Retrieves the collection of network devices that host the specified equipment in
 + Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
 
-    + Attributes 
+    + Attributes
         + Include NetworkDeviceEntityCollection
         + self:`https://{hostname}/api/v2/equipment/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
 
@@ -112,7 +113,7 @@ Retrieves the collection of network devices that are children of the specified n
 + Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
 
-    + Attributes 
+    + Attributes
         + Include NetworkDeviceEntityCollection
         + self:`https://{hostname}/api/v2/networkDevices/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
 
