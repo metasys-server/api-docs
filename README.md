@@ -4,8 +4,6 @@
 
 <!-- cSpell:ignore apiaryio -->
 
-**Note** This is prerelease documentation and is subject to change.
-
 The source code for the [Metasys Server API](https://metasys-server.github.io/api-docs)
 
 ## Quickstart
