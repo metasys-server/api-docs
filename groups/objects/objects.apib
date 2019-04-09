@@ -20,7 +20,6 @@ Retrieves a collection of objects. Note that this endpoint requires the `type` p
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -50,7 +49,6 @@ The object schema is used to validate the "object" content, opposed to entire pa
 + Request An Av with `?includeSchema=true`
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -199,7 +197,6 @@ The object schema is used to validate the "object" content, opposed to entire pa
 
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -241,7 +238,6 @@ The object schema is used to validate the "object" content, opposed to entire pa
 
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -400,7 +396,6 @@ The object schema is used to validate the "object" content, opposed to entire pa
 
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -456,7 +451,6 @@ Note: You must URL encode the Fully Qualified Reference in the query string.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (text/plain)
@@ -480,7 +474,6 @@ Retrieves the collection of objects that are children of the specified network d
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -506,7 +499,6 @@ Retrieves the children (recursively) of the specified object.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -536,7 +528,6 @@ will coordinate with the object to ensure the attribute is cached to make future
 + Request The presentValue of an AV Object
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -554,7 +545,6 @@ will coordinate with the object to ensure the attribute is cached to make future
 + Request The description of an object.
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -581,7 +571,6 @@ Retrieves all equipment points mapped to attributes of this object.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -605,7 +594,6 @@ Instead of using this action, use the send command action described below.
 
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
     + Body
@@ -623,7 +611,6 @@ Instead of using this action, use the send command action described below.
 
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
     + Body
@@ -649,7 +636,6 @@ get a list of commands for an object.
 + Request AV Example
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -810,7 +796,6 @@ get a list of commands for an object.
 + Request BV Example
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -983,7 +968,6 @@ get a list of commands for an object.
 + Request MV Example
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -1253,7 +1237,6 @@ Several error status codes are possible
     + Headers
 
             Authorization: Bearer [token]
-            Accept: application/vnd.metasysapi.v2+json
 
     + Body
 

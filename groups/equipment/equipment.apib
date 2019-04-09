@@ -17,7 +17,6 @@ Retrieves a collection of equipment instances.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -36,7 +35,6 @@ Retrieves the specified equipment instance.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -60,7 +58,6 @@ Retrieves the equipment served by the specified equipment instance.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -86,13 +83,12 @@ Retrieves the collection of points that are defined by the specified equipment i
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
 
-    + Attributes 
+    + Attributes
         + Include EquipmentPointMappingCollection
         + self:`https://{hostname}/api/v2/equipment/{id}/points{?queryParams}` (string) - A link to this equipment point mapping collection
 
@@ -112,7 +108,6 @@ Retrieves the collection of equipment that serve the specified equipment instanc
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -138,7 +133,6 @@ Retrieves the collection of equipment instances that are hosted by the specified
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
@@ -164,7 +158,6 @@ Retrieves the collection of equipment that serve the specified space.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v2+json)
