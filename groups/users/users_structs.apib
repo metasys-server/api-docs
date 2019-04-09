@@ -1,0 +1,65 @@
+## UserStatisticsCollection
++ accountTypes (AccountTypes)
++ policyViolations (PolicyViolations)
+
+## UserStatisticsAndSeveritysCollection
++ accountTypeCounts (AccountTypeCountsAndSeveritys)
++ policyViolationCounts (PolicyViolationCountsAndSeveritys)
+
+## AccountTypes
++ active (array[UserData]) - List of active accounts. Active accounts = total accounts - (locked accounts + disabled accounts + expired temporary accounts).
++ admin (array[UserData]) - List of administrator role accounts.  
++ disabled (array[UserData]) - List of disabled accounts including disabled single-access accounts.  
++ dormant (array[UserData]) - List of dormant accounts.  
++ locked (array[UserData]) - List of locked accounts including locked dormant accounts.  
++ temporary (array[UserData]) - List of temporary accounts.  
++ total (array[UserData]) - List of total accounts.  
++ basic (array[UserData]) - List of basic access type accounts.  
++ standard (array[UserData]) - List of standard access type accounts.  
++ tenant (array[UserData]) - List of tenant access type accounts.  
+
+## AccountTypeCountsAndSeveritys
++ active (CountAndSeverityLevel) - Count and list of active accounts. Active accounts = total accounts - (locked accounts + disabled accounts + expired temporary accounts).
++ admin (CountAndSeverityLevel) - Count and list of administrator role accounts.  
++ disabled (CountAndSeverityLevel) - Count and list of disabled accounts including disabled single-access accounts.  
++ dormant (CountAndSeverityLevel) - Count and list of dormant accounts.  
++ locked (CountAndSeverityLevel) - Count and list of locked accounts including locked dormant accounts.  
++ temporary (CountAndSeverityLevel) - Count and list of temporary accounts.  
++ total (CountAndSeverityLevel) - Count and list of total accounts.  
++ basic (CountAndSeverityLevel) - Count and list of basic access type accounts.  
++ standard (CountAndSeverityLevel) - Count and list of standard access type accounts.  
++ tenant (CountAndSeverityLevel) - Count and list of tenant access type accounts.  
+
+## PolicyViolations
++ dormantPeriod (array[UserData]) - List of accounts with "dormant after days" set to greater than 365.
++ neverDormant (array[UserData]) - List of accounts not set to check for dormancy.  
++ lockoutConfiguration (array[UserData]) - List of accounts with lock out policy not set to 3 attempts within 15 minutes. Metasys local accounts only.  
++ neverLockout (array[UserData]) - List of accounts set to never lock out. Metasys local accounts only.  
++ noPasswordHistory (array[UserData]) - List of accounts not set to keep password history. Metasys local accounts only.  
++ passwordExpiresPeriod (array[UserData]) - List of accounts with "expire in (days)" set greater than 60. Metasys local accounts only.  
++ passwordNeverExpires (array[UserData]) - List of accounts with password set to never expire. Metasys local accounts only.  
++ rememberPasswordsPeriod (array[UserData]) - List of accounts with "remember password (days)" set to  less than 7. Metasys local accounts only.        
++ neverTerminate (array[UserData]) - List of accounts set to never terminate session.  
++ terminateMinutes (array[UserData]) - List of accounts with "terminate in (min)" greater than 30.
+
+## PolicyViolationCountsAndSeveritys
++ dormantPeriod (CountAndSeverityLevel) - Count and list of accounts with "dormant after days" set to greater than 365.
++ neverDormant (CountAndSeverityLevel) - Count and list of accounts not set to check for dormancy.  
++ lockoutConfiguration (CountAndSeverityLevel) - Count and list of accounts with lock out policy not set to 3 attempts within 15 minutes. Metasys local accounts only.  
++ neverLockout (CountAndSeverityLevel) - Count and list of accounts set to never lock out. Metasys local accounts only.  
++ noPasswordHistory (CountAndSeverityLevel) - Count and list of accounts not set to keep password history. Metasys local accounts only.  
++ passwordExpiresPeriod (CountAndSeverityLevel) - Count and list of accounts with "expire in (days)" set greater than 60. Metasys local accounts only.  
++ passwordNeverExpires (CountAndSeverityLevel) - Count and list of accounts with password set to never expire. Metasys local accounts only.  
++ rememberPasswordsPeriod (CountAndSeverityLevel) - Count and list of accounts with "remember password (days)" set to  less than 7. Metasys local accounts only.        
++ neverTerminate (CountAndSeverityLevel) - Count and list of accounts set to never terminate session.  
++ terminateMinutes (CountAndSeverityLevel) - Count and list of accounts with "terminate in (min)" greater than 30.
+
+## CountAndSeverityLevel
++ count:`5` (number) - The count of users for the policy.
++ users (array[UserData]) - List of users in this group
++ severityLevel: `Informational|PotentialRisk|Critical` (enum) - The severity level for the policy. Possible values are `Informational`, `PotentialRisk`, `Critical`.
+
+## UserData
++ userName:`metasyssysagent` (string) - Username of the returned user
++ fullName:`Metasys Systems Agent` (string) - Name of the returned user
++ isAdmin:`true` (boolean) - If the returned user has admin status

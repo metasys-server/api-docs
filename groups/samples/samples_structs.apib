@@ -1,10 +1,10 @@
 ## ObjectAttributeWithSamples
-+ samples:`/objects/{id}/attributes/{attributeId}/samples` (string) - A link to this collection of object value samples
-+ attribute:`enumSets/{id}/members/{memberId}` (string) - A link to the attribute on which the samples were taken
++ samplesUrl:`https://{hostname}/api/v2/objects/{id}/trendedAttributes/{attributeId}/samples` (string) - A link to this collection of object value samples
++ attributeUrl:`https://{hostname}/api/v2/enumSets/{id}/members/{memberId}` (string) - A link to the attribute on which the samples were taken
 
 ## NetworkDeviceAttributeWithSamples
-+ samples:`/networkDevice/{id}/attributes/{attributeId}/samples` (string) - A link to the collection of network device value samples
-+ attribute:`enumSets/{id}/members/{memberId}` (string) - A link to the attribute on which the samples were taken
++ samplesUrl:`https://{hostname}/api/v2/networkDevice/{id}/trendedAttributes/{attributeId}/samples` (string) - A link to the collection of network device value samples
++ attributeUrl:`https://{hostname}/api/v2/enumSets/{id}/members/{memberId}` (string) - A link to the attribute on which the samples were taken
 
 ## ObjectValueSamplesEntity
 + Include ValueSamplesData
@@ -24,30 +24,30 @@
 
 ## ValueSamplesData
 + Include PagedItemCollection
-+ attribute:`/enumSets/509/members/{memberId}` - A link to the attribute for which the samples were generated
++ attributeUrl:`https://{hostname}/api/v2/enumSets/509/members/{memberId}` - A link to the attribute for which the samples were generated
 
 ## ObjectValueSamplesRelationshipLinks
-+ self:`/objects/{id}/attributes/{attributeId}/samples` (string) - A link to this collection of object value samples
-+ object:`/objects/{id}` (string) - A link to the object from which these samples were generated
++ self:`https://{hostname}/api/v2/objects/{id}/trendedAttributes/{attributeId}/samples` (string) - A link to this collection of object value samples
++ objectUrl:`https://{hostname}/api/v2/objects/{id}` (string) - A link to the object from which these samples were generated
 
 ## NetworkDeviceValueSamplesRelationshipLinks
-+ self:`/networkDevice/{id}/attributes/{attributeId}/samples` (string) - A link to this collection of network device value samples
-+ networkDevice:`/networkDevices/{id}` (string) - A link to the network device from which these samples were generated
++ self:`https://{hostname}/api/v2/networkDevice/{id}/trendedAttributes/{attributeId}/samples` (string) - A link to this collection of network device value samples
++ networkDeviceUrl:`https://{hostname}/api/v2/networkDevices/{id}` (string) - A link to the network device from which these samples were generated
 
 ## ValueSampleAnalog
 + value (AnalogValueSampleRaw) - The sample value
-+ timestamp:`2000-01-01T12:00:00Z` (string) - The ISO-8601 encoded timestamp for when the sample was recorded
++ timestamp:`2000-01-01T12:00:00Z` (string) - The dateTime for when the sample was recorded
 + isReliable (boolean) - The flag indicating whether the source of the sample was in a reliable state when the sample was recorded
 
 ## ValueSampleDigital
 + value (DigitalValuesSampleRaw) - The sample value
-+ timestamp:`2000-01-01T12:00:00Z` (string) - The ISO-8601 encoded timestamp for when the sample was recorded
++ timestamp:`2000-01-01T12:00:00Z` (string) - The dateTime for when the sample was recorded
 + isReliable (boolean) - The flag indicating whether the source of the sample was in a reliable state when the sample was recorded
 
 ## AnalogValueSampleRaw
 + value:`68.9` (number) - The value of the sample
-+ units:`/enumSets/{id}/members/{memberId}` (string) - A link to the units of the sample
++ unitsUrl:`https://{hostname}/api/v2/enumSets/{id}/members/{memberId}` (string) - A link to the units of the sample
 
 ## DigitalValuesSampleRaw
 + value:`1` (number) - The value of the sample
-+ valueEnumMember:`/enumSets/{id}/members/{memberId}` (string) - A link to the enum member for the sample value
++ valueEnumMemberUrl:`https://{hostname}/api/v2/enumSets/{id}/members/{memberId}` (string) - A link to the enum member for the sample value

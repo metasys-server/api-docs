@@ -1,6 +1,6 @@
 ## SpaceLinkCollection
 + Include PagedItemCollection
-+ items:`[/spaces/{id}]` (array[string], fixed-type) - The collection of space links
++ items:`[https://{hostname}/api/v2/spaces/{id}]` (array[string], fixed-type) - The collection of space links
 
 ## SpaceEntity
 + Include SpaceData
@@ -13,11 +13,11 @@
 ## SpaceData
 + Include BaseObject
 + name (string) - The name of the space
-+ type:`/enumSets/{id}/members/{memberId}` (string) - A link to the type of space
++ typeUrl:`https://{hostname}/api/v2/enumSets/{id}/members/{memberId}` (string) - A link to the type of space
 
 ## SpaceRelationshipLinks
-+ self:`/spaces/{id}` (string) - A link to this space
-+ parent:`/spaces/{id}` (string) - A link to the space that contains this space
-+ spaces:`/spaces/{id}/spaces` (string) - A link to the spaces contained within this space
-+ equipment:`/spaces/{id}/equipment` (string) - A link to the equipment instances serving this space
-+ networkDevices:`/spaces/{id}/networkDevices` (string) - A link to the network devices serving this space
++ self:`https://{hostname}/api/v2/spaces/{id}` (string) - A link to this space
++ parentUrl:`https://{hostname}/api/v2/spaces/{id}` (string) - A link to the space that contains this space
++ spacesUrl:`https://{hostname}/api/v2/spaces/{id}/spaces` (string) - A link to the spaces contained within this space
++ equipmentUrl:`https://{hostname}/api/v2/spaces/{id}/equipment` (string) - A link to the equipment instances serving this space
++ networkDevicesUrl:`https://{hostname}/api/v2/spaces/{id}/networkDevices` (string) - A link to the network devices serving this space

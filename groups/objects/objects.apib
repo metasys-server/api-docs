@@ -1,10 +1,10 @@
 Group Objects
 ============
 
-This section contains information about object-related resources as used within the Metasys API.
+This section contains information about object-related resources used within the Metasys API.
 
 ### Get Objects [GET /objects{?type,page,pageSize,sort}]
-Retrieves a collection of objects. Note that this endpoint requires the `type` parameter to be supplied; returning a list of all objects in the system is not currently supported.
+Retrieves a collection of objects. Note that this endpoint requires the `type` parameter to be supplied; returning a list of all objects in the system is currently not supported.
 
 + Parameters
     + type (number) - Type of object to return
@@ -20,37 +20,449 @@ Retrieves a collection of objects. Note that this endpoint requires the `type` p
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include ObjectEntityCollection
-        + self:`/objects{?queryParams}` (string) - A link to this object collection
+        + self:`https://{hostname}/api/v2/objects{?queryParams}` (string) - A link to this object collection
 
-### Get A Single Object [GET /objects/{id}]
-Retrieves the specified object.
+### Get A Single Object [GET /objects/{id}{?includeSchema}]
+Retrieves the specified object, attributes on that object, and schema about those attrbiutes.
+
+The attributes returned are the most common attributes.
+This endpoint is not meant for polling of attribute values. See [Get A Single Object Attribute](#Get-A-Single-Object-Attribute).
+
+Included with this endpoint's response payload is a section of information labeled `schema`.
+This section of information includes important pieces of metadata about the object attributes that gives better context to the meaning of attribute values.
+This section follows [JSON Schema](http://json-schema.org/schema#) formatting with added custom properties.
+
+The object schema is used to validate the "object" content, opposed to entire payload content, of the [get object](#Get-A-Single-Object-Attribute) and [write attributes](#Write-Attributes-Of-An-Object) endpoints.
 
 + Parameters
     + id (string) - The identifier of the object
+    + includeSchema (boolean, optional) - The flag indicating whether or not to include object schema in response payloads
+        + Default: `false`
+
++ Request An Av with `?includeSchema=true`
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+
+        {
+            "object": {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "name": "AV1",
+                "description": "This is an AV",
+                "bacnetObjectType": "bacAvClass",
+                "objectCategory": "generalCategory",
+                "defaultAttribute": "presentValue",
+                "presentValue": {
+                    "value": 5,
+                    "reliability": "reliable",
+                    "priority": ""
+                },
+                "reliability": "reliable",
+                "alarmState": "osHighAlarm",
+                "itemReference": "M4731823:Mahoney-NAE/Inputs.AV1",
+                "minPresValue": -990.01,
+                "maxPresValue": 990.01,
+                "units": "percentObscurationPerMeter",
+                "displayPrecision": "displayPrecisionPt001",
+                "covIncrement": 0.001,
+                "typeUrl": "https://{hostname}/api/v2/enumSets/508/members/165",
+                "self": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
+                "parentUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
+                "objectsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/objects",
+                "networkDeviceUrl": "https://{hostname}/api/v2/networkDevices/00000000-0000-0000-0000-000000000000",
+                "pointsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/points",
+                "attributesUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/trendedAttributes",
+                "alarmsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/alarms",
+                "auditsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/audits"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 400
+                    },
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "maxLength": 64
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "bacnetObjectType": {
+                        "allOff": [
+                            {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectTypeEnumSet.schema.json"
+                            },
+                            {
+                                "readOnly": true
+                            }
+                        ]
+                    },
+                    "objectCategory": {
+                        "$ref": "https://{hostname}/api/v2/schemas/enums/objectCategoryEnumSet.schema.json"
+                    },
+                    "defaultAttribute": {
+                        "allOff": [
+                            {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/attributeEnumSet.schema.json"
+                            },
+                            {
+                                "readOnly": true
+                            }
+                        ]
+                    },
+                    "presentValue": {
+                        "type": "object",
+                        "properties": {
+                            "value": {
+                                "minimum": -3.4028234663852886e+38,
+                                "maximum": 3.4028234663852886e+38,
+                                "decimalPrecision": 3,
+                                "units": "% Obscuration/m",
+                                "prioritized": true,
+                                "readOnly": true
+                            },
+                            "priority": {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/writePriorityEnumSet.schema.json"
+                            },
+                            "reliability": {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet.schema.json"
+                            }
+                        }
+                    },
+                    "reliability": {
+                        "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet.schema.json"
+                    },
+                    "alarmState": {
+                        "allOff": [
+                            {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectStatusEnumSet.schema.json"
+                            },
+                            {
+                                "readOnly": true
+                            }
+                        ]
+                    },
+                    "itemReference": {
+                        "type": "string",
+                        "maxLength": 65535,
+                        "readOnly": true
+                    },
+                    "minPresValue": {
+                        "type": "number",
+                        "minimum": -3.4028234663852886e+38,
+                        "maximum": 3.4028234663852886e+38,
+                        "decimalPrecision": 3,
+                        "units": "% Obscuration/m"
+                    },
+                    "maxPresValue": {
+                        "type": "number",
+                        "minimum": -3.4028234663852886e+38,
+                        "maximum": 3.4028234663852886e+38,
+                        "decimalPrecision": 3,
+                        "units": "% Obscuration/m"
+                    },
+                    "units": {
+                        "$ref": "https://{hostname}/api/v2/schemas/enums/unitEnumSet.schema.json"
+                    },
+                    "displayPrecision": {
+                        "$ref": "https://{hostname}/api/v2/schemas/enums/displayPrecisionEnumSet.schema.json"
+                    },
+                    "covIncrement": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 3.4028234663852886e+38,
+                        "decimalPrecision": 0,
+                        "units": "% Obscuration/m"
+                    }
+                }
+            }
+        }
+
++ Request An AV Object with `?includeSchema=false`
+
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+
+        {
+            "object": {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "name": "AV1",
+                "description": "This is an AV",
+                "bacnetObjectType": "bacAvClass",
+                "objectCategory": "generalCategory",
+                "defaultAttribute": "presentValue",
+                "presentValue": {
+                    "value": 5,
+                    "reliability": "reliable",
+                    "priority": ""
+                },
+                "reliability": "reliable",
+                "alarmState": "osHighAlarm",
+                "itemReference": "M4731823:Mahoney-NAE/Inputs.AV1",
+                "minPresValue": -990.01,
+                "maxPresValue": 990.01,
+                "units": "percentObscurationPerMeter",
+                "displayPrecision": "displayPrecisionPt001",
+                "covIncrement": 0.001,
+                "typeUrl": "https://{hostname}/api/v2/enumSets/508/members/165",
+                "self": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
+                "parentUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
+                "objectsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/objects",
+                "networkDeviceUrl": "https://{hostname}/api/v2/networkDevices/00000000-0000-0000-0000-000000000000",
+                "pointsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/points",
+                "attributesUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/trendedAttributes",
+                "alarmsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/alarms",
+                "auditsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/audits"
+            }
+        }
+
++ Request A BV Example with `?includeSchema=true`
+
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+
+        {
+            "object": {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "itemReference": "site:device/itemReference",
+                "name": "BV1",
+                "description": "This is a BV",
+                "typeUrl": "https://{hostname}/api/v2/enumSets/{id}/members/{memberId}",
+                "self": "https://{hostname}/api/v2/objects/{id}",
+                "parentUrl": "https://{hostname}/api/v2/objects/{id}",
+                "objectsUrl": "https://{hostname}/api/v2/objects/{id}/objects",
+                "networkDevicesUrl": "https://{hostname}/api/v2/networkDevices/{id}",
+                "pointsUrl": "https://{hostname}/api/v2/objects/{id}/points",
+                "attributesUrl": "https://{hostname}/api/v2/objects/{id}/trendedAttributes",
+                "alarmsUrl": "https://{hostname}/api/v2/objects/{id}/alarms",
+                "auditsUrl": "https://{hostname}/api/v2/objects/{id}/audits",
+                "bacnetObjectType": "bacBvClass",
+                "objectCategory": "generalCategory",
+                "reliability": "unreliableHigh",
+                "alarmState": "osNormal",
+                "cosCount": 0,
+                "elapsedActiveTime": 0,
+                "minOffTime": 0,
+                "minOnTime": 0,
+                "statesText": "binarypvEnumSet",
+                "userNameIsBacnetObjName": false,
+                "outOfService": false,
+                "statesText": "binarypvEnumSet",
+                "intrinsicAlarmDisabled": false,
+                "status": "osNormal",
+                "attrChangeCount": 0,
+                "presentValue": {
+                    "value": "bacbinActive",
+                    "reliability": "unreliableHigh",
+                    "priority": "priorityOperatorOverride"
+                },
+                "defaultAttribute": "presentValue"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "itemReference": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "maxLength": 400
+                    },
+                    "description": {
+                        "oneOf": [
+                            {
+                                "type": "string",
+                                "maxLength": 64
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "bacnetObjectType": {
+                        "allOf": [
+                            {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectTypeEnumSet.schema.json"
+                            },
+                            {
+                                "readOnly": true
+                            }
+                        ]
+                    },
+                    "objectCategory": {
+                        "$ref": "https://{hostname}/api/v2/schemas/enums/objectCategoryEnumSet.schema.json"
+                    },
+                    "defaultAttribute": {
+                        "allOff": [
+                            {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/attributeEnumSet.schema.json"
+                            },
+                            {
+                                "readOnly": true
+                            }
+                        ]
+                    },
+                    "reliability": {
+                        "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet.schema.json"
+                    },
+                    "alarmState": {
+                        "allOf": [
+                            {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectStatusEnumSet.schema.json"
+                            },
+                            {
+                                "readOnly": true
+                            }
+                        ]
+                    },
+                    "cosCount": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 4294967295
+                    },
+                    "elapsedActiveTime": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 4294967295,
+                        "units": "seconds"
+                    },
+                    "minOffTime": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 604800,
+                        "units": "seconds"
+                    },
+                    "minOnTime": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 604800,
+                        "units": "seconds"
+                    },
+                    "statesText": {
+                        "$ref": "https://{hostname}/api/v2/schemas/enums/twostateEnumSet.schema.json"
+                    },
+                    "status": {
+                        "$ref": "https://{hostname}/api/v2/schemas/enums/objectStatusEnumSet.schema.json"
+                    },
+                    "presentValue": {
+                        "type": "object",
+                            "properties": {
+                            "value": {
+                                "allOf": [
+                                    {
+                                        "$ref": "https://{hostname}/api/v2/schemas/enums/binarypvEnumSet.schema.json"
+                                    },
+                                    {
+                                        "prioritized": true,
+                                        "readOnly": true
+                                    }
+                                ]
+                            },
+                            "priority": {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/writePriorityEnumSet.schema.json"
+                            },
+                            "reliability": {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet.schema.json"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
++ Request A BV Example with `?includeSchema=false`
+
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+
+        {
+            "object": {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "itemReference": "site:device/itemReference",
+                "name": "BV1",
+                "description": "This is a BV",
+                "typeUrl": "https://{hostname}/api/v2/enumSets/{id}/members/{memberId}",
+                "self": "https://{hostname}/api/v2/objects/{id}",
+                "parentUrl": "https://{hostname}/api/v2/objects/{id}",
+                "objectsUrl": "https://{hostname}/api/v2/objects/{id}/objects",
+                "networkDevicesUrl": "https://{hostname}/api/v2/networkDevices/{id}",
+                "pointsUrl": "https://{hostname}/api/v2/objects/{id}/points",
+                "attributesUrl": "https://{hostname}/api/v2/objects/{id}/trendedAttributes",
+                "alarmsUrl": "https://{hostname}/api/v2/objects/{id}/alarms",
+                "auditsUrl": "https://{hostname}/api/v2/objects/{id}/audits",
+                "bacnetObjectType": "bacBvClass",
+                "objectCategory": "generalCategory",
+                "reliability": "reliable",
+                "alarmState": "osNormal",
+                "cosCount": 0,
+                "elapsedActiveTime": 0,
+                "minOffTime": 0,
+                "minOnTime": 0,
+                "statesText": "binarypvEnumSet",
+                "userNameIsBacnetObjName": false,
+                "outOfService": false,
+                "statesText": "binarypvEnumSet",
+                "intrinsicAlarmDisabled": false,
+                "status": "osNormal",
+                "attrChangeCount": 24,
+                "presentValue": {
+                    "value": "bacbinActive",
+                    "reliability": "unreliableHigh",
+                    "priority": "priorityOperatorOverride"
+                },
+                "defaultAttribute": "presentValue"
+            }
+        }
+
+
+### Lookup Object Id [GET /objectIdentifiers{?fqr}]
+Retrieves an Object Id for an Object given its Fully Qualified Reference.
+This information is often referred to as the Item Reference in Metasys user interfaces.
+Note: You must URL encode the Fully Qualified Reference in the query string.
+
++ Parameters
+    + fqr: siteName:naeName/Folder1.AV1 (string) - The Fully Qualified Reference of an object.
 
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (text/plain)
+    + Body
 
-    + Headers
-
-            Allow: GET
-
-    + Attributes(ObjectEntity)
+            "00000000-0000-0000-0000-000000000000"
 
 ### Get Network Device Children Objects [GET /networkDevices/{id}/objects{?page,pageSize,sort}]
 Retrieves the collection of objects that are children of the specified network device.
@@ -68,17 +480,15 @@ Retrieves the collection of objects that are children of the specified network d
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
 
-            Allow: GET
-
-    + Attributes 
+    + Attributes
         + Include ObjectEntityCollection
-        + self:`/networkDevices/{id}/objects{?queryParams}` (string) - A link to this object collection
+        + self:`https://{hostname}/api/v2/networkDevices/{id}/objects{?queryParams}` (string) - A link to this object collection
 
 ### Get Object Children [GET /objects/{id}/objects{?page,pageSize,sort}]
 Retrieves the children (recursively) of the specified object.
@@ -96,18 +506,64 @@ Retrieves the children (recursively) of the specified object.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
-
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include ObjectEntityCollection
-        + self:`/objects/{id}/objects{?queryParams}` (string) - A link to this object collection
+        + self:`https://{hostname}/api/v2/objects/{id}/objects{?queryParams}` (string) - A link to this object collection
+
+### Get A Single Object Attribute [GET /objects/{id}/attributes/{attributeId}]
+
+Retrieves the attribute value of the specified object. The attributeIds are visible as keys
+on the object instance returned when reading an object.
+
+For example, `presentValue` is one of the attributes of an AV.
+To read the `presentValue` construct the URL as: `https://{hostname}/api/v2/objects/{id}/attributes/presentValue`.
+
+
+> **Note:** In those cases where peridic polling of an attribute is needed, it is recommend that you use this
+action instead of reading the entire object. Reading one attribute is more efficient. In addition the server
+will coordinate with the object to ensure the attribute is cached to make future reads even faster.
+
++ Parameters
+    + id (string) - The identifier of the object
+    + attributeId (string) - The identifier of the attribute
+
++ Request The presentValue of an AV Object
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+
+        {
+            "object": {
+                "presentValue": {
+                    "value": 10,
+                    "reliability": "unreliableHigh",
+                    "priority": "priorityOperatorOverride"
+                }
+            },
+        }
+
++ Request The description of an object.
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+
+        {
+            "object": {
+                "description": "This is the description"
+            },
+        }
 
 ### Get Equipment Points Mapped To An Object [GET /objects/{id}/points{?page,pageSize,sort}]
 Retrieves all equipment points mapped to attributes of this object.
@@ -119,20 +575,703 @@ Retrieves all equipment points mapped to attributes of this object.
     + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-1,000.
         + Default: `100`
     + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
-        + Accepted Values: `category`,`equipmentName`, `isDisplayData`, `shortName`
+        + Accepted Values: `category`, `equipmentName`, `isDisplayData`, `shortName`
         + Default: `shortName`
 
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentPointMappingCollection
-        + self:`/objects/{id}/points{?queryParams}` (string) - A link to this equipment point collection
+        + self:`https://{hostname}/api/v2/objects/{id}/points{?queryParams}` (string) - A link to this equipment point collection
+
+### Update an Object [PATCH /objects/{id}]
+
+This action allows you to update one or more properties of an object.
+
+The `presentValue` attribute of many objects is marked as `"readOnly"`.
+Instead of using this action, use the send command action described below.
+
++ Parameters
+    + id (string) - The identifier of the object
+
++ Request Writing name and description
+
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
+    + Body
+
+            {
+                "object": {
+                    "name": "AV1",
+                    "description": "Analog Value"
+                }
+            }
+
++ Response 202 (application/vnd.metasysapi.v2+json)
+
++ Request Writing a Nullable Property
+
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
+    + Body
+
+            {
+                "object": {
+                    "description": null
+                }
+            }
+
++ Response 202 (application/vnd.metasysapi.v2+json)
+
+### Get Commands For An Object [GET /objects/{id}/commands]
+Retrieves schema information for commands to send to an object.
+
+A 504 status code is returned if the server cannot connect to the device to
+get a list of commands for an object.
+
+
++ Parameters
+    + id (string) - The identifier of the object
+
++ Request AV Example
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+    + Body
+
+            [
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "adjust",
+                    "description": "Adjust",
+                    "type": "array",
+                    "items": [
+                    {
+                        "type": "number",
+                        "description": "Value",
+                        "minimum": 0,
+                        "maximum": 100
+                    }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "operatorOverride",
+                    "description": "Operator Override",
+                    "type": "array",
+                    "items": [
+                        {
+                            "type": "number",
+                            "description": "Value",
+                            "minimum": 0,
+                            "maximum": 100
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseOperatorOverride",
+                    "description": "Release Operator Override",
+                    "type": "array",
+                    "items": [],
+                    "minItems": 0,
+                    "maxItems": 0
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "release",
+                    "description": "Release",
+                    "type": "array",
+                    "items": [
+                    {
+                        "oneOf": [
+                            {
+                                "const": "presentValue",
+                                "description": "Present Value"
+                            }
+                        ]
+                    },
+                    {
+                        "oneOf": [
+                            {
+                                "const": "priorityNone",
+                                "description": "0 (No Priority)"
+                            },
+                            {
+                                "const": "priorityManualEmergency",
+                                "description": "1 (Manual Life Safety)"
+                            },
+                            {
+                                "const": "priorityFireApplications",
+                                "description": "2 (Auto Life Safety)"
+                            },
+                            {
+                                "const": "priority3",
+                                "description": "3 (Application)"
+                            },
+                            {
+                                "const": "priority4",
+                                "description": "4 (Application)"
+                            },
+                            {
+                                "const": "priorityCriticalEquipment",
+                                "description": "5 (Critical Equipment)"
+                            },
+                            {
+                                "const": "priorityMinimumOnOff",
+                                "description": "6 (Minimum On Off)"
+                            },
+                            {
+                                "const": "priorityHeavyEquipDelay",
+                                "description": "7 (Heavy Equip Delay)"
+                            },
+                            {
+                                "const": "priorityOperatorOverride",
+                                "description": "8 (Operator Override)"
+                            },
+                            {
+                                "const": "priority9",
+                                "description": "9 (Application)"
+                            },
+                            {
+                                "const": "priority10",
+                                "description": "10 (Application)"
+                            },
+                            {
+                                "const": "priorityDemandLimiting",
+                                "description": "11 (Demand Limiting)"
+                            },
+                            {
+                                "const": "priority12",
+                                "description": "12 (Application)"
+                            },
+                            {
+                                "const": "priorityLoadRolling",
+                                "description": "13 (Load Rolling)"
+                            },
+                            {
+                                "const": "priority14",
+                                "description": "14 (Application)"
+                            },
+                            {
+                                "const": "prioritySchedulingOst",
+                                "description": "15 (Scheduling)"
+                            },
+                            {
+                                "const": "priorityDefault",
+                                "description": "16 (Default)"
+                            }
+                        ]
+                    }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseAll",
+                    "description": "Release All",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "presentValue",
+                                    "description": "Present Value"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                }
+            ]
+
++ Request BV Example
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+    + Body
+
+            [
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "adjust",
+                    "description": "Set State",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "state0Command",
+                                    "description": "Inactive"
+                                },
+                                {
+                                    "const": "state1Commmand",
+                                    "description": "Active"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "operatorOverride",
+                    "description": "Operator Override",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "bacbinInactive",
+                                    "description": "Inactive"
+                                },
+                                {
+                                    "const": "bacbinActive",
+                                    "description": "Active"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseOperatorOverride",
+                    "description": "Release Operator Override",
+                    "type": "array",
+                    "items": [],
+                    "minItems": 0,
+                    "maxItems": 0
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "release",
+                    "description": "Release",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "presentValue",
+                                    "description": "Present Value"
+                                }
+                            ]
+                        },
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "priorityNone",
+                                    "description": "0 (No Priority)"
+                                },
+                                {
+                                    "const": "priorityManualEmergency",
+                                    "description": "1 (Manual Life Safety)"
+                                },
+                                {
+                                    "const": "priorityFireApplications",
+                                    "description": "2 (Auto Life Safety)"
+                                },
+                                {
+                                    "const": "priority3",
+                                    "description": "3 (Application)"
+                                },
+                                {
+                                    "const": "priority4",
+                                    "description": "4 (Application)"
+                                },
+                                {
+                                    "const": "priorityCriticalEquipment",
+                                    "description": "5 (Critical Equipment)"
+                                },
+                                {
+                                    "const": "priorityMinimumOnOff",
+                                    "description": "6 (Minimum On Off)"
+                                },
+                                {
+                                    "const": "priorityHeavyEquipDelay",
+                                    "description": "7 (Heavy Equip Delay)"
+                                },
+                                {
+                                    "const": "priorityOperatorOverride",
+                                    "description": "8 (Operator Override)"
+                                },
+                                {
+                                    "const": "priority9",
+                                    "description": "9 (Application)"
+                                },
+                                {
+                                    "const": "priority10",
+                                    "description": "10 (Application)"
+                                },
+                                {
+                                    "const": "priorityDemandLimiting",
+                                    "description": "11 (Demand Limiting)"
+                                },
+                                {
+                                    "const": "priority12",
+                                    "description": "12 (Application)"
+                                },
+                                {
+                                    "const": "priorityLoadRolling",
+                                    "description": "13 (Load Rolling)"
+                                },
+                                {
+                                    "const": "priority14",
+                                    "description": "14 (Application)"
+                                },
+                                {
+                                    "const": "prioritySchedulingOst",
+                                    "description": "15 (Scheduling)"
+                                },
+                                {
+                                    "const": "priorityDefault",
+                                    "description": "16 (Default)"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseAll",
+                    "description": "Release All",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                                {
+                                    "const": "presentValue",
+                                    "description": "Present Value"
+                                }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                }
+            ]
+
++ Request MV Example
+    + Headers
+
+            Accept: application/vnd.metasysapi.v2+json
+            Authorization: Bearer [token]
+
++ Response 200 (application/vnd.metasysapi.v2+json)
+    + Body
+
+            [
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "adjust",
+                    "description": "Set State",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                            {
+                                "const": "multistate0Command",
+                                "description": "State 0"
+                            },
+                            {
+                                "const": "multistate1Command",
+                                "description": "State 1"
+                            },
+                            {
+                                "const": "multistate2Command",
+                                "description": "State 2"
+                            },
+                            {
+                                "const": "multistate3Command",
+                                "description": "State 3"
+                            }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "operatorOverride",
+                    "description": "Operator Override",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                            {
+                                "const": "state0",
+                                "description": "State 0"
+                            },
+                            {
+                                "const": "state1",
+                                "description": "State 1"
+                            },
+                            {
+                                "const": "state2",
+                                "description": "State 2"
+                            },
+                            {
+                                "const": "state3",
+                                "description": "State 3"
+                            }
+                            ]
+                        }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "temporaryOperatorOverride",
+                    "description": "Temporary Override",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                            {
+                                "const": "state0",
+                                "description": "State 0"
+                            },
+                            {
+                                "const": "state1",
+                                "description": "State 1"
+                            },
+                            {
+                                "const": "state2",
+                                "description": "State 2"
+                            },
+                            {
+                                "const": "state3",
+                                "description": "State 3"
+                            }
+                            ]
+                        },
+                        {
+                            "type": "number",
+                            "description": "Hours",
+                            "Minimum": 0,
+                            "Maximum": 100
+                        },
+                        {
+                            "type": "number",
+                            "description": "Minutes",
+                            "Minimum": 0,
+                            "Maximum": 59
+                        }
+                    ],
+                    "minItems": 3,
+                    "maxItems": 3
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseOperatorOverride",
+                    "description": "Release Operator Override",
+                    "type": "array",
+                    "items": [],
+                    "minItems": 0,
+                    "maxItems": 0
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "release",
+                    "description": "Release",
+                    "type": "array",
+                    "items": [
+                        {
+                            "oneOf": [
+                            {
+                                "const": "presentValue",
+                                "description": "Present Value"
+                            }
+                            ]
+                        },
+                        {
+                            "oneOf": [
+                            {
+                                "const": "priorityNone",
+                                "description": "0 (No Priority)"
+                            },
+                            {
+                                "const": "priorityManualEmergency",
+                                "description": "1 (Manual Life Safety)"
+                            },
+                            {
+                                "const": "priorityFireApplications",
+                                "description": "2 (Auto Life Safety)"
+                            },
+                            {
+                                "const": "priority3",
+                                "description": "3 (Application)"
+                            },
+                            {
+                                "const": "priority4",
+                                "description": "4 (Application)"
+                            },
+                            {
+                                "const": "priorityCriticalEquipment",
+                                "description": "5 (Critical Equipment)"
+                            },
+                            {
+                                "const": "priorityMinimumOnOff",
+                                "description": "6 (Minimum On Off)"
+                            },
+                            {
+                                "const": "priorityHeavyEquipDelay",
+                                "description": "7 (Heavy Equip Delay)"
+                            },
+                            {
+                                "const": "priorityOperatorOverride",
+                                "description": "8 (Operator Override)"
+                            },
+                            {
+                                "const": "priority9",
+                                "description": "9 (Application)"
+                            },
+                            {
+                                "const": "priority10",
+                                "description": "10 (Application)"
+                            },
+                            {
+                                "const": "priorityDemandLimiting",
+                                "description": "11 (Demand Limiting)"
+                            },
+                            {
+                                "const": "priority12",
+                                "description": "12 (Application)"
+                            },
+                            {
+                                "const": "priorityLoadRolling",
+                                "description": "13 (Load Rolling)"
+                            },
+                            {
+                                "const": "priority14",
+                                "description": "14 (Application)"
+                            },
+                            {
+                                "const": "prioritySchedulingOst",
+                                "description": "15 (Scheduling)"
+                            },
+                            {
+                                "const": "priorityDefault",
+                                "description": "16 (Default)"
+                            }
+                            ]
+                        }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "releaseAll",
+                    "description": "Release All",
+                    "type": "array",
+                    "items": [
+                    {
+                        "oneOf": [
+                            {
+                                "const": "presentValue",
+                                "description": "Present Value"
+                            }
+                        ]
+                    }
+                    ],
+                    "minItems": 1,
+                    "maxItems": 1
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "enableAlarms",
+                    "description": "Enable Alarms",
+                    "type": "array",
+                    "items": [],
+                    "minItems": 0,
+                    "maxItems": 0
+                },
+                {
+                    "$schema": "http://json-schema.org/schema#",
+                    "commandId": "disableAlarms",
+                    "description": "Disable Alarms",
+                    "type": "array",
+                    "items": [],
+                    "minItems": 0,
+                    "maxItems": 0
+                }
+            ]
+
++ Response 504
+
+### Send a Command to an Object [PUT /objects/{id}/commands/{commandId}]
+
+This action allows you to send a command to the specified object. To discover what commands an object supports,
+see the get commands endpoint.
+
+Several examples of different commands are shown below.
+
+Several error status codes are possible
+
+| Status Code | Reason
+| ----------: | ----------------
+| 400         | The point being commanded is under local control or the request is malformed.
+| 504         | The command is sent to an offline device or the server cannot connect to the device.
+
++ Parameters
+    + id (string) - The identifier of the object.
+    + commandId (string) - The Id of the command to send. Command Ids are discovered via the get commands endpoint.
+
++ Request
+    + Headers
+
+            Authorization: Bearer [token]
+            Accept: application/vnd.metasysapi.v2+json
+
+    + Body
+
+            + parameters (array) - The list of parameters for the command. Parameters and their data types are determined by the command being sent.
+
++ Request Adjust an AV (application/json)
+
+        [15]
+
++ Request Release a BV (application/json)
+
+        []
+
++ Request Temporary Operator Override a MV (application/json)
+
+        ["state0", 15, 30]
+
++ Response 400
+
++ Response 504
+

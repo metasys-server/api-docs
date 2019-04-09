@@ -7,8 +7,8 @@ This section contains information about alarms as used within the Metasys API.
 Retrieves a collection of alarms.
 
 + Parameters
-    + startTime:`2018-05-21T13:58:20.243Z` (string, optional) - The ISO-8601 encoded dateTime representing the earliest alarm to return
-    + endTime:`2018-05-21T13:58:20.243Z` (string, optional) - The ISO-8601 encoded dateTime representing the latest alarm to return
+    + startTime:`2018-05-21T13:58:20.243Z` (string, optional) - The dateTime representing the earliest alarm to return
+    + endTime:`2018-05-21T13:58:20.243Z` (string, optional) - The dateTime representing the latest alarm to return
     + priorityRange:`0,255` (string, optional) - The inclusive priority range, from 0 to 255, of the alarm
     + type (number, optional) - The type of the requested alarms
         + See /enumSets/505/members for possible values
@@ -33,17 +33,15 @@ Retrieves a collection of alarms.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include AlarmEntityCollection
-        + self:`/alarms{?queryParams}` (string) - A link to this alarm collection
+        + self:`https://{hostname}/api/v2/alarms{?queryParams}` (string) - A link to this alarm collection
 
 ### Get A Single Alarm [GET /alarms/{id}]
 Retrieves the specified alarm.
@@ -54,26 +52,22 @@ Retrieves the specified alarm.
 + Request Analog Alarm
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (AlarmEntityAnalog)
     
 + Request Digital Alarm
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (AlarmEntityDigital)
 
@@ -106,13 +100,11 @@ Retrieves a collection of alarms for the specified network device.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(NetworkDeviceAlarmsEntity)
 
@@ -145,12 +137,10 @@ Retrieves a collection of alarms for the specified object.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (ObjectAlarmsEntity)

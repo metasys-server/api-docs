@@ -4,17 +4,17 @@
 
 ## AuditEntity
 + id:`00000000-0000-0000-0000-000000000000` (string) - The identifier of the audit
-+ creationTime:`2017-09-18T08:11:28Z` (string) - The ISO-8601 encoded dateTime representing the creation time when this audit message was created
-+ actionType:`/enumSets/577/members/1` (string) - The action performed that initiated the audit. See /enumSets/577/members for possible values
++ creationTime:`2017-09-18T08:11:28Z` (string) - The dateTime representing the creation time when this audit message was created
++ actionTypeUrl:`https://{hostname}/api/v2/enumSets/577/members/1` (string) - The action performed that initiated the audit. See https://{hostname}/api/v2/enumSets/577/members for possible values
 + discarded (boolean) - Indicates if the audit has been discarded
-+ status:`/enumSets/516/members/1` (string) - Enumeration representing status. See /enumSets/516/members for possible values
++ statusUrl:`https://{hostname}/api/v2/enumSets/516/members/1` (string) - Enumeration representing status. See https://{hostname}/api/v2/enumSets/516/members for possible values
 + preData (Data) - Data value prior to the Audit
 + postData (Data) - Data value after the Audit
 + parameters (array[Data], fixed-type) The actual data that is changing
 + errorString (string) - The error that may have occurred during an audit
 + user (string) - The userName of the user that initiated the audit
 + signature (Signature) - The user who created this audit
-+ object:`/objects/{id}` (string) - A link to the object on which the activity was generated
-+ self:`/audits/{id}` (string) - A link to this audit
-+ annotations:`/audits/{id}/annotations` (string) - Link to annotations
++ objectUrl:`https://{hostname}/api/v2/objects/{id}` (string) - A link to the object on which the activity was generated
++ self:`https://{hostname}/api/v2/audits/{id}` (string) - A link to this audit
++ annotationsUrl:`https://{hostname}/api/v2/audits/{id}/annotations` (string) - Link to annotations
 + legacy (LegacyMetasys) - Metasys specific data

@@ -13,8 +13,8 @@ Retrieves a collection of audits. When using multiple filters, an AND evaluation
         + See /enumSets/568/members for possible values
     + actionTypes:`1,2` (string, optional) - Filter by comma-separated list of the action types
         + See /enumSets/577/members for possible values
-    + startTime:`2018-05-21T13:58:20.243Z` (string, optional) - The ISO-8601 encoded dateTime representing the earliest audit to return
-    + endTime:`2018-05-22T13:58:20.243Z` (string, optional) - The ISO-8601 encoded dateTime representing the latest audit to return
+    + startTime:`2018-05-21T13:58:20.243Z` (string, optional) - The dateTime representing the earliest audit to return
+    + endTime:`2018-05-22T13:58:20.243Z` (string, optional) - The dateTime representing the latest audit to return
     + excludeDiscarded (boolean, optional) - Determines whether discarded audits will be excluded from results. Default is `false` (discarded audits will not be excluded).
         + Accepted Values: `true`,`false`
         + Default: `false`
@@ -29,31 +29,29 @@ Retrieves a collection of audits. When using multiple filters, an AND evaluation
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include AuditEntityCollection
-        + self:`/audits{?queryParams}` (string) - A link to this audit collection
+        + self:`https://{hostname}/api/v2/audits{?queryParams}` (string) - A link to this audit collection
 
 ### Get A Single Audit [GET /audits/{id}]
 Retrieves the specified audit.
 
 + Parameters
     + id:`00000000-0000-0000-0000-000000000000` (string) - The identifier of the audit to retrieve
-    
+
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
 
             Allow: GET
@@ -71,8 +69,8 @@ Retrieves a collection of audits for the specified object. When using multiple f
         + See /enumSets/568/members for possible values
     + actionTypes:`1,2` (string, optional) - Filter by comma-separated list of the action types
         + See /enumSets/577/members for possible values
-    + startTime:`2018-05-21T13:58:20.243Z` (string, optional) - The ISO-8601 encoded dateTime representing the earliest audit to return
-    + endTime:`2018-05-22T13:58:20.243Z` (string, optional) - The ISO-8601 encoded dateTime representing the latest audit to return
+    + startTime:`2018-05-21T13:58:20.243Z` (string, optional) - The dateTime representing the earliest audit to return
+    + endTime:`2018-05-22T13:58:20.243Z` (string, optional) - The dateTime representing the latest audit to return
     + excludeDiscarded (boolean, optional) - Determines whether discarded audits will be excluded from results. Default is `false` (discarded audits will not be excluded).
         + Accepted Values: `true`,`false`
         + Default: `false`
@@ -87,13 +85,12 @@ Retrieves a collection of audits for the specified object. When using multiple f
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
 
-            Allow: GET
     + Attributes
         + Include AuditEntityCollection
-        + self:`/objects/{id}/audits{?queryParams}` (string) - A link to this audit collection
+        + self:`https://{hostname}/api/v2/objects/{id}/audits{?queryParams}` (string) - A link to this audit collection

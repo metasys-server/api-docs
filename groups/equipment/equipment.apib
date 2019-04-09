@@ -17,17 +17,15 @@ Retrieves a collection of equipment instances.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentEntityCollection
-        + self:`/equipment{?queryParams}` (string) - A link to this equipment collection
+        + self:`https://{hostname}/api/v2/equipment{?queryParams}` (string) - A link to this equipment collection
 
 ### Get A Single Equipment Instance [GET /equipment/{id}]
 Retrieves the specified equipment instance.
@@ -38,13 +36,11 @@ Retrieves the specified equipment instance.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (EquipmentEntity)
 
@@ -64,17 +60,15 @@ Retrieves the equipment served by the specified equipment instance.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentEntityCollection
-        + self:`/equipment/{id}/equipment{?queryParams}` (string) - A link to this equipment collection
+        + self:`https://{hostname}/api/v2/equipment/{id}/equipment{?queryParams}` (string) - A link to this equipment collection
 
 ### Get Points Defined by An Equipment Instance [GET /equipment/{id}/points{?page,pageSize,sort}]
 Retrieves the collection of points that are defined by the specified equipment instance. Each point contains a mapping to an attribute on an object.
@@ -92,17 +86,15 @@ Retrieves the collection of points that are defined by the specified equipment i
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes 
         + Include EquipmentPointMappingCollection
-        + self:`/equipment/{id}/points{?queryParams}` (string) - A link to this equipment point mapping collection
+        + self:`https://{hostname}/api/v2/equipment/{id}/points{?queryParams}` (string) - A link to this equipment point mapping collection
 
 ### Get Equipment that Serve An Equipment Instance [GET /equipment/{id}/upstreamEquipment{?page,pageSize,sort}]
 Retrieves the collection of equipment that serve the specified equipment instance.
@@ -120,17 +112,15 @@ Retrieves the collection of equipment that serve the specified equipment instanc
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentEntityCollection
-        + self:`/equipment/{id}/upstreamEquipment{?queryParams}` (string) - A link to this equipment collection
+        + self:`https://{hostname}/api/v2/equipment/{id}/upstreamEquipment{?queryParams}` (string) - A link to this equipment collection
 
 ### Get Equipment Hosted By A Network Device [GET /networkDevices/{id}/equipment{?page,pageSize,sort}]
 Retrieves the collection of equipment instances that are hosted by the specified network device or its children. A network device is considered to host an equipment if the equipment defines points that map to an attribute of any object contained on the network device.
@@ -148,13 +138,11 @@ Retrieves the collection of equipment instances that are hosted by the specified
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentEntityCollection
@@ -176,14 +164,12 @@ Retrieves the collection of equipment that serve the specified space.
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentEntityCollection
-        + self:`/spaces/{id}/equipment{?queryParams}` (string) - A link to this equipment collection
+        + self:`https://{hostname}/api/v2/spaces/{id}/equipment{?queryParams}` (string) - A link to this equipment collection

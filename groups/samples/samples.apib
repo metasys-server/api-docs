@@ -3,7 +3,7 @@ Group Samples
 
 This section contains information about samples as used within the Metasys API
 
-### Get Network Device Attributes With Samples [GET /networkDevices/{id}/attributes]
+### Get Network Device Attributes With Samples [GET /networkDevices/{id}/trendedAttributes]
 Retrieves a collection of attributes under the specified network device for which samples are available.
 
 + Parameters
@@ -12,29 +12,27 @@ Retrieves a collection of attributes under the specified network device for whic
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include NetworkDeviceAttributeWithSamplesCollection
-        + self:`/networkDevices/{id}/attributes` - A link to this collection
+        + self:`https://{hostname}/api/v2/networkDevices/{id}/trendedAttributes` - A link to this collection
 
-### Get Samples For A Network Device Attribute [GET /networkDevices/{id}/attributes/{attributeId}/samples{?startTime,endTime,page,pageSize,sort}]
+### Get Samples For A Network Device Attribute [GET /networkDevices/{id}/trendedAttributes/{attributeId}/samples{?startTime,endTime,page,pageSize,sort}]
 Retrieves a collection of samples for the specified network device attribute during a particular date and time range.
 
-Note that the parent endpoint `/networkDevices/{id}/attributes/{attributeId}` is not currently implemented.
+Note that the parent endpoint `https://{hostname}/api/v2/networkDevices/{id}/trendedAttributes/{attributeId}` is not currently implemented.
 
 + Parameters
     + id (string) - The identifier of the network device
     + attributeId (number) - The identifier of the attribute for which to retrieve sample information
-        + See /networkDevices/{id}/attributes for possible values
-    + startTime (string) - The ISO-8601 encoded dateTime representing the earliest sample to return
-    + endTime (string) - The ISO-8601 encoded dateTime representing the latest sample to return
+        + See /networkDevices/{id}/trendedAttributes for possible values
+    + startTime (string) - The dateTime representing the earliest sample to return
+    + endTime (string) - The dateTime representing the latest sample to return
     + page (number, optional) - The page number of items to return
         + Default: `1`
     + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-10,000.
@@ -46,13 +44,11 @@ Note that the parent endpoint `/networkDevices/{id}/attributes/{attributeId}` is
 + Request Analog Samples
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes(NetworkDeviceValueSamplesEntity)
       - items (array)
@@ -61,19 +57,17 @@ Note that the parent endpoint `/networkDevices/{id}/attributes/{attributeId}` is
 + Request Digital Samples
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (NetworkDeviceValueSamplesEntity)
       - items (array)
           - (ValueSampleDigital)
 
-### Get Object Attributes With Samples [GET /objects/{id}/attributes]
+### Get Object Attributes With Samples [GET /objects/{id}/trendedAttributes]
 Retrieves a collection of attributes under the specified object for which samples are available.
 
 + Parameters
@@ -82,29 +76,27 @@ Retrieves a collection of attributes under the specified object for which sample
 + Request
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes
         + Include ObjectAttributeWithSamplesCollection
-        + self:`/objects/{id}/attributes` - A link to this collection
+        + self:`https://{hostname}/api/v2/objects/{id}/trendedAttributes` - A link to this collection
 
-### Get Samples For An Object Attribute [GET /objects/{id}/attributes/{attributeId}/samples{?startTime,endTime,page,pageSize,sort}]
+### Get Samples For An Object Attribute [GET /objects/{id}/trendedAttributes/{attributeId}/samples{?startTime,endTime,page,pageSize,sort}]
 Retrieves a collection of samples for the specified object attribute during a particular date and time range.
 
-Note that the parent endpoint `/objects/{id}/attributes/{attributeId}` is not currently implemented.
+Note that the parent endpoint `https://{hostname}/api/v2/objects/{id}/trendedAttributes/{attributeId}` is not currently implemented.
 
 + Parameters
     + id (string) - The identifier of the object
     + attributeId (number) - The identifier of the attribute for which to retrieve sample information
-        + See /objects/{id}/attributes for possible values
-    + startTime (string) - The ISO-8601 encoded dateTime representing the earliest sample to return
-    + endTime (string) - The ISO-8601 encoded dateTime representing the latest sample to return
+        + See /points/{id}/trendedAttributes for possible values
+    + startTime (string) - The dateTime representing the earliest sample to return
+    + endTime (string) - The dateTime representing the latest sample to return
     + page (number, optional) - The page number of items to return
         + Default: `1`
     + pageSize (number, optional) - The maximum number of items to return in the response. Valid range is 1-10,000.
@@ -116,13 +108,11 @@ Note that the parent endpoint `/objects/{id}/attributes/{attributeId}` is not cu
 + Request Analog Samples
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (ObjectValueSamplesEntity)
       - items (array)
@@ -131,13 +121,11 @@ Note that the parent endpoint `/objects/{id}/attributes/{attributeId}` is not cu
 + Request Digital Samples
     + Headers
 
-            Accept: application/vnd.metasysapi.v1+json
+            Accept: application/vnd.metasysapi.v2+json
             Authorization: Bearer [token]
 
-+ Response 200 (application/vnd.metasysapi.v1+json)
++ Response 200 (application/vnd.metasysapi.v2+json)
     + Headers
-
-            Allow: GET
 
     + Attributes (ObjectValueSamplesEntity)
       - items (array)
