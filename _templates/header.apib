@@ -14,7 +14,9 @@ The Metasys API is the exposed interface for accessing system data. This documen
 ## API Version
 
 Version: 2
+
 Prefix: /api/v2
+
 Documentation: {{revision}}
 
 ### API Version Notes
@@ -27,24 +29,13 @@ While this is currently the only version available, as new versions are added th
 
 In the future, multiple versions may be supported on one release of Metasys. It is recommended that you explicitly specify which version you intend to use. The primary means of doing this is to add the version before the first entity in the URL using the format "v[#]":
 
-* `http://localhost/api/v2/spaces` for version 2
-
-If using the URL is undesirable, an alternate approach is to use the `Accept` header in the HTTP request, and modify the version portion based on which version is intended, again using the "v[#]" format:
-
-* `Accept: application/vnd.metasysapi.v2+json` for version 2
-* `Accept: application/vnd.metasysapi.v3+json` for version 3
-
-#### Version Specification Rules
-
-Because the version specification is optional and can be provided in multiple ways, the following rules are used when determining or providing version information:
-
-* If no version is specified, the lowest supported version (v2) will be used.
-* If the version is specified in both the URL and the `Accept` header, the version specified in the URL will be used and the version specified in the header will be ignored.
-* If the version specified is invalid (i.e. does not represent a known version of the API), a 404 (not found) error status will be returned.
+For example, `http://localhost/api/v2/spaces` for version 2
 
 #### Version Response Behavior
 
 The `Content-Type` header of the response will always contain (in part) the version of the API that was used to serve the request. This allows the consumer to identify which version of the API was utilized.
+
+For example, `Content-Type: application/vnd.metasysapi.v2+json` for version 2
 
 ## Pagination
 
@@ -86,9 +77,3 @@ There are some general rules that apply across all endpoints. If certain provide
 |Internal Server Error          |500 (Internal Server Error) |An unexpected error occurs                                                                                 |
 |The device is not supported    |501 (Not Implemented)       |The server does not support the functionality required to fulfill the request                              |
 |The device is offline          |503 (Service Unavailable)   |The device is currently offline and unable to serve the request                                            |
-
-## Redirects
-
-HTTP Redirects are used throughout the Metasys API.  This means that the client calling a Metasys API endpoint will have to handle the redirect in order for the service call to be completed.  Note that some clients and frameworks may handle the redirect automatically.
-
-HTTP Redirects are planned to be deprecated in future Metasys release and replaced with a reverse proxy to handle inbound and outbound HTTP calls.  This means the client will no longer have to handle the redirect but instead will be able to make a direct HTTP calls without anything extra to handle.
