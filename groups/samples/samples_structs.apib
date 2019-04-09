@@ -1,9 +1,9 @@
 ## ObjectAttributeWithSamples
-+ samplesUrl:`https://{hostname}/api/v2/objects/{id}/attributes/{attributeId}/samples` (string) - A link to this collection of object value samples
++ samplesUrl:`https://{hostname}/api/v2/objects/{id}/trendedAttributes/{attributeId}/samples` (string) - A link to this collection of object value samples
 + attributeUrl:`https://{hostname}/api/v2/enumSets/{id}/members/{memberId}` (string) - A link to the attribute on which the samples were taken
 
 ## NetworkDeviceAttributeWithSamples
-+ samplesUrl:`https://{hostname}/api/v2/networkDevice/{id}/attributes/{attributeId}/samples` (string) - A link to the collection of network device value samples
++ samplesUrl:`https://{hostname}/api/v2/networkDevice/{id}/trendedAttributes/{attributeId}/samples` (string) - A link to the collection of network device value samples
 + attributeUrl:`https://{hostname}/api/v2/enumSets/{id}/members/{memberId}` (string) - A link to the attribute on which the samples were taken
 
 ## ObjectValueSamplesEntity
@@ -27,11 +27,11 @@
 + attributeUrl:`https://{hostname}/api/v2/enumSets/509/members/{memberId}` - A link to the attribute for which the samples were generated
 
 ## ObjectValueSamplesRelationshipLinks
-+ self:`https://{hostname}/api/v2/objects/{id}/attributes/{attributeId}/samples` (string) - A link to this collection of object value samples
++ self:`https://{hostname}/api/v2/objects/{id}/trendedAttributes/{attributeId}/samples` (string) - A link to this collection of object value samples
 + objectUrl:`https://{hostname}/api/v2/objects/{id}` (string) - A link to the object from which these samples were generated
 
 ## NetworkDeviceValueSamplesRelationshipLinks
-+ self:`https://{hostname}/api/v2/networkDevice/{id}/attributes/{attributeId}/samples` (string) - A link to this collection of network device value samples
++ self:`https://{hostname}/api/v2/networkDevice/{id}/trendedAttributes/{attributeId}/samples` (string) - A link to this collection of network device value samples
 + networkDeviceUrl:`https://{hostname}/api/v2/networkDevices/{id}` (string) - A link to the network device from which these samples were generated
 
 ## ValueSampleAnalog
