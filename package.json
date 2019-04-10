@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@apib/2me": "^1.0.3",
-    "@apib/2postman": "^1.1.0",
+    "@apib/2postman": "^1.1.2",
     "del": "^3.0.0",
     "fury": "^3.0.0-beta.7",
     "fury-adapter-apib-parser": "^0.11.0",
