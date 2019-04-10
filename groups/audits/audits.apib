@@ -33,9 +33,6 @@ Retrieves a collection of audits. When using multiple filters, an AND evaluation
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include AuditEntityCollection
@@ -46,7 +43,7 @@ Retrieves the specified audit.
 
 + Parameters
     + id:`00000000-0000-0000-0000-000000000000` (string) - The identifier of the audit to retrieve
-    
+
 + Request
     + Headers
 
@@ -54,9 +51,6 @@ Retrieves the specified audit.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes(AuditEntity)
 
@@ -91,9 +85,7 @@ Retrieves a collection of audits for the specified object. When using multiple f
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
 
-            Allow: GET
     + Attributes
         + Include AuditEntityCollection
         + self:`/objects/{id}/audits{?queryParams}` (string) - A link to this audit collection

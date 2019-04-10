@@ -24,11 +24,8 @@ Retrieves a collection of network devices.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
 
-            Allow: GET
-
-    + Attributes 
+    + Attributes
         + Include NetworkDeviceEntityCollection
         + self:`/networkDevices{?queryParams}` (string) - A link to this network device collection
 
@@ -42,9 +39,6 @@ Retrieves the collection of all network device types.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include ItemCollection
@@ -64,9 +58,6 @@ Retrieves the specified network device.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes(NetworkDeviceEntity)
 
@@ -90,11 +81,8 @@ Retrieves the collection of network devices that host the specified equipment in
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
 
-            Allow: GET
-
-    + Attributes 
+    + Attributes
         + Include NetworkDeviceEntityCollection
         + self:`/equipment/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
 
@@ -118,11 +106,8 @@ Retrieves the collection of network devices that are children of the specified n
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
 
-            Allow: GET
-
-    + Attributes 
+    + Attributes
         + Include NetworkDeviceEntityCollection
         + self:`/networkDevices/{id}/networkDevices{?queryParams}` (string) - A link to this network device collection
 
@@ -147,9 +132,6 @@ A space is considered to be served by a network device is considered to host an 
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include NetworkDeviceEntityCollection

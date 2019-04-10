@@ -24,9 +24,6 @@ Retrieves a collection of objects. Note that this endpoint requires the `type` p
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include ObjectEntityCollection
@@ -45,10 +42,6 @@ Retrieves the specified object.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-
-    + Headers
-
-            Allow: GET
 
     + Attributes(ObjectEntity)
 
@@ -72,11 +65,8 @@ Retrieves the collection of objects that are children of the specified network d
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
 
-            Allow: GET
-
-    + Attributes 
+    + Attributes
         + Include ObjectEntityCollection
         + self:`/networkDevices/{id}/objects{?queryParams}` (string) - A link to this object collection
 
@@ -100,10 +90,6 @@ Retrieves the children (recursively) of the specified object.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include ObjectEntityCollection
@@ -129,9 +115,6 @@ Retrieves all equipment points mapped to attributes of this object.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentPointMappingCollection
