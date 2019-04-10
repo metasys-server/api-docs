@@ -16,9 +16,6 @@ Retrieves a collection of attributes under the specified network device for whic
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include NetworkDeviceAttributeWithSamplesCollection
@@ -50,9 +47,6 @@ Note that the parent endpoint `/networkDevices/{id}/attributes/{attributeId}` is
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes(NetworkDeviceValueSamplesEntity)
       - items (array)
@@ -65,9 +59,6 @@ Note that the parent endpoint `/networkDevices/{id}/attributes/{attributeId}` is
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes (NetworkDeviceValueSamplesEntity)
       - items (array)
@@ -86,9 +77,6 @@ Retrieves a collection of attributes under the specified object for which sample
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include ObjectAttributeWithSamplesCollection
@@ -120,9 +108,6 @@ Note that the parent endpoint `/objects/{id}/attributes/{attributeId}` is not cu
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes (ObjectValueSamplesEntity)
       - items (array)
@@ -135,9 +120,6 @@ Note that the parent endpoint `/objects/{id}/attributes/{attributeId}` is not cu
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes (ObjectValueSamplesEntity)
       - items (array)

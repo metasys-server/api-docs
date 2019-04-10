@@ -29,7 +29,7 @@ Retrieves a collection of alarms.
     + sort (string, optional) - The criteria to use when sorting results (see [rules](#sorting-rules))
         + Accepted Values: `itemReference`, `priority`, `creationTime`
         + Default: `creationTime`
-    
+
 + Request
     + Headers
 
@@ -37,9 +37,6 @@ Retrieves a collection of alarms.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include AlarmEntityCollection
@@ -58,12 +55,9 @@ Retrieves the specified alarm.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes (AlarmEntityAnalog)
-    
+
 + Request Digital Alarm
     + Headers
 
@@ -71,9 +65,6 @@ Retrieves the specified alarm.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes (AlarmEntityDigital)
 
@@ -110,9 +101,6 @@ Retrieves a collection of alarms for the specified network device.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes(NetworkDeviceAlarmsEntity)
 
@@ -149,8 +137,5 @@ Retrieves a collection of alarms for the specified object.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes (ObjectAlarmsEntity)

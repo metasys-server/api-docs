@@ -19,9 +19,6 @@ Retrieves a collection of all enumeration sets in the system.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EnumSetCollection
@@ -40,9 +37,6 @@ Retrieves the specified enumeration set.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes(EnumSet)
 
@@ -63,9 +57,6 @@ Retrieves the collection of member values belonging to the specified enumeration
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EnumMemberCollection
@@ -85,8 +76,5 @@ Retrieves the specified enumeration member value.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes(EnumMember)

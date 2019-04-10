@@ -21,9 +21,6 @@ Retrieves a collection of equipment instances.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentEntityCollection
@@ -42,9 +39,6 @@ Retrieves the specified equipment instance.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes (EquipmentEntity)
 
@@ -68,9 +62,6 @@ Retrieves the equipment served by the specified equipment instance.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentEntityCollection
@@ -96,11 +87,8 @@ Retrieves the collection of points that are defined by the specified equipment i
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
 
-            Allow: GET
-
-    + Attributes 
+    + Attributes
         + Include EquipmentPointMappingCollection
         + self:`/equipment/{id}/points{?queryParams}` (string) - A link to this equipment point mapping collection
 
@@ -124,9 +112,6 @@ Retrieves the collection of equipment that serve the specified equipment instanc
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentEntityCollection
@@ -152,9 +137,6 @@ Retrieves the collection of equipment instances that are hosted by the specified
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentEntityCollection
@@ -180,9 +162,6 @@ Retrieves the collection of equipment that serve the specified space.
             Authorization: Bearer [token]
 
 + Response 200 (application/vnd.metasysapi.v1+json)
-    + Headers
-
-            Allow: GET
 
     + Attributes
         + Include EquipmentEntityCollection
