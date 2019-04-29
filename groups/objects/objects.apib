@@ -641,12 +641,12 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "adjust",
-                    "description": "Adjust",
+                    "title": "Adjust",
                     "type": "array",
                     "items": [
                     {
                         "type": "number",
-                        "description": "Value",
+                        "title": "Value",
                         "minimum": 0,
                         "maximum": 100
                     }
@@ -657,12 +657,12 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "operatorOverride",
-                    "description": "Operator Override",
+                    "title": "Operator Override",
                     "type": "array",
                     "items": [
                         {
                             "type": "number",
-                            "description": "Value",
+                            "title": "Value",
                             "minimum": 0,
                             "maximum": 100
                         }
@@ -673,7 +673,7 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "releaseOperatorOverride",
-                    "description": "Release Operator Override",
+                    "title": "Release Operator Override",
                     "type": "array",
                     "items": [],
                     "minItems": 0,
@@ -682,14 +682,14 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "release",
-                    "description": "Release",
+                    "title": "Release",
                     "type": "array",
                     "items": [
                     {
                         "oneOf": [
                             {
                                 "const": "presentValue",
-                                "description": "Present Value"
+                                "title": "Present Value"
                             }
                         ]
                     },
@@ -697,71 +697,71 @@ get a list of commands for an object.
                         "oneOf": [
                             {
                                 "const": "priorityNone",
-                                "description": "0 (No Priority)"
+                                "title": "0 (No Priority)"
                             },
                             {
                                 "const": "priorityManualEmergency",
-                                "description": "1 (Manual Life Safety)"
+                                "title": "1 (Manual Life Safety)"
                             },
                             {
                                 "const": "priorityFireApplications",
-                                "description": "2 (Auto Life Safety)"
+                                "title": "2 (Auto Life Safety)"
                             },
                             {
                                 "const": "priority3",
-                                "description": "3 (Application)"
+                                "title": "3 (Application)"
                             },
                             {
                                 "const": "priority4",
-                                "description": "4 (Application)"
+                                "title": "4 (Application)"
                             },
                             {
                                 "const": "priorityCriticalEquipment",
-                                "description": "5 (Critical Equipment)"
+                                "title": "5 (Critical Equipment)"
                             },
                             {
                                 "const": "priorityMinimumOnOff",
-                                "description": "6 (Minimum On Off)"
+                                "title": "6 (Minimum On Off)"
                             },
                             {
                                 "const": "priorityHeavyEquipDelay",
-                                "description": "7 (Heavy Equip Delay)"
+                                "title": "7 (Heavy Equip Delay)"
                             },
                             {
                                 "const": "priorityOperatorOverride",
-                                "description": "8 (Operator Override)"
+                                "title": "8 (Operator Override)"
                             },
                             {
                                 "const": "priority9",
-                                "description": "9 (Application)"
+                                "title": "9 (Application)"
                             },
                             {
                                 "const": "priority10",
-                                "description": "10 (Application)"
+                                "title": "10 (Application)"
                             },
                             {
                                 "const": "priorityDemandLimiting",
-                                "description": "11 (Demand Limiting)"
+                                "title": "11 (Demand Limiting)"
                             },
                             {
                                 "const": "priority12",
-                                "description": "12 (Application)"
+                                "title": "12 (Application)"
                             },
                             {
                                 "const": "priorityLoadRolling",
-                                "description": "13 (Load Rolling)"
+                                "title": "13 (Load Rolling)"
                             },
                             {
                                 "const": "priority14",
-                                "description": "14 (Application)"
+                                "title": "14 (Application)"
                             },
                             {
                                 "const": "prioritySchedulingOst",
-                                "description": "15 (Scheduling)"
+                                "title": "15 (Scheduling)"
                             },
                             {
                                 "const": "priorityDefault",
-                                "description": "16 (Default)"
+                                "title": "16 (Default)"
                             }
                         ]
                     }
@@ -772,14 +772,14 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "releaseAll",
-                    "description": "Release All",
+                    "title": "Release All",
                     "type": "array",
                     "items": [
                         {
                             "oneOf": [
                                 {
                                     "const": "presentValue",
-                                    "description": "Present Value"
+                                    "title": "Present Value"
                                 }
                             ]
                         }
@@ -801,18 +801,18 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "adjust",
-                    "description": "Set State",
+                    "title": "Set State",
                     "type": "array",
                     "items": [
                         {
                             "oneOf": [
                                 {
                                     "const": "state0Command",
-                                    "description": "Inactive"
+                                    "title": "Inactive"
                                 },
                                 {
                                     "const": "state1Commmand",
-                                    "description": "Active"
+                                    "title": "Active"
                                 }
                             ]
                         }
@@ -823,18 +823,18 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "operatorOverride",
-                    "description": "Operator Override",
+                    "title": "Operator Override",
                     "type": "array",
                     "items": [
                         {
                             "oneOf": [
                                 {
                                     "const": "bacbinInactive",
-                                    "description": "Inactive"
+                                    "title": "Inactive"
                                 },
                                 {
                                     "const": "bacbinActive",
-                                    "description": "Active"
+                                    "title": "Active"
                                 }
                             ]
                         }
@@ -845,7 +845,7 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "releaseOperatorOverride",
-                    "description": "Release Operator Override",
+                    "title": "Release Operator Override",
                     "type": "array",
                     "items": [],
                     "minItems": 0,
@@ -854,14 +854,14 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "release",
-                    "description": "Release",
+                    "title": "Release",
                     "type": "array",
                     "items": [
                         {
                             "oneOf": [
                                 {
                                     "const": "presentValue",
-                                    "description": "Present Value"
+                                    "title": "Present Value"
                                 }
                             ]
                         },
@@ -869,71 +869,71 @@ get a list of commands for an object.
                             "oneOf": [
                                 {
                                     "const": "priorityNone",
-                                    "description": "0 (No Priority)"
+                                    "title": "0 (No Priority)"
                                 },
                                 {
                                     "const": "priorityManualEmergency",
-                                    "description": "1 (Manual Life Safety)"
+                                    "title": "1 (Manual Life Safety)"
                                 },
                                 {
                                     "const": "priorityFireApplications",
-                                    "description": "2 (Auto Life Safety)"
+                                    "title": "2 (Auto Life Safety)"
                                 },
                                 {
                                     "const": "priority3",
-                                    "description": "3 (Application)"
+                                    "title": "3 (Application)"
                                 },
                                 {
                                     "const": "priority4",
-                                    "description": "4 (Application)"
+                                    "title": "4 (Application)"
                                 },
                                 {
                                     "const": "priorityCriticalEquipment",
-                                    "description": "5 (Critical Equipment)"
+                                    "title": "5 (Critical Equipment)"
                                 },
                                 {
                                     "const": "priorityMinimumOnOff",
-                                    "description": "6 (Minimum On Off)"
+                                    "title": "6 (Minimum On Off)"
                                 },
                                 {
                                     "const": "priorityHeavyEquipDelay",
-                                    "description": "7 (Heavy Equip Delay)"
+                                    "title": "7 (Heavy Equip Delay)"
                                 },
                                 {
                                     "const": "priorityOperatorOverride",
-                                    "description": "8 (Operator Override)"
+                                    "title": "8 (Operator Override)"
                                 },
                                 {
                                     "const": "priority9",
-                                    "description": "9 (Application)"
+                                    "title": "9 (Application)"
                                 },
                                 {
                                     "const": "priority10",
-                                    "description": "10 (Application)"
+                                    "title": "10 (Application)"
                                 },
                                 {
                                     "const": "priorityDemandLimiting",
-                                    "description": "11 (Demand Limiting)"
+                                    "title": "11 (Demand Limiting)"
                                 },
                                 {
                                     "const": "priority12",
-                                    "description": "12 (Application)"
+                                    "title": "12 (Application)"
                                 },
                                 {
                                     "const": "priorityLoadRolling",
-                                    "description": "13 (Load Rolling)"
+                                    "title": "13 (Load Rolling)"
                                 },
                                 {
                                     "const": "priority14",
-                                    "description": "14 (Application)"
+                                    "title": "14 (Application)"
                                 },
                                 {
                                     "const": "prioritySchedulingOst",
-                                    "description": "15 (Scheduling)"
+                                    "title": "15 (Scheduling)"
                                 },
                                 {
                                     "const": "priorityDefault",
-                                    "description": "16 (Default)"
+                                    "title": "16 (Default)"
                                 }
                             ]
                         }
@@ -944,14 +944,14 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "releaseAll",
-                    "description": "Release All",
+                    "title": "Release All",
                     "type": "array",
                     "items": [
                         {
                             "oneOf": [
                                 {
                                     "const": "presentValue",
-                                    "description": "Present Value"
+                                    "title": "Present Value"
                                 }
                             ]
                         }
@@ -973,26 +973,26 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "adjust",
-                    "description": "Set State",
+                    "title": "Set State",
                     "type": "array",
                     "items": [
                         {
                             "oneOf": [
                             {
                                 "const": "multistate0Command",
-                                "description": "State 0"
+                                "title": "State 0"
                             },
                             {
                                 "const": "multistate1Command",
-                                "description": "State 1"
+                                "title": "State 1"
                             },
                             {
                                 "const": "multistate2Command",
-                                "description": "State 2"
+                                "title": "State 2"
                             },
                             {
                                 "const": "multistate3Command",
-                                "description": "State 3"
+                                "title": "State 3"
                             }
                             ]
                         }
@@ -1003,26 +1003,26 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "operatorOverride",
-                    "description": "Operator Override",
+                    "title": "Operator Override",
                     "type": "array",
                     "items": [
                         {
                             "oneOf": [
                             {
                                 "const": "state0",
-                                "description": "State 0"
+                                "title": "State 0"
                             },
                             {
                                 "const": "state1",
-                                "description": "State 1"
+                                "title": "State 1"
                             },
                             {
                                 "const": "state2",
-                                "description": "State 2"
+                                "title": "State 2"
                             },
                             {
                                 "const": "state3",
-                                "description": "State 3"
+                                "title": "State 3"
                             }
                             ]
                         }
@@ -1033,38 +1033,38 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "temporaryOperatorOverride",
-                    "description": "Temporary Override",
+                    "title": "Temporary Override",
                     "type": "array",
                     "items": [
                         {
                             "oneOf": [
                             {
                                 "const": "state0",
-                                "description": "State 0"
+                                "title": "State 0"
                             },
                             {
                                 "const": "state1",
-                                "description": "State 1"
+                                "title": "State 1"
                             },
                             {
                                 "const": "state2",
-                                "description": "State 2"
+                                "title": "State 2"
                             },
                             {
                                 "const": "state3",
-                                "description": "State 3"
+                                "title": "State 3"
                             }
                             ]
                         },
                         {
                             "type": "number",
-                            "description": "Hours",
+                            "title": "Hours",
                             "Minimum": 0,
                             "Maximum": 100
                         },
                         {
                             "type": "number",
-                            "description": "Minutes",
+                            "title": "Minutes",
                             "Minimum": 0,
                             "Maximum": 59
                         }
@@ -1075,7 +1075,7 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "releaseOperatorOverride",
-                    "description": "Release Operator Override",
+                    "title": "Release Operator Override",
                     "type": "array",
                     "items": [],
                     "minItems": 0,
@@ -1084,14 +1084,14 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "release",
-                    "description": "Release",
+                    "title": "Release",
                     "type": "array",
                     "items": [
                         {
                             "oneOf": [
                             {
                                 "const": "presentValue",
-                                "description": "Present Value"
+                                "title": "Present Value"
                             }
                             ]
                         },
@@ -1099,71 +1099,71 @@ get a list of commands for an object.
                             "oneOf": [
                             {
                                 "const": "priorityNone",
-                                "description": "0 (No Priority)"
+                                "title": "0 (No Priority)"
                             },
                             {
                                 "const": "priorityManualEmergency",
-                                "description": "1 (Manual Life Safety)"
+                                "title": "1 (Manual Life Safety)"
                             },
                             {
                                 "const": "priorityFireApplications",
-                                "description": "2 (Auto Life Safety)"
+                                "title": "2 (Auto Life Safety)"
                             },
                             {
                                 "const": "priority3",
-                                "description": "3 (Application)"
+                                "title": "3 (Application)"
                             },
                             {
                                 "const": "priority4",
-                                "description": "4 (Application)"
+                                "title": "4 (Application)"
                             },
                             {
                                 "const": "priorityCriticalEquipment",
-                                "description": "5 (Critical Equipment)"
+                                "title": "5 (Critical Equipment)"
                             },
                             {
                                 "const": "priorityMinimumOnOff",
-                                "description": "6 (Minimum On Off)"
+                                "title": "6 (Minimum On Off)"
                             },
                             {
                                 "const": "priorityHeavyEquipDelay",
-                                "description": "7 (Heavy Equip Delay)"
+                                "title": "7 (Heavy Equip Delay)"
                             },
                             {
                                 "const": "priorityOperatorOverride",
-                                "description": "8 (Operator Override)"
+                                "title": "8 (Operator Override)"
                             },
                             {
                                 "const": "priority9",
-                                "description": "9 (Application)"
+                                "title": "9 (Application)"
                             },
                             {
                                 "const": "priority10",
-                                "description": "10 (Application)"
+                                "title": "10 (Application)"
                             },
                             {
                                 "const": "priorityDemandLimiting",
-                                "description": "11 (Demand Limiting)"
+                                "title": "11 (Demand Limiting)"
                             },
                             {
                                 "const": "priority12",
-                                "description": "12 (Application)"
+                                "title": "12 (Application)"
                             },
                             {
                                 "const": "priorityLoadRolling",
-                                "description": "13 (Load Rolling)"
+                                "title": "13 (Load Rolling)"
                             },
                             {
                                 "const": "priority14",
-                                "description": "14 (Application)"
+                                "title": "14 (Application)"
                             },
                             {
                                 "const": "prioritySchedulingOst",
-                                "description": "15 (Scheduling)"
+                                "title": "15 (Scheduling)"
                             },
                             {
                                 "const": "priorityDefault",
-                                "description": "16 (Default)"
+                                "title": "16 (Default)"
                             }
                             ]
                         }
@@ -1174,14 +1174,14 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "releaseAll",
-                    "description": "Release All",
+                    "title": "Release All",
                     "type": "array",
                     "items": [
                     {
                         "oneOf": [
                             {
                                 "const": "presentValue",
-                                "description": "Present Value"
+                                "title": "Present Value"
                             }
                         ]
                     }
@@ -1192,7 +1192,7 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "enableAlarms",
-                    "description": "Enable Alarms",
+                    "title": "Enable Alarms",
                     "type": "array",
                     "items": [],
                     "minItems": 0,
@@ -1201,7 +1201,7 @@ get a list of commands for an object.
                 {
                     "$schema": "http://json-schema.org/schema#",
                     "commandId": "disableAlarms",
-                    "description": "Disable Alarms",
+                    "title": "Disable Alarms",
                     "type": "array",
                     "items": [],
                     "minItems": 0,
