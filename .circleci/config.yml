@@ -34,6 +34,7 @@ jobs:
             # node build.js
             npm run build:postman
             npm run preview
+            npm run aglio
 
       # collect artifacts
       - store_artifacts:
