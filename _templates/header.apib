@@ -5,29 +5,21 @@ Metasys API
 
 The Metasys API is the exposed interface for accessing system data. This document defines the contracts included in that interface.
 
-<!--
-**See HLD for more detailed information about the API**
--->
+## Base URL
 
-## API Version
+This documentation is for Metasys 10.1 which ships with version 2 of the Metasys Server API.
+This document was last updated on {{revision}}.
 
-Version: 2
-
-Prefix: /api/v2
-
-Documentation: {{revision}}
+The base endpoint for the API is `https://{host}/api/v2` where `{host}` is the host name of your Metasys server.
 
 ### API Version Notes
 
-<!--
-This document describes version 2 of the API (not to be confused with document version in [Document Information](#document-information) section above). -->
-
 At Metasys 10.1, the only supported version is v2. (Note: v1 is not supported by Metasys 10.1)
-While this is currently the only version available, as new versions are added the API consumer will need to specify which version of the API they intend to use.
 
-In the future, multiple versions may be supported on one release of Metasys. It is required that you explicitly specify which version you intend to use. This is done by specifying the version in the URL using the format "v[#]":
+In the future, multiple versions of this API may be supported on one release of Metasys.
+It is required that you explicitly specify which version you intend to use. This is done by specifying the version in the URL using the format "v[#]":
 
-For example, `http://localhost/api/v2/spaces` for version 2
+For example, `http://localhost/api/v2/spaces` for version 2 of spaces
 
 #### Version Response Behavior
 
