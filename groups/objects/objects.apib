@@ -53,47 +53,49 @@ The object schema is used to validate the "object" content, opposed to entire pa
 + Response 200 (application/vnd.metasysapi.v2+json)
 
         {
-            "object": {
+            "item": {
                 "id": "00000000-0000-0000-0000-000000000000",
                 "name": "AV1",
                 "description": "This is an AV",
-                "bacnetObjectType": "bacAvClass",
-                "objectCategory": "generalCategory",
-                "defaultAttribute": "presentValue",
+                "bacnetObjectType": "objectTypeEnumSet.bacAvClass",
+                "objectCategory": "objectCategoryEnumSet.generalCategory",
+                "defaultAttribute": "attributeEnumSet.presentValue",
                 "presentValue": {
                     "value": 5,
-                    "reliability": "reliable",
-                    "priority": ""
+                    "reliability": "reliabilityEnumSet.reliable",
+                    "priority": "writePriorityEnumSet.priorityOperatorOverride"
                 },
-                "reliability": "reliable",
-                "alarmState": "osHighAlarm",
+                "reliability": "reliabilityEnumSet.reliable",
+                "alarmState": "objectStatusEnumSet.osHighAlarm",
                 "itemReference": "M4731823:Mahoney-NAE/Inputs.AV1",
                 "minPresValue": -990.01,
                 "maxPresValue": 990.01,
-                "units": "percentObscurationPerMeter",
-                "displayPrecision": "displayPrecisionPt001",
+                "units": "unitEnumSet.noUnits",
+                "displayPrecision": "displayPrecisionEnumSet.displayPrecisionPt1",
                 "covIncrement": 0.001,
-                "typeUrl": "https://{hostname}/api/v2/enumSets/508/members/165",
-                "self": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
-                "parentUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
-                "objectsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/objects",
-                "networkDeviceUrl": "https://{hostname}/api/v2/networkDevices/00000000-0000-0000-0000-000000000000",
-                "pointsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/points",
-                "attributesUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/trendedAttributes",
-                "alarmsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/alarms",
-                "auditsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/audits"
             },
+            "typeUrl": "https://{hostname}/api/v2/enumSets/508/members/165",
+            "self": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
+            "parentUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
+            "objectsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/objects",
+            "networkDeviceUrl": "https://{hostname}/api/v2/networkDevices/00000000-0000-0000-0000-000000000000",
+            "pointsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/points",
+            "trendedAttributesUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/trendedAttributes",
+            "alarmsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/alarms",
+            "auditsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/audits"
             "schema": {
                 "type": "object",
                 "properties": {
                     "name": {
                         "type": "string",
+                        "title": "Name",
                         "maxLength": 400
                     },
                     "description": {
                         "oneOf": [
                             {
                                 "type": "string",
+                                "title": "Description",
                                 "maxLength": 64
                             },
                             {
@@ -104,28 +106,45 @@ The object schema is used to validate the "object" content, opposed to entire pa
                     "bacnetObjectType": {
                         "allOff": [
                             {
-                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectTypeEnumSet.schema.json"
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectTypeEnumSet"
                             },
                             {
-                                "readOnly": true
+                                "readOnly": true,
+                                "title": "Object Type"
                             }
                         ]
                     },
                     "objectCategory": {
-                        "$ref": "https://{hostname}/api/v2/schemas/enums/objectCategoryEnumSet.schema.json"
-                    },
-                    "defaultAttribute": {
-                        "allOff": [
+                        "allOf": [
                             {
-                                "$ref": "https://{hostname}/api/v2/schemas/enums/attributeEnumSet.schema.json"
+                                "title": "Authorization Category"
                             },
                             {
-                                "readOnly": true
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectCategoryEnumSet"
+                            }
+                        ]
+                    },
+                    "defaultAttribute": {
+                        "oneOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "readOnly": true,
+                                        "title": "Default Attr Number"
+                                    },
+                                    {
+                                        "$ref": "https://{hostname}/api/v2/schemas/enums/attributeEnumSet"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "null"
                             }
                         ]
                     },
                     "presentValue": {
                         "type": "object",
+                        "title": "Present Value",
                         "properties": {
                             "value": {
                                 "minimum": -3.4028234663852886e+38,
@@ -136,33 +155,42 @@ The object schema is used to validate the "object" content, opposed to entire pa
                                 "readOnly": true
                             },
                             "priority": {
-                                "$ref": "https://{hostname}/api/v2/schemas/enums/writePriorityEnumSet.schema.json"
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/writePriorityEnumSet"
                             },
                             "reliability": {
-                                "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet.schema.json"
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet"
                             }
                         }
                     },
                     "reliability": {
-                        "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet.schema.json"
+                        "allOf": [
+                            {
+                                "title": "Reliability"
+                            },
+                            {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet"
+                            }
+                        ]
                     },
                     "alarmState": {
                         "allOff": [
                             {
-                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectStatusEnumSet.schema.json"
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectStatusEnumSet"
                             },
                             {
-                                "readOnly": true
+                                "readOnly": true,
+                                "title": "Alarm State"
                             }
                         ]
                     },
                     "itemReference": {
                         "type": "string",
-                        "maxLength": 65535,
+                        "title": "Item Reference",
                         "readOnly": true
                     },
                     "minPresValue": {
                         "type": "number",
+                        "title": "Min Value",
                         "minimum": -3.4028234663852886e+38,
                         "maximum": 3.4028234663852886e+38,
                         "decimalPrecision": 3,
@@ -170,19 +198,35 @@ The object schema is used to validate the "object" content, opposed to entire pa
                     },
                     "maxPresValue": {
                         "type": "number",
+                        "title": "Max Value",
                         "minimum": -3.4028234663852886e+38,
                         "maximum": 3.4028234663852886e+38,
                         "decimalPrecision": 3,
                         "units": "% Obscuration/m"
                     },
                     "units": {
-                        "$ref": "https://{hostname}/api/v2/schemas/enums/unitEnumSet.schema.json"
+                        "allOf": [
+                            {
+                                "title": "Units"
+                            },
+                            {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/unitEnumSet"
+                            }
+                        ]
                     },
                     "displayPrecision": {
-                        "$ref": "https://{hostname}/api/v2/schemas/enums/displayPrecisionEnumSet.schema.json"
+                        "allOf": [
+                            {
+                                "title": "Display Precision"
+                            },
+                            {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/displayPrecisionEnumSet"
+                            }
+                        ]
                     },
                     "covIncrement": {
                         "type": "number",
+                        "title": "COV Increment",
                         "minimum": 0,
                         "maximum": 3.4028234663852886e+38,
                         "decimalPrecision": 0,
@@ -201,36 +245,36 @@ The object schema is used to validate the "object" content, opposed to entire pa
 + Response 200 (application/vnd.metasysapi.v2+json)
 
         {
-            "object": {
+            "item": {
                 "id": "00000000-0000-0000-0000-000000000000",
                 "name": "AV1",
                 "description": "This is an AV",
-                "bacnetObjectType": "bacAvClass",
-                "objectCategory": "generalCategory",
-                "defaultAttribute": "presentValue",
+                "bacnetObjectType": "objectTypeEnumSet.bacAvClass",
+                "objectCategory": "objectCategoryEnumSet.generalCategory",
+                "defaultAttribute": "attributeEnumSet.presentValue",
                 "presentValue": {
                     "value": 5,
-                    "reliability": "reliable",
-                    "priority": ""
+                    "reliability": "reliabilityEnumSet.reliable",
+                    "priority": "writePriorityEnumSet.priorityOperatorOverride"
                 },
-                "reliability": "reliable",
-                "alarmState": "osHighAlarm",
+                "reliability": "reliabilityEnumSet.reliable",
+                "alarmState": "objectStatusEnumSet.osHighAlarm",
                 "itemReference": "M4731823:Mahoney-NAE/Inputs.AV1",
                 "minPresValue": -990.01,
                 "maxPresValue": 990.01,
-                "units": "percentObscurationPerMeter",
-                "displayPrecision": "displayPrecisionPt001",
+                "units": "unitEnumSet.noUnits",
+                "displayPrecision": "displayPrecisionEnumSet.displayPrecisionPt1",
                 "covIncrement": 0.001,
-                "typeUrl": "https://{hostname}/api/v2/enumSets/508/members/165",
-                "self": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
-                "parentUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
-                "objectsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/objects",
-                "networkDeviceUrl": "https://{hostname}/api/v2/networkDevices/00000000-0000-0000-0000-000000000000",
-                "pointsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/points",
-                "attributesUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/trendedAttributes",
-                "alarmsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/alarms",
-                "auditsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/audits"
-            }
+            },
+            "typeUrl": "https://{hostname}/api/v2/enumSets/508/members/165",
+            "self": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
+            "parentUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000",
+            "objectsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/objects",
+            "networkDeviceUrl": "https://{hostname}/api/v2/networkDevices/00000000-0000-0000-0000-000000000000",
+            "pointsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/points",
+            "trendedAttributesUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/trendedAttributes",
+            "alarmsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/alarms",
+            "auditsUrl": "https://{hostname}/api/v2/objects/00000000-0000-0000-0000-000000000000/audits"
         }
 
 + Request A BV Example with `?includeSchema=true`
@@ -242,57 +286,59 @@ The object schema is used to validate the "object" content, opposed to entire pa
 + Response 200 (application/vnd.metasysapi.v2+json)
 
         {
-            "object": {
+            "item": {
                 "id": "00000000-0000-0000-0000-000000000000",
                 "itemReference": "site:device/itemReference",
                 "name": "BV1",
                 "description": "This is a BV",
-                "typeUrl": "https://{hostname}/api/v2/enumSets/{id}/members/{memberId}",
-                "self": "https://{hostname}/api/v2/objects/{id}",
-                "parentUrl": "https://{hostname}/api/v2/objects/{id}",
-                "objectsUrl": "https://{hostname}/api/v2/objects/{id}/objects",
-                "networkDevicesUrl": "https://{hostname}/api/v2/networkDevices/{id}",
-                "pointsUrl": "https://{hostname}/api/v2/objects/{id}/points",
-                "attributesUrl": "https://{hostname}/api/v2/objects/{id}/trendedAttributes",
-                "alarmsUrl": "https://{hostname}/api/v2/objects/{id}/alarms",
-                "auditsUrl": "https://{hostname}/api/v2/objects/{id}/audits",
-                "bacnetObjectType": "bacBvClass",
-                "objectCategory": "generalCategory",
-                "reliability": "unreliableHigh",
-                "alarmState": "osNormal",
+                "bacnetObjectType": "objectTypeEnumSet.bacBvClass",
+                "objectCategory": "objectCategoryEnumSet.generalCategory",
+                "reliability": "reliabilityEnumSet.reliable",
+                "alarmState": "objectStatusEnumSet.osNormal",
                 "cosCount": 0,
                 "elapsedActiveTime": 0,
                 "minOffTime": 0,
                 "minOnTime": 0,
-                "statesText": "binarypvEnumSet",
+                "statesText": "twostateEnumSet.binarypvEnumSet",
                 "userNameIsBacnetObjName": false,
                 "outOfService": false,
                 "statesText": "binarypvEnumSet",
                 "intrinsicAlarmDisabled": false,
-                "status": "osNormal",
                 "attrChangeCount": 0,
                 "presentValue": {
-                    "value": "bacbinActive",
-                    "reliability": "unreliableHigh",
-                    "priority": "priorityOperatorOverride"
+                    "value": "binarypvEnumSet.bacbinActive",
+                    "reliability": "reliabilityEnumSet.reliable",
+                    "priority": "writePriorityEnumSet.prioritySchedulingOst"
                 },
-                "defaultAttribute": "presentValue"
+                "defaultAttribute": "attributeEnumSet.presentValue"
             },
+            "typeUrl": "https://{hostname}/api/v2/enumSets/{id}/members/{memberId}",
+            "self": "https://{hostname}/api/v2/objects/{id}",
+            "parentUrl": "https://{hostname}/api/v2/objects/{id}",
+            "objectsUrl": "https://{hostname}/api/v2/objects/{id}/objects",
+            "networkDevicesUrl": "https://{hostname}/api/v2/networkDevices/{id}",
+            "pointsUrl": "https://{hostname}/api/v2/objects/{id}/points",
+            "trendedAttributesUrl": "https://{hostname}/api/v2/objects/{id}/trendedAttributes",
+            "alarmsUrl": "https://{hostname}/api/v2/objects/{id}/alarms",
+            "auditsUrl": "https://{hostname}/api/v2/objects/{id}/audits",
             "schema": {
                 "type": "object",
                 "properties": {
                     "itemReference": {
                         "type": "string",
+                        "title": "Item Reference",
                         "readOnly": true
                     },
                     "name": {
                         "type": "string",
+                        "title": "Name",
                         "maxLength": 400
                     },
                     "description": {
                         "oneOf": [
                             {
                                 "type": "string",
+                                "title": "Description",
                                 "maxLength": 64
                             },
                             {
@@ -303,33 +349,56 @@ The object schema is used to validate the "object" content, opposed to entire pa
                     "bacnetObjectType": {
                         "allOf": [
                             {
-                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectTypeEnumSet.schema.json"
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectTypeEnumSet"
                             },
                             {
-                                "readOnly": true
+                                "readOnly": true,
+                                "title": "Object Type"
                             }
                         ]
                     },
                     "objectCategory": {
-                        "$ref": "https://{hostname}/api/v2/schemas/enums/objectCategoryEnumSet.schema.json"
-                    },
-                    "defaultAttribute": {
-                        "allOff": [
+                        "allOf": [
                             {
-                                "$ref": "https://{hostname}/api/v2/schemas/enums/attributeEnumSet.schema.json"
+                                "title": "Authorization Category"
                             },
                             {
-                                "readOnly": true
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectCategoryEnumSet"
+                            }
+                        ]
+                    },
+                    "defaultAttribute": {
+                        "oneOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "readOnly": true,
+                                        "title": "Default Attr Number"
+                                    },
+                                    {
+                                        "$ref": "/schemas/enums/attributeEnumSet"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "null"
                             }
                         ]
                     },
                     "reliability": {
-                        "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet.schema.json"
+                        "allOf": [
+                            {
+                                "title": "Reliability"
+                            },
+                            {
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet"
+                            }
+                        ]
                     },
                     "alarmState": {
                         "allOf": [
                             {
-                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectStatusEnumSet.schema.json"
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/objectStatusEnumSet"
                             },
                             {
                                 "readOnly": true
@@ -338,52 +407,62 @@ The object schema is used to validate the "object" content, opposed to entire pa
                     },
                     "cosCount": {
                         "type": "integer",
+                        "title": "COS Count",
                         "minimum": 0,
                         "maximum": 4294967295
                     },
                     "elapsedActiveTime": {
                         "type": "integer",
+                        "title": "Elapsed Active Time",
                         "minimum": 0,
                         "maximum": 4294967295,
                         "units": "seconds"
                     },
                     "minOffTime": {
                         "type": "integer",
+                        "title": "Min Off Time",
                         "minimum": 0,
                         "maximum": 604800,
                         "units": "seconds"
                     },
                     "minOnTime": {
                         "type": "integer",
+                        "title": "Min On Time",
                         "minimum": 0,
                         "maximum": 604800,
                         "units": "seconds"
                     },
                     "statesText": {
-                        "$ref": "https://{hostname}/api/v2/schemas/enums/twostateEnumSet.schema.json"
-                    },
-                    "status": {
-                        "$ref": "https://{hostname}/api/v2/schemas/enums/objectStatusEnumSet.schema.json"
+                        "allOf": [
+                            {
+                                "title": "States Text"
+                            },
+                            {
+                                "$ref": "/schemas/enums/twostateEnumSet"
+                            }
+                        ]
                     },
                     "presentValue": {
                         "type": "object",
-                            "properties": {
+                        "title": "Present Value",
+                        "properties": {
                             "value": {
                                 "allOf": [
                                     {
-                                        "$ref": "https://{hostname}/api/v2/schemas/enums/binarypvEnumSet.schema.json"
+                                        "readOnly": true,
+                                        "title": "Present Value",
+                                        "prioritized": true
                                     },
                                     {
-                                        "prioritized": true,
-                                        "readOnly": true
+                                        "$ref": "https://{hostname}/api/v2/schemas/enums/binarypvEnumSet"
                                     }
                                 ]
                             },
                             "priority": {
-                                "$ref": "https://{hostname}/api/v2/schemas/enums/writePriorityEnumSet.schema.json"
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/writePriorityEnumSet"
                             },
                             "reliability": {
-                                "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet.schema.json"
+                                "$ref": "https://{hostname}/api/v2/schemas/enums/reliabilityEnumSet"
                             }
                         }
                     }
@@ -400,42 +479,41 @@ The object schema is used to validate the "object" content, opposed to entire pa
 + Response 200 (application/vnd.metasysapi.v2+json)
 
         {
-            "object": {
+            "item": {
                 "id": "00000000-0000-0000-0000-000000000000",
                 "itemReference": "site:device/itemReference",
                 "name": "BV1",
                 "description": "This is a BV",
-                "typeUrl": "https://{hostname}/api/v2/enumSets/{id}/members/{memberId}",
-                "self": "https://{hostname}/api/v2/objects/{id}",
-                "parentUrl": "https://{hostname}/api/v2/objects/{id}",
-                "objectsUrl": "https://{hostname}/api/v2/objects/{id}/objects",
-                "networkDevicesUrl": "https://{hostname}/api/v2/networkDevices/{id}",
-                "pointsUrl": "https://{hostname}/api/v2/objects/{id}/points",
-                "attributesUrl": "https://{hostname}/api/v2/objects/{id}/trendedAttributes",
-                "alarmsUrl": "https://{hostname}/api/v2/objects/{id}/alarms",
-                "auditsUrl": "https://{hostname}/api/v2/objects/{id}/audits",
-                "bacnetObjectType": "bacBvClass",
-                "objectCategory": "generalCategory",
-                "reliability": "reliable",
-                "alarmState": "osNormal",
+                "bacnetObjectType": "objectTypeEnumSet.bacBvClass",
+                "objectCategory": "objectCategoryEnumSet.generalCategory",
+                "reliability": "reliabilityEnumSet.reliable",
+                "alarmState": "objectStatusEnumSet.osNormal",
                 "cosCount": 0,
                 "elapsedActiveTime": 0,
                 "minOffTime": 0,
                 "minOnTime": 0,
-                "statesText": "binarypvEnumSet",
+                "statesText": "twostateEnumSet.binarypvEnumSet",
                 "userNameIsBacnetObjName": false,
                 "outOfService": false,
                 "statesText": "binarypvEnumSet",
                 "intrinsicAlarmDisabled": false,
-                "status": "osNormal",
-                "attrChangeCount": 24,
+                "attrChangeCount": 0,
                 "presentValue": {
-                    "value": "bacbinActive",
-                    "reliability": "unreliableHigh",
-                    "priority": "priorityOperatorOverride"
+                    "value": "binarypvEnumSet.bacbinActive",
+                    "reliability": "reliabilityEnumSet.reliable",
+                    "priority": "writePriorityEnumSet.prioritySchedulingOst"
                 },
-                "defaultAttribute": "presentValue"
-            }
+                "defaultAttribute": "attributeEnumSet.presentValue"
+            },
+            "typeUrl": "https://{hostname}/api/v2/enumSets/{id}/members/{memberId}",
+            "self": "https://{hostname}/api/v2/objects/{id}",
+            "parentUrl": "https://{hostname}/api/v2/objects/{id}",
+            "objectsUrl": "https://{hostname}/api/v2/objects/{id}/objects",
+            "networkDevicesUrl": "https://{hostname}/api/v2/networkDevices/{id}",
+            "pointsUrl": "https://{hostname}/api/v2/objects/{id}/points",
+            "trendedAttributesUrl": "https://{hostname}/api/v2/objects/{id}/trendedAttributes",
+            "alarmsUrl": "https://{hostname}/api/v2/objects/{id}/alarms",
+            "auditsUrl": "https://{hostname}/api/v2/objects/{id}/audits"
         }
 
 
@@ -530,11 +608,11 @@ will coordinate with the object to ensure the attribute is cached to make future
 + Response 200 (application/vnd.metasysapi.v2+json)
 
         {
-            "object": {
+            "item": {
                 "presentValue": {
                     "value": 10,
-                    "reliability": "unreliableHigh",
-                    "priority": "priorityOperatorOverride"
+                    "reliability": "reliabilityEnumSet.unreliableHigh",
+                    "priority": "writePriorityEnumSet.priorityOperatorOverride"
                 }
             },
         }
@@ -547,7 +625,7 @@ will coordinate with the object to ensure the attribute is cached to make future
 + Response 200 (application/vnd.metasysapi.v2+json)
 
         {
-            "object": {
+            "item": {
                 "description": "This is the description"
             },
         }
@@ -595,7 +673,7 @@ Instead of using this action, use the send command action described below.
     + Body
 
             {
-                "object": {
+                "item": {
                     "name": "AV1",
                     "description": "Analog Value"
                 }
@@ -612,7 +690,7 @@ Instead of using this action, use the send command action described below.
     + Body
 
             {
-                "object": {
+                "item": {
                     "description": null
                 }
             }
@@ -688,7 +766,7 @@ get a list of commands for an object.
                     {
                         "oneOf": [
                             {
-                                "const": "presentValue",
+                                "const": "attributeEnumSet.presentValue",
                                 "title": "Present Value"
                             }
                         ]
@@ -696,71 +774,71 @@ get a list of commands for an object.
                     {
                         "oneOf": [
                             {
-                                "const": "priorityNone",
+                                "const": "writePriorityEnumSet.priorityNone",
                                 "title": "0 (No Priority)"
                             },
                             {
-                                "const": "priorityManualEmergency",
+                                "const": "writePriorityEnumSet.priorityManualEmergency",
                                 "title": "1 (Manual Life Safety)"
                             },
                             {
-                                "const": "priorityFireApplications",
+                                "const": "writePriorityEnumSet.priorityFireApplications",
                                 "title": "2 (Auto Life Safety)"
                             },
                             {
-                                "const": "priority3",
+                                "const": "writePriorityEnumSet.priority3",
                                 "title": "3 (Application)"
                             },
                             {
-                                "const": "priority4",
+                                "const": "writePriorityEnumSet.priority4",
                                 "title": "4 (Application)"
                             },
                             {
-                                "const": "priorityCriticalEquipment",
+                                "const": "writePriorityEnumSet.priorityCriticalEquipment",
                                 "title": "5 (Critical Equipment)"
                             },
                             {
-                                "const": "priorityMinimumOnOff",
+                                "const": "writePriorityEnumSet.priorityMinimumOnOff",
                                 "title": "6 (Minimum On Off)"
                             },
                             {
-                                "const": "priorityHeavyEquipDelay",
+                                "const": "writePriorityEnumSet.priorityHeavyEquipDelay",
                                 "title": "7 (Heavy Equip Delay)"
                             },
                             {
-                                "const": "priorityOperatorOverride",
+                                "const": "writePriorityEnumSet.priorityOperatorOverride",
                                 "title": "8 (Operator Override)"
                             },
                             {
-                                "const": "priority9",
+                                "const": "writePriorityEnumSet.priority9",
                                 "title": "9 (Application)"
                             },
                             {
-                                "const": "priority10",
+                                "const": "writePriorityEnumSet.priority10",
                                 "title": "10 (Application)"
                             },
                             {
-                                "const": "priorityDemandLimiting",
+                                "const": "writePriorityEnumSet.priorityDemandLimiting",
                                 "title": "11 (Demand Limiting)"
                             },
                             {
-                                "const": "priority12",
+                                "const": "writePriorityEnumSet.priority12",
                                 "title": "12 (Application)"
                             },
                             {
-                                "const": "priorityLoadRolling",
+                                "const": "writePriorityEnumSet.priorityLoadRolling",
                                 "title": "13 (Load Rolling)"
                             },
                             {
-                                "const": "priority14",
+                                "const": "writePriorityEnumSet.priority14",
                                 "title": "14 (Application)"
                             },
                             {
-                                "const": "prioritySchedulingOst",
+                                "const": "writePriorityEnumSet.prioritySchedulingOst",
                                 "title": "15 (Scheduling)"
                             },
                             {
-                                "const": "priorityDefault",
+                                "const": "writePriorityEnumSet.priorityDefault",
                                 "title": "16 (Default)"
                             }
                         ]
@@ -778,7 +856,7 @@ get a list of commands for an object.
                         {
                             "oneOf": [
                                 {
-                                    "const": "presentValue",
+                                    "const": "attributeEnumSet.presentValue",
                                     "title": "Present Value"
                                 }
                             ]
@@ -807,11 +885,11 @@ get a list of commands for an object.
                         {
                             "oneOf": [
                                 {
-                                    "const": "state0Command",
+                                    "const": "commandIdEnumSet.state0Command",
                                     "title": "Inactive"
                                 },
                                 {
-                                    "const": "state1Commmand",
+                                    "const": "commandIdEnumSet.state1Command",
                                     "title": "Active"
                                 }
                             ]
@@ -829,11 +907,11 @@ get a list of commands for an object.
                         {
                             "oneOf": [
                                 {
-                                    "const": "bacbinInactive",
+                                    "const": "binarypvEnumSet.bacbinInactive",
                                     "title": "Inactive"
                                 },
                                 {
-                                    "const": "bacbinActive",
+                                    "const": "binarypvEnumSet.bacbinActive",
                                     "title": "Active"
                                 }
                             ]
@@ -860,7 +938,7 @@ get a list of commands for an object.
                         {
                             "oneOf": [
                                 {
-                                    "const": "presentValue",
+                                    "const": "attributeEnumSet.presentValue",
                                     "title": "Present Value"
                                 }
                             ]
@@ -868,71 +946,71 @@ get a list of commands for an object.
                         {
                             "oneOf": [
                                 {
-                                    "const": "priorityNone",
+                                    "const": "writePriorityEnumSet.priorityNone",
                                     "title": "0 (No Priority)"
                                 },
                                 {
-                                    "const": "priorityManualEmergency",
+                                    "const": "writePriorityEnumSet.priorityManualEmergency",
                                     "title": "1 (Manual Life Safety)"
                                 },
                                 {
-                                    "const": "priorityFireApplications",
+                                    "const": "writePriorityEnumSet.priorityFireApplications",
                                     "title": "2 (Auto Life Safety)"
                                 },
                                 {
-                                    "const": "priority3",
+                                    "const": "writePriorityEnumSet.priority3",
                                     "title": "3 (Application)"
                                 },
                                 {
-                                    "const": "priority4",
+                                    "const": "writePriorityEnumSet.priority4",
                                     "title": "4 (Application)"
                                 },
                                 {
-                                    "const": "priorityCriticalEquipment",
+                                    "const": "writePriorityEnumSet.priorityCriticalEquipment",
                                     "title": "5 (Critical Equipment)"
                                 },
                                 {
-                                    "const": "priorityMinimumOnOff",
+                                    "const": "writePriorityEnumSet.priorityMinimumOnOff",
                                     "title": "6 (Minimum On Off)"
                                 },
                                 {
-                                    "const": "priorityHeavyEquipDelay",
+                                    "const": "writePriorityEnumSet.priorityHeavyEquipDelay",
                                     "title": "7 (Heavy Equip Delay)"
                                 },
                                 {
-                                    "const": "priorityOperatorOverride",
+                                    "const": "writePriorityEnumSet.priorityOperatorOverride",
                                     "title": "8 (Operator Override)"
                                 },
                                 {
-                                    "const": "priority9",
+                                    "const": "writePriorityEnumSet.priority9",
                                     "title": "9 (Application)"
                                 },
                                 {
-                                    "const": "priority10",
+                                    "const": "writePriorityEnumSet.priority10",
                                     "title": "10 (Application)"
                                 },
                                 {
-                                    "const": "priorityDemandLimiting",
+                                    "const": "writePriorityEnumSet.priorityDemandLimiting",
                                     "title": "11 (Demand Limiting)"
                                 },
                                 {
-                                    "const": "priority12",
+                                    "const": "writePriorityEnumSet.priority12",
                                     "title": "12 (Application)"
                                 },
                                 {
-                                    "const": "priorityLoadRolling",
+                                    "const": "writePriorityEnumSet.priorityLoadRolling",
                                     "title": "13 (Load Rolling)"
                                 },
                                 {
-                                    "const": "priority14",
+                                    "const": "writePriorityEnumSet.priority14",
                                     "title": "14 (Application)"
                                 },
                                 {
-                                    "const": "prioritySchedulingOst",
+                                    "const": "writePriorityEnumSet.prioritySchedulingOst",
                                     "title": "15 (Scheduling)"
                                 },
                                 {
-                                    "const": "priorityDefault",
+                                    "const": "writePriorityEnumSet.priorityDefault",
                                     "title": "16 (Default)"
                                 }
                             ]
@@ -950,7 +1028,7 @@ get a list of commands for an object.
                         {
                             "oneOf": [
                                 {
-                                    "const": "presentValue",
+                                    "const": "attributeEnumSet.presentValue",
                                     "title": "Present Value"
                                 }
                             ]
@@ -978,22 +1056,22 @@ get a list of commands for an object.
                     "items": [
                         {
                             "oneOf": [
-                            {
-                                "const": "multistate0Command",
-                                "title": "State 0"
-                            },
-                            {
-                                "const": "multistate1Command",
-                                "title": "State 1"
-                            },
-                            {
-                                "const": "multistate2Command",
-                                "title": "State 2"
-                            },
-                            {
-                                "const": "multistate3Command",
-                                "title": "State 3"
-                            }
+                                {
+                                    "const": "commandIdEnumSet.multistate0Command",
+                                    "title": "State 0"
+                                },
+                                {
+                                    "const": "commandIdEnumSet.multistate1Command",
+                                    "title": "State 1"
+                                },
+                                {
+                                    "const": "commandIdEnumSet.multistate2Command",
+                                    "title": "State 2"
+                                },
+                                {
+                                    "const": "commandIdEnumSet.multistate3Command",
+                                    "title": "State 3"
+                                }
                             ]
                         }
                     ],
@@ -1008,22 +1086,22 @@ get a list of commands for an object.
                     "items": [
                         {
                             "oneOf": [
-                            {
-                                "const": "state0",
-                                "title": "State 0"
-                            },
-                            {
-                                "const": "state1",
-                                "title": "State 1"
-                            },
-                            {
-                                "const": "state2",
-                                "title": "State 2"
-                            },
-                            {
-                                "const": "state3",
-                                "title": "State 3"
-                            }
+                                {
+                                    "const": "statesEnumSet.state0",
+                                    "title": "State 0"
+                                },
+                                {
+                                    "const": "statesEnumSet.state1",
+                                    "title": "State 1"
+                                },
+                                {
+                                    "const": "statesEnumSet.state2",
+                                    "title": "State 2"
+                                },
+                                {
+                                    "const": "statesEnumSet.state3",
+                                    "title": "State 3"
+                                }
                             ]
                         }
                     ],
@@ -1038,22 +1116,22 @@ get a list of commands for an object.
                     "items": [
                         {
                             "oneOf": [
-                            {
-                                "const": "state0",
-                                "title": "State 0"
-                            },
-                            {
-                                "const": "state1",
-                                "title": "State 1"
-                            },
-                            {
-                                "const": "state2",
-                                "title": "State 2"
-                            },
-                            {
-                                "const": "state3",
-                                "title": "State 3"
-                            }
+                                {
+                                    "const": "statesEnumSet.state0",
+                                    "title": "State 0"
+                                },
+                                {
+                                    "const": "statesEnumSet.state1",
+                                    "title": "State 1"
+                                },
+                                {
+                                    "const": "statesEnumSet.state2",
+                                    "title": "State 2"
+                                },
+                                {
+                                    "const": "statesEnumSet.state3",
+                                    "title": "State 3"
+                                }
                             ]
                         },
                         {
@@ -1089,82 +1167,82 @@ get a list of commands for an object.
                     "items": [
                         {
                             "oneOf": [
-                            {
-                                "const": "presentValue",
-                                "title": "Present Value"
-                            }
+                                {
+                                    "const": "attributeEnumSet.presentValue",
+                                    "title": "Present Value"
+                                }
                             ]
                         },
                         {
                             "oneOf": [
-                            {
-                                "const": "priorityNone",
-                                "title": "0 (No Priority)"
-                            },
-                            {
-                                "const": "priorityManualEmergency",
-                                "title": "1 (Manual Life Safety)"
-                            },
-                            {
-                                "const": "priorityFireApplications",
-                                "title": "2 (Auto Life Safety)"
-                            },
-                            {
-                                "const": "priority3",
-                                "title": "3 (Application)"
-                            },
-                            {
-                                "const": "priority4",
-                                "title": "4 (Application)"
-                            },
-                            {
-                                "const": "priorityCriticalEquipment",
-                                "title": "5 (Critical Equipment)"
-                            },
-                            {
-                                "const": "priorityMinimumOnOff",
-                                "title": "6 (Minimum On Off)"
-                            },
-                            {
-                                "const": "priorityHeavyEquipDelay",
-                                "title": "7 (Heavy Equip Delay)"
-                            },
-                            {
-                                "const": "priorityOperatorOverride",
-                                "title": "8 (Operator Override)"
-                            },
-                            {
-                                "const": "priority9",
-                                "title": "9 (Application)"
-                            },
-                            {
-                                "const": "priority10",
-                                "title": "10 (Application)"
-                            },
-                            {
-                                "const": "priorityDemandLimiting",
-                                "title": "11 (Demand Limiting)"
-                            },
-                            {
-                                "const": "priority12",
-                                "title": "12 (Application)"
-                            },
-                            {
-                                "const": "priorityLoadRolling",
-                                "title": "13 (Load Rolling)"
-                            },
-                            {
-                                "const": "priority14",
-                                "title": "14 (Application)"
-                            },
-                            {
-                                "const": "prioritySchedulingOst",
-                                "title": "15 (Scheduling)"
-                            },
-                            {
-                                "const": "priorityDefault",
-                                "title": "16 (Default)"
-                            }
+                                {
+                                    "const": "writePriorityEnumSet.priorityNone",
+                                    "title": "0 (No Priority)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priorityManualEmergency",
+                                    "title": "1 (Manual Life Safety)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priorityFireApplications",
+                                    "title": "2 (Auto Life Safety)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priority3",
+                                    "title": "3 (Application)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priority4",
+                                    "title": "4 (Application)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priorityCriticalEquipment",
+                                    "title": "5 (Critical Equipment)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priorityMinimumOnOff",
+                                    "title": "6 (Minimum On Off)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priorityHeavyEquipDelay",
+                                    "title": "7 (Heavy Equip Delay)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priorityOperatorOverride",
+                                    "title": "8 (Operator Override)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priority9",
+                                    "title": "9 (Application)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priority10",
+                                    "title": "10 (Application)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priorityDemandLimiting",
+                                    "title": "11 (Demand Limiting)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priority12",
+                                    "title": "12 (Application)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priorityLoadRolling",
+                                    "title": "13 (Load Rolling)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priority14",
+                                    "title": "14 (Application)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.prioritySchedulingOst",
+                                    "title": "15 (Scheduling)"
+                                },
+                                {
+                                    "const": "writePriorityEnumSet.priorityDefault",
+                                    "title": "16 (Default)"
+                                }
                             ]
                         }
                     ],
@@ -1180,7 +1258,7 @@ get a list of commands for an object.
                     {
                         "oneOf": [
                             {
-                                "const": "presentValue",
+                                "const": "attributeEnumSet.presentValue",
                                 "title": "Present Value"
                             }
                         ]
@@ -1248,7 +1326,7 @@ Several error status codes are possible
 
 + Request Temporary Operator Override a MV (application/json)
 
-        ["state0", 15, 30]
+        ["commandIdEnumSet.state0Command", 15, 30]
 
 + Response 400
 

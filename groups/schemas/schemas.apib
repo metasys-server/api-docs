@@ -5,41 +5,40 @@ This section describes the predefined JSON schemas used by Metasys.
 
 Schemas are used to describe Metasys data formatting, provide context around Metasys Objects, validate API data requests, and drive rich user interfaces.
 
-### Get A Single Enumeration Schema [GET /schemas/enums/{enumerationId}.schema.json]
+### Get A Single Enumeration Schema [GET /schemas/enums/{enumerationId}]
 Retrieves the specified enumeration schema. To get a list of all of the known enumerations you can
 use this API to return the `enumerationSetNamesEnumSet` (ie.
-`GET /schemas/enums/enumerationSetNamesEnumSet.schema.json`). This is the enum set that contains
-the ids of all of the enum sets.
+`GET /schemas/enums/enumerationSetNamesEnumSet`). This is the enum set that contains the ids of all of the enum sets.
 
-For example, the following is a fragment that shows the first four elements of  `enumerationSetNamesEnumSet`.
+For example, the following is a fragment that shows the first four elements of `enumerationSetNamesEnumSet`.
 
 ```json
     {
-      "const": "displayPrecisionEnumSet",
-      "description": "Display Precision"
+        "const": "enumerationSetNamesEnumSet.displayPrecisionEnumSet",
+        "title": "Display Precision"
     },
     {
-      "const": "writePriorityEnumSet",
-      "description": "Write Priority"
+        "const": "enumerationSetNamesEnumSet.writePriorityEnumSet",
+        "title": "Write Priority"
     },
     {
-      "const": "bosetupEnumSet",
-      "description": "BO Setup"
+        "const": "enumerationSetNamesEnumSet.bosetupEnumSet",
+        "title": "BO Setup"
     },
     {
-      "const": "bacpolarityEnumSet",
-      "description": "Normal Reverse"
+        "const": "enumerationSetNamesEnumSet.bacpolarityEnumSet",
+        "title": "Normal Reverse"
     },
 ```
 
 So to lookup the schema for the "Write Priority" enumeration, you would send a request for
-`schemas/enums/writePriorityEnumSet.schema.json`
+`schemas/enums/writePriorityEnumSet`
 
 + Parameters
     + enumerationId: unitEnumSet (string) - The id of the enumeration schema to return. The entire list of enumerations
     can be found in the `enumerationSetNamesEnumSet`.
 
-+ Request /schemas/enums/absentPresentEnumSet.schema.json
++ Request /schemas/enums/absentPresentEnumSet
     + Headers
 
             Authorization: Bearer [token]
@@ -48,18 +47,17 @@ So to lookup the schema for the "Write Priority" enumeration, you would send a r
 
         {
             "$schema": "http://json-schema.org/schema#",
-            "$id": "https://{hostname}/api/schemas/enums/absentPresentEnumSet.schema.json",
-            "title": "absentPresentEnumSet",
+            "$id": "https://{hostname}/api/v2/schemas/enums/absentPresentEnumSet",
+            "title": "Absent/Present",
             "setId": "655",
-            "description": "Absent/Present",
             "oneOf": [
                 {
-                    "const": "abprAbsent",
-                    "description": "Absent"
+                    "const": "absentPresentEnumSet.abprAbsent",
+                    "title": "Absent"
                 },
                 {
-                    "const": "abprPresent",
-                    "description": "Present"
+                    "const": "absentPresentEnumSet.abprPresent",
+                    "title": "Present"
                 }
             ]
         }
