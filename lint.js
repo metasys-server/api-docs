@@ -9,7 +9,7 @@ fury.use(apibParser);
 
 function output(classification, message) {
   if (classification === 'warning') {
-    console.warn(message);
+    console.error(message);
   } else if (classification === 'error') {
     console.error(message);
   } else {

@@ -31,7 +31,7 @@ jobs:
             npm run build
             # if [ -n "$CIRCLE_PR_NUMBER" ]; then node build.js; fi
             # if [ -z "$CIRCLE_PR_NUMBER" ]; then node build.js && npm run publish; fi
-            # node build.js
+            npm run lint
             npm run build:postman
             npm run preview
             npm run aglio
