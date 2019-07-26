@@ -18,70 +18,81 @@ Version: 1
 Prefix: /api/v1
 ```
 
-This documentation was last updated on {{revision}}.
+This documentation was last updated on 26/07/2019.
 
 ### API Version Notes
 
 <!--
 This document describes version 1 of the API (not to be confused with document version in [Document Information](#document-information) section above). -->
 
-While this is currently the only version available, as new versions are added the API consumer will need to specify which version of the API they intend to use. The primary means of doing this is to add the version before the first entity in the URL using the format "v[#]":
+When new versions are added you must specify which version of the API you intend to use. In the future, one release of Metasys, may support multiple versions. In that case you must explicitly specify which version you intend to use in the URL using the format "v[#]":
 
-* `http://localhost/api/v1/spaces` for version 1
-* `http://localhost/api/v2/spaces` for version 2
+For example, `http://localhost/api/v2/spaces` for version 2
 
-If using the URL is undesirable, an alternate approach is to use the `Accept` header in the HTTP request, and modify the version portion based on which version is intended, again using the "v[#]" format:
+You can also use the following `Accept` header in the HTTP request. To do this, modify the version based on which version you are using in the format v[#].
+For example:
 
 * `Accept: application/vnd.metasysapi.v1+json` for version 1
 * `Accept: application/vnd.metasysapi.v2+json` for version 2
 
 #### Version Specification Rules
 
-Because the version specification is optional and can be provided in multiple ways, the following rules are used when determining or providing version information:
+Version specification is optional. You can configure it in multiple ways. Use the following rules when determining or providing version information:
 
-* If no version is specified, the lowest supported version (v1) will be used.
-* If the version is specified in both the URL and the `Accept` header, the version specified in the URL will be used and the a version specified in the header will be ignored.
-* If the version specified is invalid (i.e. does not represent a known version of the API), a 404 (not found) error status will be returned.
+* If you do not specify a version, the lowest supported version is the default (v1).
+* If you specify the version in both the URL and the `Accept` header, the API uses the version you specify in the URL and ignores the version you specify in the header.
+* If you specify an invalid version or unknown version of the API, the API returns a 404 (not found) error status.
 
 #### Version Response Behavior
 
-The `Content-Type` header of the response will always contain (in part) the version of the API that was used to serve the request. This allows the consumer to identify which version of the API was utilized.
+The `Content-Type` header of the response always contains (in part) the version of the API you use to serve the request. Using the `Content-Type` header you can identify the version of the API.
+
+For example, `Content-Type: application/vnd.metasysapi.v2+json` for version 2.
 
 ## Pagination
 
-On endpoints where `page` and `pageSize` is allowed, the default `page` number will be 1 and is 1-based for all endpoints while the default `pageSize` will vary between endpoints.  The `page` parameter indicates the `page` number of items to return from the endpoint.  The `pageSize` parameter indicates the maximum number of items in the response from the endpoint.
+On endpoints where `page` and `pageSize` is allowed, the default `page` number is be 1 and is 1-based for all endpoints while the default `pageSize` varies between endpoints.  The `page` parameter indicates the `page` number of items to return from the endpoint.  The `pageSize` parameter indicates the maximum number of items in the response from the endpoint.
 
-Payloads returned by pagination-enabled endpoints will have a similar structure. A `total` property will indicate the total number of items included in all pages. A `next` and `previous` property will supply a link to the next and previous page of data, respectively (These properties can be empty if irrelevant, e.g. it is the first/last page, or there is only one page of data). The `items` property contains the data included in the page.
+Payloads returned by pagination-enabled endpoints have a similar structure. A `total` property indicates the total number of items a page includes. A `next` and `previous` property supplies a link to the next and previous page of data, respectively. These properties can be empty if irrelevant, for example, it is the first or last page, or there is only one page of data. The `items` property contains the data included in the page.
 
 ## Sorting Rules
 
-On endpoints where a `sort` query parameter is allowed, the supplied value should be in the format of a single attribute name, optionally prefixed with `-` to indicate descending sort order (ascending order is used if no prefix is supplied).
+On endpoints where a `sort` query parameter is allowed, the supplied value should be in the format of a single attribute name, optionally prefixed with `-` to indicate descending sort order. If you do not provide a prefix ascending order is the sort order.
 
 ## Relationship Links
 
 Payloads may contain links to related data, each represented as a property sharing the name of the respective relationship. The links point to either single or multiple related entities. A link to a single entity points to the canonical endpoint for that entity. A link to multiple entities points to an endpoint dedicated to representing that particular relationship.
 
-For example, if object `/objects/a` has children `/objects/b` and `/objects/c`, the payload returned by `/objects/a` will have a property `objects` with a value of `/objects/a/objects`, because multiple children can be returned. However, the payload returned by `/objects/b/` will contain a property 'parent' with a value of `/objects/a` (not `/objects/b/parent`), because the relationship represents a single entity.
+For example, if object `/objects/a` has children `/objects/b` and `/objects/c`, `/objects/a` returns a payload with the property `objects` and a value of `/objects/a/objects`, because you can return multiple children. However, the payload `/objects/b/` returns contains a property 'parent' with a value of `/objects/a` (not `/objects/b/parent`), because the relationship represents a single entity.
 
-Additionally, each payload will contain a `self` property, which contains a link representing the endpoint used to obtain the data contained in the current payload.
+Additionally, each payload contains a `self` property, which contains a link representing what endpoint you use to obtain the data the current payload contains.
+
+## DateTimes
+
+Unless otherwise specified, all date times in the document use ISO-8601 encoding.
 
 ## Validation
 
-There are some general rules that apply across all endpoints. If certain provided inputs are invalid or preconditions are not met, the API will respond with an appropriate error to indicate what went wrong.
+There are some general rules that apply across all endpoints. If certain inputs are invalid or preconditions are not met, the API wll respond with an appropriate error to indicate what went wrong.
 
-|Condition                      |Error             |Details                                                                                                    |
-|-------------------------------|------------------|-----------------------------------------------------------------------------------------------------------|
-|User not authenticated         |401 (Unauthorized)|The auth token supplied with the request is missing, invalid, or expired                                   |
-|Record not authorized          |403 (Forbidden)   |The user is not authorized to view data matching the provided identifier                                   |
-|Identifier not found           |404 (Not Found)   |An identifier is provided that does not match any known data                                               |
-|Missing required parameter     |400 (Bad Request) |A parameter marked required in this document is not included in the request                                |
-|Parameter incorrect type       |400 (Bad Request) |A parameter is included with a value of the wrong type (e.g. number is expected and string is provided)    |
-|Parameter out of range         |400 (Bad Request) |A numeric parameter is included but the value is outside the allowed range                                 |
-|Parameter not in set           |400 (Bad Request) |A string parameter has a set of predefined valid values, and the value provided is not included in that set|
-|Parameter not in correct format|400 (Bad Request) |A string parameter with expected format is provided in the wrong format                                    |
+|Condition                      |Error                       |Details                                                                                                    |
+|-------------------------------|----------------------------|-----------------------------------------------------------------------------------------------------------|
+|Missing required parameter     |400 (Bad Request)           |The request does not include a parameter marked required                                                   |
+|Parameter incorrect type       |400 (Bad Request)           |The parameter value type is incorrect. For example, use a number instead of a string                       |
+|Parameter out of range         |400 (Bad Request)           |The value of the numeric parameter is outside the allowed range                                            |
+|Parameter not in set           |400 (Bad Request)           |The string parameter does not match the set of predefined values                                           |
+|Parameter not in correct format|400 (Bad Request)           |The string parameter format is incorrect                                                                   |
+|User not authenticated         |401 (Unauthorized)          |The auth token the request supplies is missing, invalid, or expired                                        |
+|Record not authorized          |403 (Forbidden)             |You are not authorized to view data matching the provided identifier                                       |
+|Identifier not found           |404 (Not Found)             |The identifier you provided does not match any known data                                                  |
+|The Resource already exists    |409 (Conflict)              |The resource already exists                                                                                |
+|Internal Server Error          |500 (Internal Server Error) |An unexpected error occurs                                                                                 |
+|The device is not supported    |501 (Not Implemented)       |The server does not support the functionality it requires to fulfill the request                           |
+|The device is offline          |503 (Service Unavailable)   |The device is currently offline and unable to serve the request                                            |
 
 ## Redirects
 
-HTTP Redirects are used throughout the Metasys API.  This means that the client calling a Metasys API endpoint will have to handle the redirect in order for the service call to be completed.  Note that some clients and frameworks may handle the redirect automatically.
+The Metasys API uses HTTP Redirects.  The client calling a Metasys API endpoint must to handle the redirect in order to complete the service call.  
+**NOTE**: Some clients and frameworks may automatically handle the redirect.
 
-HTTP Redirects are planned to be deprecated in future Metasys release and replaced with a reverse proxy to handle inbound and outbound HTTP calls.  This means the client will no longer have to handle the redirect but instead will be able to make a direct HTTP calls without anything extra to handle.
+HTTP Redirects will be deprecated in future Metasys releases and replaced with a reverse proxy to handle inbound and outbound HTTP calls.  The client will no longer handle the redirect but instead will be able to make a direct HTTP calls without anything extra to handle.
