@@ -18,7 +18,7 @@ Version: 1
 Prefix: /api/v1
 ```
 
-This documentation was last updated on 26/07/2019.
+This documentation was last updated on {{revision}}.
 
 ### API Version Notes
 
@@ -27,21 +27,13 @@ This document describes version 1 of the API (not to be confused with document v
 
 When new versions are added you must specify which version of the API you intend to use. In the future, one release of Metasys, may support multiple versions. In that case you must explicitly specify which version you intend to use in the URL using the format "v[#]":
 
-For example, `http://localhost/api/v2/spaces` for version 2
+For example, `https://localhost/api/v2/spaces` for version 2
 
 You can also use the following `Accept` header in the HTTP request. To do this, modify the version based on which version you are using in the format v[#].
 For example:
 
 * `Accept: application/vnd.metasysapi.v1+json` for version 1
 * `Accept: application/vnd.metasysapi.v2+json` for version 2
-
-#### Version Specification Rules
-
-Version specification is optional. You can configure it in multiple ways. Use the following rules when determining or providing version information:
-
-* If you do not specify a version, the lowest supported version is the default (v1).
-* If you specify the version in both the URL and the `Accept` header, the API uses the version you specify in the URL and ignores the version you specify in the header.
-* If you specify an invalid version or unknown version of the API, the API returns a 404 (not found) error status.
 
 #### Version Response Behavior
 
