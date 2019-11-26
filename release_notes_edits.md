@@ -14,12 +14,12 @@
 
 ## Changed
 - Introduction
-	- Added Base URL, this describes the base endpoint for the API.
-    - Removed the following details from API Version notes: 
+	- Added a base URL, this describes the base endpoint for the API.
+    - Removed the following details from API version notes: 
         - URL examples
         - Accept header information
         - Version specification rules
-    - Added an example for Version Response Behavior.
+    - Added an example for Version response behavior.
     - Added DateTimes, which specifies that all date and time values in the document are ISO-8601 encoded.
     - Added seven error descriptions to Validation:
         - User not authenticated
@@ -29,9 +29,9 @@
         - Internal server error
         - The device is not supported
         - The device is offline<br><br>
-	- Removed Redirects. The client ceases to handle inbound and outbound HTTP calls; a reverse proxy now handles this operation.<br><br>
+	- Removed redirects. The client ceases to handle inbound and outbound HTTP calls; a reverse proxy now handles this operation.<br><br>
 - Objects
-    - Added more information on the functionality of Get A Single Object. 
+    - Added more information on the functionality of Get a single object. 
         - Added common object attributes to response payload. 
         - Included the 'schema' query parameter, which you can use to get optional schema in response payload.
         - Changed response payload 'enumSet' links to fully qualified enums. **Note**: Breaking change.
