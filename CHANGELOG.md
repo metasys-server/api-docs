@@ -2,7 +2,7 @@
 
 All API functional changes to the Metasys Server API will be documented in this file.
 
-## [2.0.0] - 2019-09-27
+## 2.0.0 - 2019-09-27
 
 ### Added
 
@@ -29,7 +29,7 @@ All API functional changes to the Metasys Server API will be documented in this 
 
 - Support for API version 1.
 
-## [1.0.0] - 2018-11-29
+## 1.0.0 - 2018-11-29
 
 ### Added
 
