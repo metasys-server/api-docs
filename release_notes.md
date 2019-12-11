@@ -34,7 +34,7 @@
   - Added more information on the functionality of Get a single object.
     - Added common object attributes to response payload.
     - Included the 'schema' query parameter, which you can use to get optional schema in response payload.
-    - Changed response payload 'enumSet' links to fully qualified enums. **Note**: Breaking change.
+    - Changed response payload 'enumSet' links to enum values. **Note**: Breaking change.
     - Changed 'attributes' link to 'trendedAttributesUrl'. **Note**: Breaking change.
 
 ## Removed
