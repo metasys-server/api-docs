@@ -1,6 +1,6 @@
 # Metasys Server API Changelog
 
-All API functional changes to the Metasys Server API will be documented in this file.
+Use the following information to view all API functional changes to the *Metasys* server API.
 
 ## 2.0.0 - 2019-09-27
 
