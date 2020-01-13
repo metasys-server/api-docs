@@ -6,7 +6,7 @@ Here are the changes to the API in release 10.1.
 
 ### Added
 
-- Object
+- Objects
   - Lookup object ID
   - Get a single object attribute
   - Update an object
