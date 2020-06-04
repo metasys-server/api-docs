@@ -25,47 +25,47 @@ For example, `http://localhost/api/v2/spaces` for version 2 of spaces
 
 #### Version Response Behavior
 
-The `Content-Type` header of the response will always contain (in part) the version of the API that was used to serve the request. This allows the consumer to identify which version of the API was utilized.
+To enable the consumer to identify, which version of the API is active, the `Content-Type` header of the response always contains in part, the version of the API that you used to serve the request.
 
-For example, `Content-Type: application/vnd.metasysapi.v2+json` for version 2
+See the following example for version 2, `Content-Type: application/vnd.metasysapi.v2+json` for version.
 
 ## Pagination
 
-On endpoints where `page` and `pageSize` is allowed, the default `page` number will be 1 and is 1-based for all endpoints while the default `pageSize` will vary between endpoints.  The `page` parameter indicates the `page` number of items to return from the endpoint.  The `pageSize` parameter indicates the maximum number of items in the response from the endpoint.
+On endpoints that use `page` and `pageSize`, the default `page` number is 1, and is 1-based for all endpoints. The default `pageSize` varies between endpoints.  The `page` parameter indicates the `page` number of items to return from the endpoint.  The `pageSize` parameter indicates the maximum number of items in the response from the endpoint.
 
-Payloads returned by pagination-enabled endpoints will have a similar structure. A `total` property will indicate the total number of items included in all pages. A `next` and `previous` property will supply a link to the next and previous page of data, respectively (These properties can be empty if irrelevant, e.g. it is the first/last page, or there is only one page of data). The `items` property contains the data included in the page.
+Payloads returned by pagination-enabled endpoints have a similar structure. A `total` property indicates the total number of items included in all pages. A `next` and `previous` property supplies a link to the next and previous page of data, respectively. If irrelevant leave these properties empty, for example, it is the first or last page, or there is only one page of data. The `items` property contains the data included in the page.
 
 ## Sorting Rules
 
-On endpoints where a `sort` query parameter is allowed, the supplied value should be in the format of a single attribute name, optionally prefixed with `-` to indicate descending sort order (ascending order is used if no prefix is supplied).
+On endpoints that allow a ‘sort’ query, use a single attribute name format for the supplied value. For descending order, use the prefix ‘-‘. A prefix is not required for ascending order.
 
 ## Relationship Links
 
-Payloads may contain links to related data, each represented as a property sharing the name of the respective relationship. The links point to either single or multiple related entities. A link to a single entity points to the canonical endpoint for that entity. A link to multiple entities points to an endpoint dedicated to representing that particular relationship.
+Payloads may contain links to related data, with each payload represented as a property sharing the name of the respective relationship. The links point to either single or multiple related entities. A link to a single entity points to the canonical endpoint for that entity. A link to multiple entities points to an endpoint dedicated to representing that particular relationship.
 
-For example, if object `/objects/a` has children `/objects/b` and `/objects/c`, the payload returned by `/objects/a` will have a property `objects` with a value of `/objects/a/objects`, because multiple children can be returned. However, the payload returned by `/objects/b/` will contain a property 'parent' with a value of `/objects/a` (not `/objects/b/parent`), because the relationship represents a single entity.
+For example, if object `/objects/a` has children `/objects/b` and `/objects/c`, `/objects/a` returns a payload with the property `objects` and a value of `/objects/a/objects`, because you can return multiple children. However, the payload `/objects/b/` returns contains a property 'parent' with a value of `/objects/a` (not `/objects/b/parent`), because the relationship represents a single entity.
 
-Additionally, each payload will contain a `self` property, which contains a link representing the endpoint used to obtain the data contained in the current payload.
+Additionally, each payload contains a `self` property, which contains a link representing what endpoint you use to obtain the data the current payload contains.
 
 ## DateTimes
 
-Unless otherwise specified, all date times in the document are ISO-8601 encoded.
+Unless otherwise specified, all date times in the document use ISO-8601 encoding.
 
 ## Validation
 
-There are some general rules that apply across all endpoints. If certain provided inputs are invalid or preconditions are not met, the API wll respond with an appropriate error to indicate what went wrong.
+There are some general rules that apply across all endpoints. If you provide invalid inputs or do not meet certain preconditions, the API responds with an appropriate error to indicate what went wrong.
 
-|Condition                      |Error                       |Details                                                                                                    |
-|-------------------------------|----------------------------|-----------------------------------------------------------------------------------------------------------|
-|Missing required parameter     |400 (Bad Request)           |A parameter marked required in this document is not included in the request                                |
-|Parameter incorrect type       |400 (Bad Request)           |A parameter is included with a value of the wrong type (e.g. number is expected and string is provided)    |
-|Parameter out of range         |400 (Bad Request)           |A numeric parameter is included but the value is outside the allowed range                                 |
-|Parameter not in set           |400 (Bad Request)           |A string parameter has a set of predefined valid values, and the value provided is not included in that set|
-|Parameter not in correct format|400 (Bad Request)           |A string parameter with expected format is provided in the wrong format                                    |
-|User not authenticated         |401 (Unauthorized)          |The auth token supplied with the request is missing, invalid, or expired                                   |
-|Record not authorized          |403 (Forbidden)             |The user is not authorized to view data matching the provided identifier                                   |
-|Identifier not found           |404 (Not Found)             |An identifier is provided that does not match any known data                                               |
-|The Resource already exists    |409 (Conflict)              |The Resource already exists                                                                                |
-|Internal Server Error          |500 (Internal Server Error) |An unexpected error occurs                                                                                 |
-|The device is not supported    |501 (Not Implemented)       |The server does not support the functionality required to fulfill the request                              |
-|The device is offline          |503 (Service Unavailable)   |The device is currently offline and unable to serve the request                                            |
+|Condition                      |Error                       |Details                                                                                                     |
+|-------------------------------|----------------------------|------------------------------------------------------------------------------------------------------------|
+|Missing required parameter     |400 (Bad Request)           |The request does not include a parameter marked required.                                                   |
+|Parameter incorrect type       |400 (Bad Request)           |The parameter value type is incorrect. For example, use a number instead of a string.                       |
+|Parameter out of range         |400 (Bad Request)           |The value of the numeric parameter is outside the allowed range.                                            |
+|Parameter not in set           |400 (Bad Request)           |The string parameter does not match the set of predefined values.                                           |
+|Parameter not in correct format|400 (Bad Request)           |The string parameter format is incorrect.                                                                   |
+|User not authenticated         |401 (Unauthorized)          |The authentication token supplied by the request is missing, invalid, or expired.                           |
+|Record not authorized          |403 (Forbidden)             |You are not authorized to view data matching the provided identifier.                                       |
+|Identifier not found           |404 (Not Found)             |The identifier you provided does not match any known data.                                                  |
+|The Resource already exists    |409 (Conflict)              |The resource already exists.                                                                                |
+|Internal Server Error          |500 (Internal Server Error) |An unexpected error occured.                                                                                |
+|The device is not supported    |501 (Not Implemented)       |The server does not support the functionality it requires to fulfill the request.                           |
+|The device is offline          |503 (Service Unavailable)   |The device is currently offline and unable to serve the request.                                            |
