@@ -43,7 +43,7 @@ On endpoints that allow a ‘sort’ query, use a single attribute name format f
 
 Payloads may contain links to related data, with each payload represented as a property sharing the name of the respective relationship. The links point to either single or multiple related entities. A link to a single entity points to the canonical endpoint for that entity. A link to multiple entities points to an endpoint dedicated to representing that particular relationship.
 
-For example, if object `/objects/a` has children `/objects/b` and `/objects/c`, `/objects/a` returns a payload with the property `objects` and a value of `/objects/a/objects`, because you can return multiple children. However, the payload `/objects/b/` returns contains a property 'parent' with a value of `/objects/a` (not `/objects/b/parent`), because the relationship represents a single entity.
+For example, if object `/objects/a` has children `/objects/b` and `/objects/c`, the payload returned by `/objects/a` will have a property `objects` with a value of `/objects/a/objects`, because multiple children can be returned. However, the payload returned by `/objects/b/` will contain a property 'parent' with a value of `/objects/a` (not `/objects/b/parent`), because the relationship represents a single entity.
 
 Additionally, each payload contains a `self` property, which contains a link representing what endpoint you use to obtain the data the current payload contains.
 
