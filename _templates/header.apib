@@ -5,7 +5,7 @@ HOST: https://example.com/api/v2
 Metasys API
 ===========
 
-The Metasys API is the exposed interface for accessing system data. This document defines the contracts included in that interface.
+The Metasys API is the exposed interface to access system data. This document defines the contracts included in that interface.
 
 ## Base URL
 
@@ -14,7 +14,7 @@ This document was last updated on {{revision}}.
 
 The base endpoint for the API is `https://{host}/api/v2` where `{host}` is the host name of your Metasys server.
 
-### API Version Notes
+### API version notes
 
 At Metasys 10.1, the only supported version is v2. (Note: v1 is not supported by Metasys 10.1)
 
@@ -23,11 +23,11 @@ It is required that you explicitly specify which version you intend to use. This
 
 For example, `http://localhost/api/v2/spaces` for version 2 of spaces
 
-#### Version Response Behavior
+#### Version response behavior
 
 To enable the consumer to identify, which version of the API is active, the `Content-Type` header of the response always contains in part, the version of the API that you used to serve the request.
 
-See the following example for version 2, `Content-Type: application/vnd.metasysapi.v2+json` for version.
+See the following example for version 2, `Content-Type: application/vnd.metasysapi.v2+json`.
 
 ## Pagination
 
@@ -35,17 +35,17 @@ On endpoints that use `page` and `pageSize`, the default `page` number is 1, and
 
 Payloads returned by pagination-enabled endpoints have a similar structure. A `total` property indicates the total number of items included in all pages. A `next` and `previous` property supplies a link to the next and previous page of data, respectively. If irrelevant leave these properties empty, for example, it is the first or last page, or there is only one page of data. The `items` property contains the data included in the page.
 
-## Sorting Rules
+## Sorting rules
 
 On endpoints that allow a ‘sort’ query, use a single attribute name format for the supplied value. For descending order, use the prefix ‘-‘. A prefix is not required for ascending order.
 
-## Relationship Links
+## Relationship links
 
-Payloads may contain links to related data, with each payload represented as a property sharing the name of the respective relationship. The links point to either single or multiple related entities. A link to a single entity points to the canonical endpoint for that entity. A link to multiple entities points to an endpoint dedicated to representing that particular relationship.
+Payloads may contain links to related data, with each payload represented as a property sharing the name of the respective relationship. The links point to either single or multiple related entities. A link to a single entity points to the canonical endpoint for that entity. A link to multiple entities points to an endpoint that is dedicated to representing that particular relationship.
 
 For example, if object `/objects/a` has children `/objects/b` and `/objects/c`, the payload returned by `/objects/a` will have a property `objects` with a value of `/objects/a/objects`, because multiple children can be returned. However, the payload returned by `/objects/b/` will contain a property 'parent' with a value of `/objects/a` (not `/objects/b/parent`), because the relationship represents a single entity.
 
-Additionally, each payload contains a `self` property, which contains a link representing what endpoint you use to obtain the data the current payload contains.
+Additionally, each payload contains a `self` property, which contains a link that represents what endpoint you use to obtain the data that the current payload contains.
 
 ## DateTimes
 
@@ -53,7 +53,7 @@ Unless otherwise specified, all date times in the document use ISO-8601 encoding
 
 ## Validation
 
-There are some general rules that apply across all endpoints. If you provide invalid inputs or do not meet certain preconditions, the API responds with an appropriate error to indicate what went wrong.
+General rules apply across all endpoints, and if you provide invalid inputs or do not meet certain preconditions, the API responds with an appropriate error to indicate what went wrong.
 
 |Condition                      |Error                       |Details                                                                                                     |
 |-------------------------------|----------------------------|------------------------------------------------------------------------------------------------------------|
