@@ -3,13 +3,13 @@ Group Audits
 
 This section contains information about audits as used within the Metasys API
 
-### Get Audits [GET /audits/{?originApplications,classLevels,actionTypes,startTime,endTime,excludeDiscarded,page,pageSize,sort}]
+### Get Audits [GET /audits/{?originApplications,classesLevels,actionTypes,startTime,endTime,excludeDiscarded,page,pageSize,sort}]
 Retrieves a collection of audits. When using multiple filters, an AND evaluation is assumed.
 
 + Parameters
     + originApplications:`1,2` (string, optional) - Filter by comma-separated list of origin applications
         + See /enumSets/578/members for possible values
-    + classLevels:`1,2` (string, optional) - Filter by comma-separated list of class levels
+    + classesLevels:`1,2` (string, optional) - Filter by comma-separated list of class levels
         + See /enumSets/568/members for possible values
     + actionTypes:`1,2` (string, optional) - Filter by comma-separated list of the action types
         + See /enumSets/577/members for possible values
@@ -52,14 +52,14 @@ Retrieves the specified audit.
 
     + Attributes(AuditEntity)
 
-### Get Audits For An Object [GET /objects/{id}/audits{?originApplications,classLevels,actionTypes,startTime,endTime,excludeDiscarded,page,pageSize,sort}]
+### Get Audits For An Object [GET /objects/{id}/audits{?originApplications,classesLevels,actionTypes,startTime,endTime,excludeDiscarded,page,pageSize,sort}]
 Retrieves a collection of audits for the specified object. When using multiple filters, an AND evaluation is assumed.
 
 + Parameters
     + id (string) - The identifier of the object
     + originApplications:`1,2` (string, optional) - Filter by comma-separated list of origin applications
         + See /enumSets/578/members for possible values
-    + classLevels:`1,2` (string, optional) - Filter by comma-separated list of class levels
+    + classesLevels:`1,2` (string, optional) - Filter by comma-separated list of class levels
         + See /enumSets/568/members for possible values
     + actionTypes:`1,2` (string, optional) - Filter by comma-separated list of the action types
         + See /enumSets/577/members for possible values
