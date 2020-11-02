@@ -1,6 +1,6 @@
 # Metasys API
 
-[![CircleCI](https://circleci.com/gh/metasys-server/api-docs.svg?style=svg)](https://circleci.com/gh/metasys-server/api-docs)
+This repo has been archived. At this time, the source of the Metasys REST API is not being hosted in a public repo. You can still access the rendered documentation from the following page <https://metasys-server.github.io/api-landing/>.
 
 <!-- cSpell:ignore apiaryio -->
 
